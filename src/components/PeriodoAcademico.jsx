@@ -33,9 +33,6 @@ const PeriodoAcademico = () => (
                 Descargar calendario <FontAwesomeIcon icon={faCalendar} />
             </a>
         </div>
-        <a href="/informacion/calendario-academico/2022/Estudiante" target="_blank" className="btn btn-danger btn-sm w-100">
-            Consultar calendario 2022
-        </a>
     </article>
 );
 

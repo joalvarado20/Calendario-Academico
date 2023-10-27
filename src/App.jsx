@@ -7,7 +7,7 @@ import CalendarComponent from './components/CalendarComponent ';
 const App = () => {
 
   return (
-    <div id="caja-vue" className="General_calendario calendario_resultados">
+    <div id="" className="General_calendario calendario_resultados">
       <Filtro/>
       <CalendarComponent />
     </div>
