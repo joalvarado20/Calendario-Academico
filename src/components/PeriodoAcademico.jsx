@@ -17,7 +17,7 @@ const PeriodoAcademico = () => (
     <article className="periodos">
         <h5>Periodo académico</h5>
         <select id="exampleFormControlSelect1" className="form-control">
-            <option disabled="disabled" value="">Ordenar...</option>
+            <option disabled selected value="">Ordenar...</option>
             <option>Orden ascendente (fecha de inicio)</option>
             <option>Orden descendente (fecha de inicio)</option>
         </select>

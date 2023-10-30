@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSlidersH, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { SelecteCtegorias } from '../helpers/objects'
 
 const Filtro = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -61,27 +62,20 @@ const Filtro = () => {
                                         </label>
                                     </div>
                                     <select className="form-control categorias-azul">
-                                        <option disabled="disabled" value="">
+                                        <option disabled selected value="">
                                             Categoría de búsqueda...
                                         </option>
-                                        <option className="ct ct-profesor-funcionario" style={{ display: 'none' }}>
-                                            Asignación de Espacios Físicos y Publicación de Salones
-                                        </option>
-                                        <option className="ct ct-estudiante ct-profesor-funcionario" style={{ display: 'block' }}>
-                                            Cierre académico
-                                        </option>
-                                        <option className="ct ct-estudiante ct-profesor-funcionario" style={{ display: 'block' }}>
-                                            Cierre formativo
-                                        </option>
-                                        <option className="ct ct-estudiante ct-profesor-funcionario" style={{ display: 'block' }}>
-                                            Comité de idiomas
-                                        </option>
-                                        <option className="ct ct-profesor-funcionario" style={{ display: 'none' }}>
-                                            Contratación profesores/as cátedra
-                                        </option>
-                                        <option className="ct ct-profesor-funcionario" style={{ display: 'none' }}>
-                                            Evaluación integral de profesores
-                                        </option>
+                                        {SelecteCtegorias.map((categoria) => (
+                                            <option
+                                                key={categoria.nombre}
+                                                className="ct ct-estudiante ct-profesor-funcionario"
+                                                style={{
+                                                    display: window.location.href.includes("5174") ? (categoria.display ? 'block' : 'none') : 'block'
+                                                }}
+                                            >
+                                                {categoria.nombre}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>
