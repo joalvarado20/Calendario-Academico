@@ -22,3 +22,15 @@ export const SelecteCtegorias = [
     { "nombre": "Reserva de cupo, re activaciones de cupo y reintegros", "display": true },
     { "nombre": "Registro de asignaturas", "display": true },
 ]
+
+export const UnidadAcademica = [
+    "Escuela de Administración",
+    "Escuela de Medicina y Ciencias de la Salud",
+    "Escuela de Ciencias Humanas",
+    "Facultad de Economía",
+    "Facultad de Jurisprudencia",
+    "Facultad de Estudios Internacionales, Políticos y Urbanos",
+    "Facultad de Ciencias Naturales",
+    "Facultad de Creación",
+    "Escuela de Ingeniería, Ciencia y Tecnología",
+]

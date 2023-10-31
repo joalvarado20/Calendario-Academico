@@ -3,6 +3,9 @@ export const fetchDataFromAPI = async (selectedYear) => {
     const token = '03cBcETqak5Vis4ORGf3oanH8Ty9IroT5887dBQL';
 
     const selectedYearParam = selectedYear || '';
+
+    // Obtener el siguiente año
+    const nextYear = parseInt(selectedYearParam, 10) + 1;
     
     const requestOptions = {
         method: 'POST',
@@ -11,11 +14,10 @@ export const fetchDataFromAPI = async (selectedYear) => {
             'x-api-key': token,
         },
         body: JSON.stringify({
-            fechaInicio: `${selectedYearParam}-01-01`,
-            fechaFin: `${selectedYearParam}-12-31`,
+            fechaInicio: `${selectedYearParam}-12-01`,
+            fechaFin: `${nextYear}-11-30`,
         }),
-    };
-
+    }; 
     try {
         const response = await fetch(url, requestOptions);
         const data = await response.json();

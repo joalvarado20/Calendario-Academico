@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSlidersH, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { SelecteCtegorias } from '../helpers/objects';
+import { Programa } from '../helpers/programas'
+import { SelecteCtegorias, UnidadAcademica } from '../helpers/objects';
 import { fetchDataFromAPI } from '../helpers/api';
 
 const Filtro = () => {
@@ -139,16 +140,17 @@ const Filtro = () => {
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <select className="form-control">
                                     <option value="" selected disabled>Unidad académica...</option>
-                                    <option>Escuela de Administración</option>
-                                    <option>Escuela de Medicina y Ciencias de la Salud</option>
-
+                                    {UnidadAcademica.map((facultad, index) => (
+                                        <option key={index}>{facultad}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <select className="form-control">
                                     <option disabled selected value="">Programa...</option>
-                                    <option>Administración de Empresas</option>
-                                    <option>Administración de Negocios Internacionales</option>
+                                    {Programa.map((programa, index) => (
+                                        <option key={index}>{programa}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="d-flex justify-content-end gap-2">
