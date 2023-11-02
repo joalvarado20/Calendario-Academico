@@ -5,30 +5,108 @@ import { faSlidersH, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons
 import { Programa } from '../helpers/programas'
 import { SelecteCtegorias, UnidadAcademica } from '../helpers/objects';
 import { fetchDataFromAPI } from '../helpers/api';
+import { convertDateFormatToAPI } from '../helpers/functions'
 
 const Filtro = () => {
+    // Estado para controlar si el menú está abierto o cerrado
     const [menuOpen, setMenuOpen] = useState(false);
-    const [selectedYear, setSelectedYear] = useState(''); // Estado para almacenar el año seleccionado
-    const [initialDataFetched, setInitialDataFetched] = useState(false); // Estado para rastrear si se han obtenido datos iniciales de la API
-
-    // eslint-disable-next-line no-unused-vars
-    const [apiData, setApiData] = useState(null); // Estado para almacenar los datos de la API
+    
+    // Estados para almacenar selecciones del usuario
+    const [selectedYear, setSelectedYear] = useState(''); // Año seleccionado
+    const [selectedCategory, setSelectedCategory] = useState(''); // Categoría seleccionada
+    const [keyword, setKeyword] = useState(''); // Palabra clave ingresada
+    const [selectedNivelFormacion, setSelectedNivelFormacion] = useState(''); // Nivel de formación seleccionado
+    const [selectedFechaInicio, setSelectedFechaInicio] = useState(''); // Fecha de inicio seleccionada
+    const [selectedFechaFin, setSelectedFechaFin] = useState(''); // Fecha de fin seleccionada
+    
+    // Estado para rastrear si se han obtenido datos iniciales de la API
+    const [initialDataFetched, setInitialDataFetched] = useState(false);
 
     // Maneja el cambio de año seleccionado por el usuario
     const handleYearChange = (event) => {
         setSelectedYear(event.target.value);
     };
 
-    // Realiza una solicitud a la API con las fechas y el año seleccionado
+    // Maneja el cambio de categoría seleccionada por el usuario
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+    
+    // Maneja el cambio de palabra clave ingresada por el usuario
+    const handleKeywordChange = (event) => {
+        setKeyword(event.target.value);
+    };
+    
+    // Maneja el cambio de fecha de inicio seleccionada por el usuario
+    const handleFechaInicioChange = (event) => {
+        setSelectedFechaInicio(event.target.value);
+    };
+
+    // Maneja el cambio de fecha de fin seleccionada por el usuario
+    const handleFechaFinChange = (event) => {
+        setSelectedFechaFin(event.target.value);
+    };
+
+    // Función para limpiar todos los filtros
+    const handleClearFilters = () => {
+        setSelectedYear(''); 
+        setSelectedCategory('');
+        setKeyword('');
+        setSelectedNivelFormacion(''); 
+        setSelectedFechaInicio(''); 
+        setSelectedFechaFin(''); 
+    };
+
+    // Función para realizar la búsqueda y filtrado de datos
     const handleSearch = () => {
-        // Llama a la función fetchDataFromAPI con el año seleccionado
+        // Llama a la función fetchDataFromAPI para obtener datos de la API
         fetchDataFromAPI(selectedYear)
-            .then(data => {
+            .then((data) => {
                 console.log('Respuesta exitosa:');
-                console.log(data);
-                setApiData(data);
+                console.log('Datos sin filtrar por año, categoría y palabra clave:');
+                console.log(data.data.Actividades);
+
+                // Filtrado de datos por categoría
+                let filteredData = data.data.Actividades;
+                if (selectedCategory) {
+                    filteredData = filteredData.filter((item) => item.categoria === selectedCategory);
+                }
+
+                // Filtrado de datos por palabra clave
+                if (keyword) {
+                    const keywordLower = keyword.toLowerCase();
+                    filteredData = filteredData.filter((item) =>
+                        item.categoria.toLowerCase().includes(keywordLower) ||
+                        item.contenido.toLowerCase().includes(keywordLower) ||
+                        item.nombre.toLowerCase().includes(keywordLower)
+                    );
+                }
+                
+                // Filtrado de datos por nivel de formación
+                if (selectedNivelFormacion) {
+                    filteredData = filteredData.filter((item) => item.tipoPrograma === selectedNivelFormacion);
+                }
+                
+                // Filtrado de datos por fecha de inicio
+                if (selectedFechaInicio) {
+                    filteredData = filteredData.filter((item) => {
+                        const fechaInicioApiFormat = convertDateFormatToAPI(selectedFechaInicio);
+                        return item.fechaInicio === fechaInicioApiFormat;
+                    });
+                }
+
+                // Filtrado de datos por fecha de fin
+                if (selectedFechaFin) {
+                    filteredData = filteredData.filter((item) => {
+                        const fechaFinApiFormat = convertDateFormatToAPI(selectedFechaFin);
+                        return item.fechaFin === fechaFinApiFormat;
+                    });
+                }
+
+                console.log("Datos filtrados", filteredData);
+                // Aquí tienes los datos filtrados por año, categoría y palabra clave (filteredData)
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error('Error al realizar la solicitud:', error);
             });
     };
@@ -96,8 +174,12 @@ const Filtro = () => {
                                             <i><FontAwesomeIcon icon={faSearch} /></i>
                                         </label>
                                     </div>
-                                    <select className="form-control categorias-azul">
-                                        <option disabled selected value="">
+                                    <select
+                                        className="form-control categorias-azul"
+                                        onChange={handleCategoryChange}
+                                        value={selectedCategory}
+                                    >
+                                        <option disabled value="">
                                             Categoría de búsqueda...
                                         </option>
                                         {SelecteCtegorias.map((categoria) => (
@@ -107,35 +189,65 @@ const Filtro = () => {
                                                 style={{
                                                     display: window.location.href.includes("localhost") ? (categoria.display ? 'block' : 'none') : 'block'
                                                 }}
+                                                value={categoria.nombre}
                                             >
                                                 {categoria.nombre}
                                             </option>
                                         ))}
                                     </select>
+
                                 </div>
                             </div>
                             <div className="col-12 col-sm-12 col-md-4 col-lg-3 d-flex align-items-center">
-                                <input id="date-input-inicio" type="date" className="form-control date" />
+                                <input
+                                    id="date-input-inicio"
+                                    type="date"
+                                    className="form-control date"
+                                    onChange={handleFechaInicioChange}
+                                    value={selectedFechaInicio}
+                                />
                                 <span className="date">/</span>
-                                <input id="date-input-fin" type="date" className="form-control date" />
+                                <input
+                                    id="date-input-fin"
+                                    type="date"
+                                    className="form-control date"
+                                    onChange={handleFechaFinChange}
+                                    value={selectedFechaFin}
+                                />
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <input type="text" id="buscarTexto" placeholder="Palabra clave..." required="required" className="form-control" />
+                                <input
+                                    type="text"
+                                    id="buscarTexto"
+                                    placeholder="Palabra clave..."
+                                    required="required"
+                                    className="form-control"
+                                    onChange={handleKeywordChange}
+                                    value={keyword}
+                                />
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <select className="form-control" onChange={handleYearChange}>
                                     <option disabled selected value="">Año</option>
+                                    <option>2022</option>
                                     <option>2023</option>
                                     <option>2024</option>
-                                    <option>2025</option>
                                 </select>
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select className="form-control">
-                                    <option disabled value="" selected>Nivel de formación...</option>
+                                <select
+                                    className="form-control"
+                                    onChange={(event) => setSelectedNivelFormacion(event.target.value)}
+                                    value={selectedNivelFormacion}
+                                >
+                                    <option disabled value="" selected>
+                                        Nivel de formación...
+                                    </option>
                                     <option>Pregrados</option>
                                     <option>Posgrados</option>
+                                    <option>Especializaciones</option>
                                 </select>
+
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <select className="form-control">
@@ -155,7 +267,7 @@ const Filtro = () => {
                             </div>
                             <div className="d-flex justify-content-end gap-2">
                                 <input id="buscar" minLength="6" type="button" value="BUSCAR" className="button form-control buscar btn btn-danger btn-sm w-25" onClick={handleSearch} />
-                                <input minLength="6" type="button" value="Limpiar" className="button form-control item_R limpiar btn btn-danger btn-sm w-25" />
+                                <input minLength="6" type="button" value="Limpiar" className="button form-control item_R limpiar btn btn-danger btn-sm w-25" onClick={handleClearFilters} />
                             </div>
                         </div>
                     </div>
