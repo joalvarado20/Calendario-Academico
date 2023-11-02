@@ -10,7 +10,7 @@ import { convertDateFormatToAPI } from '../helpers/functions'
 const Filtro = () => {
     // Estado para controlar si el menú está abierto o cerrado
     const [menuOpen, setMenuOpen] = useState(false);
-    
+
     // Estados para almacenar selecciones del usuario
     const [selectedYear, setSelectedYear] = useState(''); // Año seleccionado
     const [selectedCategory, setSelectedCategory] = useState(''); // Categoría seleccionada
@@ -18,43 +18,30 @@ const Filtro = () => {
     const [selectedNivelFormacion, setSelectedNivelFormacion] = useState(''); // Nivel de formación seleccionado
     const [selectedFechaInicio, setSelectedFechaInicio] = useState(''); // Fecha de inicio seleccionada
     const [selectedFechaFin, setSelectedFechaFin] = useState(''); // Fecha de fin seleccionada
-    
+
     // Estado para rastrear si se han obtenido datos iniciales de la API
     const [initialDataFetched, setInitialDataFetched] = useState(false);
 
-    // Maneja el cambio de año seleccionado por el usuario
-    const handleYearChange = (event) => {
-        setSelectedYear(event.target.value);
+    // Función genérica para manejar cambios en estados
+    const handleInputChange = (stateSetter) => (event) => {
+        stateSetter(event.target.value);
     };
 
-    // Maneja el cambio de categoría seleccionada por el usuario
-    const handleCategoryChange = (event) => {
-        setSelectedCategory(event.target.value);
-    };
-    
-    // Maneja el cambio de palabra clave ingresada por el usuario
-    const handleKeywordChange = (event) => {
-        setKeyword(event.target.value);
-    };
-    
-    // Maneja el cambio de fecha de inicio seleccionada por el usuario
-    const handleFechaInicioChange = (event) => {
-        setSelectedFechaInicio(event.target.value);
-    };
-
-    // Maneja el cambio de fecha de fin seleccionada por el usuario
-    const handleFechaFinChange = (event) => {
-        setSelectedFechaFin(event.target.value);
-    };
+    // Luego, puedes usar esta función para crear tus manejadores de eventos
+    const handleYearChange = handleInputChange(setSelectedYear);
+    const handleCategoryChange = handleInputChange(setSelectedCategory);
+    const handleKeywordChange = handleInputChange(setKeyword);
+    const handleFechaInicioChange = handleInputChange(setSelectedFechaInicio);
+    const handleFechaFinChange = handleInputChange(setSelectedFechaFin);
 
     // Función para limpiar todos los filtros
     const handleClearFilters = () => {
-        setSelectedYear(''); 
+        setSelectedYear('');
         setSelectedCategory('');
         setKeyword('');
-        setSelectedNivelFormacion(''); 
-        setSelectedFechaInicio(''); 
-        setSelectedFechaFin(''); 
+        setSelectedNivelFormacion('');
+        setSelectedFechaInicio('');
+        setSelectedFechaFin('');
     };
 
     // Función para realizar la búsqueda y filtrado de datos
@@ -63,8 +50,7 @@ const Filtro = () => {
         fetchDataFromAPI(selectedYear)
             .then((data) => {
                 console.log('Respuesta exitosa:');
-                console.log('Datos sin filtrar por año, categoría y palabra clave:');
-                console.log(data.data.Actividades);
+                console.log("datos sin filtro", data.data.Actividades);
 
                 // Filtrado de datos por categoría
                 let filteredData = data.data.Actividades;
@@ -81,12 +67,12 @@ const Filtro = () => {
                         item.nombre.toLowerCase().includes(keywordLower)
                     );
                 }
-                
+
                 // Filtrado de datos por nivel de formación
                 if (selectedNivelFormacion) {
                     filteredData = filteredData.filter((item) => item.tipoPrograma === selectedNivelFormacion);
                 }
-                
+
                 // Filtrado de datos por fecha de inicio
                 if (selectedFechaInicio) {
                     filteredData = filteredData.filter((item) => {
