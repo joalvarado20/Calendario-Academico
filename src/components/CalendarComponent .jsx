@@ -1,10 +1,12 @@
+// CalendarComponent.jsx
+
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import PeriodoAcademico from './PeriodoAcademico';
 import Calendario from './Calendario';
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ filteredData }) => {
     const facultades = [
         'Decanatura Del Medio Universitario',
         'Escuela De Administración',
@@ -27,7 +29,8 @@ const CalendarComponent = () => {
                         </aside>
                     </div>
                     <div className="col-12 col-sm-12 col-md-8 col-lg-8 d-flex justify-content-center">
-                        <Calendario facultades={facultades} programas={programas} />
+                        {/* Pasa los datos filtrados a Calendario */}
+                        <Calendario filteredData={filteredData} facultades={facultades} programas={programas} />
                     </div>
                 </div>
             </div>

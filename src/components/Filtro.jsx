@@ -7,7 +7,7 @@ import { SelecteCtegorias, UnidadAcademica } from '../helpers/objects';
 import { fetchDataFromAPI } from '../helpers/api';
 import { convertDateFormatToAPI } from '../helpers/functions'
 
-const Filtro = () => {
+const Filtro = ({ updateFilteredData }) => {
     // Estado para controlar si el menú está abierto o cerrado
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -50,8 +50,6 @@ const Filtro = () => {
         fetchDataFromAPI(selectedYear)
             .then((data) => {
                 console.log('Respuesta exitosa:');
-                console.log("datos sin filtro", data.data.Actividades);
-
                 // Filtrado de datos por categoría
                 let filteredData = data.data.Actividades;
                 if (selectedCategory) {
@@ -88,7 +86,7 @@ const Filtro = () => {
                         return item.fechaFin === fechaFinApiFormat;
                     });
                 }
-
+                updateFilteredData(filteredData)
                 console.log("Datos filtrados", filteredData);
                 // Aquí tienes los datos filtrados por año, categoría y palabra clave (filteredData)
             })
@@ -108,7 +106,8 @@ const Filtro = () => {
             handleSearch(); // Realiza la llamada a la API al cargar la página
             setInitialDataFetched(true); // Marca que los datos iniciales se han obtenido
         }
-    }, [initialDataFetched]);
+    }, []); // Dependencias vacías para que se ejecute solo una vez
+
 
     return (
         <div id="menu-pagina-ur" className="menu_evento">

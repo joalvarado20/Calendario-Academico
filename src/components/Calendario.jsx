@@ -1,9 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMap, faClock, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { formatFecha } from '../helpers/functions'
 
 // Componente para la lista de elementos
-
 const ListItems = ({ items }) => (
     <ul>
         {items.map((item, index) => (
@@ -12,61 +12,69 @@ const ListItems = ({ items }) => (
     </ul>
 );
 
-const Calendario = ({ facultades, programas }) => (
+const Calendario = ({ facultades, programas, filteredData }) => (
     <section id="resultadosActividades">
         <div>
-            <article className="evento eventos0">
-                <div className="row">
-                    <div className="col-12 d-flex justify-content-end">
-                        <div className="card_filter item_2dosemestre">Semestre II</div>
-                        <div className="card_filter item_pregrado">Pregrados</div>
-                        <div className="card_filter item_busqueda">Cierre académico</div>
-                    </div>
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-start flex-column">
-                        <div className="evento_icon abierto">
-                            <FontAwesomeIcon icon={faCalendar} />
-                            <small>abierto</small>
-                        </div>
-                        <div className="fecha">
-                            <h2> 06</h2>
-                            <hr />
-                            <h3>De diciembre</h3>
-                            <small>al 06 de diciembre</small>
-                        </div>
-                    </div>
-                    <div className="col-12 col-sm-12 col-md-12 col-lg-8 flex-column">
-                        <hr />
-                        <h6>Cierre académico para todos los programas</h6>
-                        <p>Cierre académico para todos los programas</p>
-                        <div className="items_lugar">
-                            <p>
-                                <FontAwesomeIcon className='icons' icon={faMap} />
-                                <strong>Ciudad:</strong>Bogotá
-                            </p>
-                            <p>
-                                <FontAwesomeIcon className='icons' icon={faCalendar} />
-                                <strong>Desde el día:</strong>06 de diciembre del 2023, <strong>hasta el día:</strong>06 de diciembre del 2023.
-                            </p>
-                            <p>
-                                <FontAwesomeIcon className='icons' icon={faClock} />
-                                <strong>Hora:</strong>07:00 AM - 23:00 PM
-                            </p>
-                        </div>
-                        <div className="items_contet d-flex">
-                            <div data-bs-toggle="tooltip" data-placement="bottom" title="Unidad académica." className="Facultad">
-                                <a data-bs-target="#modalFacultadPregrados0" data-bs-toggle="modal" href="#">
-                                    Unidad académica <FontAwesomeIcon className='icons' icon={faPlus} />
-                                </a>
+            {filteredData.map((item, index) => {
+                // Mueve el formateo de fechas aquí
+                const fechaInicioFormateada = formatFecha(item.fechaInicio);
+                const fechaFinFormateada = formatFecha(item.fechaFin);
+
+                return (
+                    <article className="evento eventos0" key={index}>
+                        <div className="row">
+                            <div className="col-12 d-flex justify-content-end">
+                                <div className="card_filter item_2dosemestre">Semestre II</div>
+                                <div className="card_filter item_pregrado">Pregrados</div>
+                                <div className="card_filter item_busqueda">Cierre académico</div>
                             </div>
-                            <div data-bs-toggle="tooltip" data-placement="bottom" title="Programas." className="Programa">
-                                <a data-bs-target="#modalProgramasPregrados0" data-bs-toggle="modal" href="#">
-                                    Programa <FontAwesomeIcon className='icons' icon={faPlus} />
-                                </a>
+                            <div className="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-start flex-column">
+                                <div className="evento_icon abierto">
+                                    <FontAwesomeIcon icon={faCalendar} />
+                                    <small>abierto</small>
+                                </div>
+                                <div className="fecha">
+                                    <h2>{fechaInicioFormateada.day}</h2>
+                                    <hr />
+                                    <h3>{fechaInicioFormateada.month}</h3>
+                                    <small>al {fechaFinFormateada.day} de {fechaFinFormateada.month}</small>
+                                </div>
+                            </div>
+                            <div className="col-12 col-sm-12 col-md-12 col-lg-8 flex-column">
+                                <hr />
+                                <h6>{item.categoria}</h6>
+                                <p>{item.nombre}</p>
+                                <div className="items_lugar">
+                                    <p>
+                                        <FontAwesomeIcon className='icons' icon={faMap} />
+                                        <strong>Ciudad:</strong>{item.ciudad}
+                                    </p>
+                                    <p>
+                                        <FontAwesomeIcon className='icons' icon={faCalendar} />
+                                        <strong>Desde el día:</strong>{item.fechaInicio}, <strong>hasta el día:</strong>{item.fechaFin}.
+                                    </p>
+                                    <p>
+                                        <FontAwesomeIcon className='icons' icon={faClock} />
+                                        <strong>Hora:</strong>{item.horaInicio} - {item.horaFin}
+                                    </p>
+                                </div>
+                                <div className="items_contet d-flex">
+                                    <div data-bs-toggle="tooltip" data-placement="bottom" title="Unidad académica." className="Facultad">
+                                        <a data-bs-target="#modalFacultadPregrados0" data-bs-toggle="modal" href="#">
+                                            Unidad académica <FontAwesomeIcon className='icons' icon={faPlus} />
+                                        </a>
+                                    </div>
+                                    <div data-bs-toggle="tooltip" data-placement="bottom" title="Programas." className="Programa">
+                                        <a data-bs-target="#modalProgramasPregrados0" data-bs-toggle="modal" href="#">
+                                            Programa <FontAwesomeIcon className='icons' icon={faPlus} />
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </article>
+                    </article>
+                );
+            })}
             <div aria-labelledby="ModalFacultad" id="modalFacultadPregrados0" tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
                 <div className="modal-dialog modal-xl">
                     <div className="modal-content">

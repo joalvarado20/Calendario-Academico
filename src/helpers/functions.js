@@ -8,3 +8,10 @@ export const convertDateFormatToAPI = (date) => {
     }
     return date; // Retorna la fecha sin cambios si no se pudo convertir
 };
+// funcion que formatea la fecha para poder pintarla en la vista
+export function formatFecha(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.toLocaleDateString('es-CO', { month: 'long' });
+    return { day, month };
+}
