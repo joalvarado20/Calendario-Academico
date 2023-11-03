@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMap, faClock, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { formatFecha } from '../helpers/functions'
+import { formatFecha, formatTimeToAMPM, mesNumerico } from '../helpers/functions'
 
 // Componente para la lista de elementos
 const ListItems = ({ items }) => (
@@ -16,9 +16,17 @@ const Calendario = ({ facultades, programas, filteredData }) => (
     <section id="resultadosActividades">
         <div>
             {filteredData.map((item, index) => {
-                // Mueve el formateo de fechas aquí
+                // formateo de fechas y hora
                 const fechaInicioFormateada = formatFecha(item.fechaInicio);
                 const fechaFinFormateada = formatFecha(item.fechaFin);
+                const horaInicioAMPM = formatTimeToAMPM(item.horaInicio);
+                const horaFinAMPM = formatTimeToAMPM(item.horaFin);
+
+                // constantes para evaluar caalendario cerrado
+                const fechaFinDate = new Date(fechaFinFormateada.year, mesNumerico(fechaFinFormateada.month) - 1, fechaFinFormateada.day);
+                const fechaActual = new Date();
+                const eventoCerrado = fechaActual > fechaFinDate;
+                const eventoClase = eventoCerrado ? "cerrado" : "abierto";
 
                 return (
                     <article className="evento eventos0" key={index}>
@@ -29,9 +37,9 @@ const Calendario = ({ facultades, programas, filteredData }) => (
                                 <div className="card_filter item_busqueda">Cierre académico</div>
                             </div>
                             <div className="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-start flex-column">
-                                <div className="evento_icon abierto">
+                                <div className={`evento_icon ${eventoClase}`}>
                                     <FontAwesomeIcon icon={faCalendar} />
-                                    <small>abierto</small>
+                                    <small>{eventoClase}</small>
                                 </div>
                                 <div className="fecha">
                                     <h2>{fechaInicioFormateada.day}</h2>
@@ -51,11 +59,14 @@ const Calendario = ({ facultades, programas, filteredData }) => (
                                     </p>
                                     <p>
                                         <FontAwesomeIcon className='icons' icon={faCalendar} />
-                                        <strong>Desde el día:</strong>{item.fechaInicio}, <strong>hasta el día:</strong>{item.fechaFin}.
+                                        <strong>Desde el día:</strong>
+                                        {fechaInicioFormateada.day} de  {fechaInicioFormateada.month} del, {fechaInicioFormateada.year}
+                                        <strong> hasta el día:</strong>
+                                        {fechaFinFormateada.day} de {fechaFinFormateada.month} del {fechaFinFormateada.year}
                                     </p>
                                     <p>
                                         <FontAwesomeIcon className='icons' icon={faClock} />
-                                        <strong>Hora:</strong>{item.horaInicio} - {item.horaFin}
+                                        <strong>Hora:</strong>{horaInicioAMPM} - {horaFinAMPM}
                                     </p>
                                 </div>
                                 <div className="items_contet d-flex">
