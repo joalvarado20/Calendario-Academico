@@ -1,23 +1,27 @@
-// CalendarComponent.jsx
-
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import PeriodoAcademico from './PeriodoAcademico';
 import Calendario from './Calendario';
 
 const CalendarComponent = ({ filteredData }) => {
+    // Define las listas de facultades y programas
     const facultades = [
         'Decanatura Del Medio Universitario',
         'Escuela De Administración',
-        // ... (otros elementos de la lista)
     ];
 
     const programas = [
         'Administración de Empresas',
         'Administración de Negocios Internacionales',
-        // ... (otros elementos de la lista)
     ];
+
+    // Define el estado "ordenAscendente" y la función "handleOrdenChange" para gestionar el cambio de orden.
+    const [ordenAscendente, setOrdenAscendente] = useState(true);
+
+    const handleOrdenChange = (orden) => {
+        setOrdenAscendente(orden);
+    };
 
     return (
         <div className="contet_gris">
@@ -25,12 +29,11 @@ const CalendarComponent = ({ filteredData }) => {
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center">
                         <aside>
-                            <PeriodoAcademico />
+                            <PeriodoAcademico onOrdenChange={handleOrdenChange} />
                         </aside>
                     </div>
                     <div className="col-12 col-sm-12 col-md-8 col-lg-8 d-flex justify-content-center">
-                        {/* Pasa los datos filtrados a Calendario */}
-                        <Calendario filteredData={filteredData} facultades={facultades} programas={programas} />
+                        <Calendario filteredData={filteredData} facultades={facultades} programas={programas} ordenAscendente={ordenAscendente} />
                     </div>
                 </div>
             </div>
