@@ -29,7 +29,7 @@ const CalendarComponent = ({ filteredData }) => {
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center">
                         <aside>
-                            <PeriodoAcademico onOrdenChange={handleOrdenChange} />
+                            <PeriodoAcademico filteredData={filteredData} onOrdenChange={handleOrdenChange} />
                         </aside>
                     </div>
                     <div className="col-12 col-sm-12 col-md-8 col-lg-8 d-flex justify-content-center">
