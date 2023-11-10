@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMap, faClock, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { formatFecha, formatTimeToAMPM, mesNumerico } from '../helpers/functions';
@@ -13,11 +13,29 @@ const ListItems = ({ items }) => (
 );
 
 const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filteredDataByPeriodo }) => {
-    console.log(filteredDataByPeriodo)
+    const [dataToShow, setDataToShow] = useState(filteredData);
+    const [showNoDataMessage, setShowNoDataMessage] = useState(false);
+
+    useEffect(() => {
+        if (filteredDataByPeriodo.length > 0) {
+            setDataToShow(filteredDataByPeriodo);
+        } else {
+            setDataToShow(filteredData);
+        }
+    }, [filteredDataByPeriodo, filteredData]);
+    
+
+    useEffect(() => {
+        // Mostrar el mensaje de "No hay datos" si no hay datos para mostrar
+        setShowNoDataMessage(filteredDataByPeriodo.length === 0);
+    }, [dataToShow]);
+    
+
     return (
         <section id="resultadosActividades">
             <div>
-                {filteredData
+                {showNoDataMessage && <p>No hay datos disponibles.</p>}
+                {!showNoDataMessage && dataToShow
                     .sort((a, b) => {
                         const fechaInicioA = new Date(a.fechaInicio);
                         const fechaInicioB = new Date(b.fechaInicio);

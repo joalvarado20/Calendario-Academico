@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +11,7 @@ const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo }) => 
             value={id}
             className="form-check-input"
             onChange={() => {
-                onPeriodoChange(id, setFilteredDataByPeriodo); // Pasa la función setFilteredDataByPeriodo al componente RadioItem
+                onPeriodoChange(id, setFilteredDataByPeriodo);
             }}
         />
         <label htmlFor={id} className="form-check-label">
@@ -22,14 +22,19 @@ const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo }) => 
 );
 
 const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriodo }) => {
-    // eslint-disable-next-line no-unused-vars
-    const [periodoSeleccionado, setPeriodoSeleccionado] = useState(null);
+    const [periodoSeleccionado, setPeriodoSeleccionado] = useState('semestreICheck'); // Establecer 'semestreICheck' como seleccionado por defecto
+
+    useEffect(() => {
+        // Filtrar los datos inicialmente
+        const filteredDataByPeriodo = filteredData.filter((item) => item.periodo === 'Semestre I');
+        setFilteredDataByPeriodo(filteredDataByPeriodo);
+    }, [filteredData, setFilteredDataByPeriodo]);
 
     const idToPeriodo = {
-        semestreICheck: "Semestre I",
-        intersemestralICheck: "Intersemestral",
-        semestreIICheck: "Semestre II",
-        intersemestralIICheck: "Intersemestral II",
+        semestreICheck: 'Semestre I',
+        intersemestralICheck: 'Intersemestral',
+        semestreIICheck: 'Semestre II',
+        intersemestralIICheck: 'Intersemestral II',
     };
 
     const handleOrdenChange = (event) => {
@@ -43,31 +48,46 @@ const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriod
 
     const handlePeriodoChange = (selectedId, setFilteredDataByPeriodo) => {
         const selectedPeriodo = idToPeriodo[selectedId];
-        setPeriodoSeleccionado(selectedPeriodo);
-        console.log(`Filtrando datos para el período: ${selectedPeriodo}`);
-
-        // Filtra tus datos aquí basado en el período seleccionado
+        setPeriodoSeleccionado(selectedId);
         const filteredDataByPeriodo = filteredData.filter((item) => item.periodo === selectedPeriodo);
-        console.log(filteredDataByPeriodo);
-        setFilteredDataByPeriodo(filteredDataByPeriodo); // Actualiza los datos filtrados por período en el estado de CalendarComponent.
-
+        setFilteredDataByPeriodo(filteredDataByPeriodo);
     };
 
     return (
         <article className="periodos">
             <h5>Periodo académico</h5>
             <select id="exampleFormControlSelect1" className="form-control" onChange={handleOrdenChange}>
-                <option disabled selected value="">
+                <option disabled value="">
                     Ordenar...
                 </option>
                 <option>Orden ascendente (fecha de inicio)</option>
                 <option>Orden descendente (fecha de inicio)</option>
             </select>
             <div className="contet_phone">
-                <RadioItem id="semestreICheck" label="Semestre I" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
-                <RadioItem id="intersemestralICheck" label="Intersemestral" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
-                <RadioItem id="semestreIICheck" label="Semestre II" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
-                <RadioItem id="intersemestralIICheck" label="Intersemestral II" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
+                <RadioItem
+                    id="semestreICheck"
+                    label="Semestre I"
+                    onPeriodoChange={handlePeriodoChange}
+                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
+                />
+                <RadioItem
+                    id="intersemestralICheck"
+                    label="Intersemestral"
+                    onPeriodoChange={handlePeriodoChange}
+                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
+                />
+                <RadioItem
+                    id="semestreIICheck"
+                    label="Semestre II"
+                    onPeriodoChange={handlePeriodoChange}
+                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
+                />
+                <RadioItem
+                    id="intersemestralIICheck"
+                    label="Intersemestral II"
+                    onPeriodoChange={handlePeriodoChange}
+                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
+                />
             </div>
             <hr />
             <div className="descarga">
