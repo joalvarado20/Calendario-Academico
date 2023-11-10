@@ -21,18 +21,23 @@ const Filtro = ({ updateFilteredData }) => {
 
     // Estado para rastrear si se han obtenido datos iniciales de la API
     const [initialDataFetched, setInitialDataFetched] = useState(false);
+    const [clearFilters, setClearFilters] = useState(false);
+
 
     // Función genérica para manejar cambios en estados
     const handleInputChange = (stateSetter) => (event) => {
         stateSetter(event.target.value);
     };
 
-    // Luego, puedes usar esta función para crear tus manejadores de eventos
+    // manejadores de eventos
     const handleYearChange = handleInputChange(setSelectedYear);
     const handleCategoryChange = handleInputChange(setSelectedCategory);
     const handleKeywordChange = handleInputChange(setKeyword);
     const handleFechaInicioChange = handleInputChange(setSelectedFechaInicio);
     const handleFechaFinChange = handleInputChange(setSelectedFechaFin);
+    const handleNivelFormacionChange = handleInputChange(setSelectedNivelFormacion);
+
+    // ...
 
     // Función para limpiar todos los filtros
     const handleClearFilters = () => {
@@ -42,6 +47,9 @@ const Filtro = ({ updateFilteredData }) => {
         setSelectedNivelFormacion('');
         setSelectedFechaInicio('');
         setSelectedFechaFin('');
+
+        // Actualiza la variable de estado para indicar que se deben limpiar los filtros
+        setClearFilters(true);
     };
 
     // Función para realizar la búsqueda y filtrado de datos
@@ -107,6 +115,16 @@ const Filtro = ({ updateFilteredData }) => {
             setInitialDataFetched(true); // Marca que los datos iniciales se han obtenido
         }
     }, []); // Dependencias vacías para que se ejecute solo una vez
+
+
+    useEffect(() => {
+        // Verifica si se debe limpiar los filtros y llama a handleSearch
+        if (clearFilters) {
+            handleSearch();
+            // Restablece la variable de estado después de llamar a handleSearch
+            setClearFilters(false);
+        }
+    }, [clearFilters]);
 
 
     return (
@@ -222,7 +240,7 @@ const Filtro = ({ updateFilteredData }) => {
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <select
                                     className="form-control"
-                                    onChange={(event) => setSelectedNivelFormacion(event.target.value)}
+                                    onChange={handleNivelFormacionChange}
                                     value={selectedNivelFormacion}
                                 >
                                     <option disabled value="" selected>

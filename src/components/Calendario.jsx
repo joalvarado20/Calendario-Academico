@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMap, faClock, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { formatFecha, formatTimeToAMPM, mesNumerico } from '../helpers/functions';
@@ -12,29 +12,31 @@ const ListItems = ({ items }) => (
     </ul>
 );
 
-const Calendario = ({ facultades, programas, filteredData, ordenAscendente }) => (
-    <section id="resultadosActividades">
-        <div>
-            {filteredData
-                .sort((a, b) => {
-                    const fechaInicioA = new Date(a.fechaInicio);
-                    const fechaInicioB = new Date(b.fechaInicio);
-                    return ordenAscendente ? fechaInicioA - fechaInicioB : fechaInicioB - fechaInicioA;
-                })
-                .map((item, index) => {
-                    // Formateo de fechas y hora
-                    const fechaInicioFormateada = formatFecha(item.fechaInicio);
-                    const fechaFinFormateada = formatFecha(item.fechaFin);
-                    const horaInicioAMPM = formatTimeToAMPM(item.horaInicio);
-                    const horaFinAMPM = formatTimeToAMPM(item.horaFin);
+const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filteredDataByPeriodo }) => {
+    console.log(filteredDataByPeriodo)
+    return (
+        <section id="resultadosActividades">
+            <div>
+                {filteredData
+                    .sort((a, b) => {
+                        const fechaInicioA = new Date(a.fechaInicio);
+                        const fechaInicioB = new Date(b.fechaInicio);
+                        return ordenAscendente ? fechaInicioA - fechaInicioB : fechaInicioB - fechaInicioA;
+                    })
+                    .map((item, index) => {
+                        // Formateo de fechas y hora
+                        const fechaInicioFormateada = formatFecha(item.fechaInicio);
+                        const fechaFinFormateada = formatFecha(item.fechaFin);
+                        const horaInicioAMPM = formatTimeToAMPM(item.horaInicio);
+                        const horaFinAMPM = formatTimeToAMPM(item.horaFin);
 
-                    // Constantes para evaluar si el evento está cerrado
-                    const fechaFinDate = new Date(fechaFinFormateada.year, mesNumerico(fechaFinFormateada.month) - 1, fechaFinFormateada.day);
-                    const fechaActual = new Date();
-                    const eventoCerrado = fechaActual > fechaFinDate;
-                    const eventoClase = eventoCerrado ? "cerrado" : "abierto";
+                        // Constantes para evaluar si el evento está cerrado
+                        const fechaFinDate = new Date(fechaFinFormateada.year, mesNumerico(fechaFinFormateada.month) - 1, fechaFinFormateada.day);
+                        const fechaActual = new Date();
+                        const eventoCerrado = fechaActual > fechaFinDate;
+                        const eventoClase = eventoCerrado ? "cerrado" : "abierto";
 
-                    return (
+                        return (
                             <article className="evento eventos0" key={index}>
                                 <div className="row">
                                     <div className="col-12 d-flex justify-content-end">
@@ -123,5 +125,6 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente }) =>
             </div>
         </section>
     );
+}
 
 export default Calendario;

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
-// Componente para los elementos de radio
-const RadioItem = ({ id, label, onPeriodoChange }) => (
+const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo }) => (
     <div className="form-check">
         <input
             id={id}
@@ -11,7 +10,9 @@ const RadioItem = ({ id, label, onPeriodoChange }) => (
             name="exampleRadios"
             value={id}
             className="form-check-input"
-            onChange={() => onPeriodoChange(id)}
+            onChange={() => {
+                onPeriodoChange(id, setFilteredDataByPeriodo); // Pasa la función setFilteredDataByPeriodo al componente RadioItem
+            }}
         />
         <label htmlFor={id} className="form-check-label">
             {label}
@@ -20,7 +21,7 @@ const RadioItem = ({ id, label, onPeriodoChange }) => (
     </div>
 );
 
-const PeriodoAcademico = ({ onOrdenChange, filteredData }) => {
+const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriodo }) => {
     // eslint-disable-next-line no-unused-vars
     const [periodoSeleccionado, setPeriodoSeleccionado] = useState(null);
 
@@ -40,7 +41,7 @@ const PeriodoAcademico = ({ onOrdenChange, filteredData }) => {
         }
     };
 
-    const handlePeriodoChange = (selectedId) => {
+    const handlePeriodoChange = (selectedId, setFilteredDataByPeriodo) => {
         const selectedPeriodo = idToPeriodo[selectedId];
         setPeriodoSeleccionado(selectedPeriodo);
         console.log(`Filtrando datos para el período: ${selectedPeriodo}`);
@@ -48,6 +49,8 @@ const PeriodoAcademico = ({ onOrdenChange, filteredData }) => {
         // Filtra tus datos aquí basado en el período seleccionado
         const filteredDataByPeriodo = filteredData.filter((item) => item.periodo === selectedPeriodo);
         console.log(filteredDataByPeriodo);
+        setFilteredDataByPeriodo(filteredDataByPeriodo); // Actualiza los datos filtrados por período en el estado de CalendarComponent.
+
     };
 
     return (
@@ -61,10 +64,10 @@ const PeriodoAcademico = ({ onOrdenChange, filteredData }) => {
                 <option>Orden descendente (fecha de inicio)</option>
             </select>
             <div className="contet_phone">
-                <RadioItem id="semestreICheck" label="Semestre I" onPeriodoChange={handlePeriodoChange} />
-                <RadioItem id="intersemestralICheck" label="Intersemestral" onPeriodoChange={handlePeriodoChange} />
-                <RadioItem id="semestreIICheck" label="Semestre II" onPeriodoChange={handlePeriodoChange} />
-                <RadioItem id="intersemestralIICheck" label="Intersemestral II" onPeriodoChange={handlePeriodoChange} />
+                <RadioItem id="semestreICheck" label="Semestre I" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
+                <RadioItem id="intersemestralICheck" label="Intersemestral" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
+                <RadioItem id="semestreIICheck" label="Semestre II" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
+                <RadioItem id="intersemestralIICheck" label="Intersemestral II" onPeriodoChange={handlePeriodoChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
             </div>
             <hr />
             <div className="descarga">

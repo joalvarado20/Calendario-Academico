@@ -23,17 +23,19 @@ const CalendarComponent = ({ filteredData }) => {
         setOrdenAscendente(orden);
     };
 
+    const [filteredDataByPeriodo, setFilteredDataByPeriodo] = useState([]); // Agrega un estado para almacenar los datos filtrados por período.
+
     return (
         <div className="contet_gris">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center">
                         <aside>
-                            <PeriodoAcademico filteredData={filteredData} onOrdenChange={handleOrdenChange} />
+                            <PeriodoAcademico filteredData={filteredData} onOrdenChange={handleOrdenChange} setFilteredDataByPeriodo={setFilteredDataByPeriodo} />
                         </aside>
                     </div>
                     <div className="col-12 col-sm-12 col-md-8 col-lg-8 d-flex justify-content-center">
-                        <Calendario filteredData={filteredData} facultades={facultades} programas={programas} ordenAscendente={ordenAscendente} />
+                        <Calendario filteredData= {filteredData} filteredDataByPeriodo={filteredDataByPeriodo} facultades={facultades} programas={programas} ordenAscendente={ordenAscendente} />
                     </div>
                 </div>
             </div>
