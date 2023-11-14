@@ -23,13 +23,13 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filt
             setDataToShow(filteredData);
         }
     }, [filteredDataByPeriodo, filteredData]);
-    
+
 
     useEffect(() => {
         // Mostrar el mensaje de "No hay datos" si no hay datos para mostrar
         setShowNoDataMessage(filteredDataByPeriodo.length === 0);
     }, [dataToShow]);
-    
+
 
     return (
         <section id="resultadosActividades">
@@ -58,9 +58,11 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filt
                             <article className="evento eventos0" key={index}>
                                 <div className="row">
                                     <div className="col-12 d-flex justify-content-end">
-                                        <div className="card_filter item_2dosemestre">Semestre II</div>
-                                        <div className="card_filter item_pregrado">Pregrados</div>
-                                        <div className="card_filter item_busqueda">Cierre académico</div>
+                                        <div className={`card_filter ${item.periodo === "Semestre I" ? "item_1resemestre" : "item_2dosemestre"}`}>
+                                            {item.periodo}
+                                        </div>
+                                        <div className="card_filter item_pregrado">{item.tipoPrograma}</div>
+                                        <div className="card_filter item_busqueda">{item.categoria}</div>
                                     </div>
                                     <div className="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-start flex-column">
                                         <div className={`evento_icon ${eventoClase}`}>
@@ -68,10 +70,10 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filt
                                             <small>{eventoClase}</small>
                                         </div>
                                         <div className="fecha">
-                                            <h2>{fechaInicioFormateada.day}</h2>
+                                            <h2>{fechaInicioFormateada.day + 1}</h2>
                                             <hr />
                                             <h3>{fechaInicioFormateada.month}</h3>
-                                            <small>al {fechaFinFormateada.day} de {fechaFinFormateada.month}</small>
+                                            <small>al {fechaFinFormateada.day + 1} de {fechaFinFormateada.month}</small>
                                         </div>
                                     </div>
                                     <div className="col-12 col-sm-12 col-md-12 col-lg-8 flex-column">
@@ -86,9 +88,9 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filt
                                             <p>
                                                 <FontAwesomeIcon className='icons' icon={faCalendar} />
                                                 <strong>Desde el día:</strong>
-                                                {fechaInicioFormateada.day} de  {fechaInicioFormateada.month} del, {fechaInicioFormateada.year}
+                                                {fechaInicioFormateada.day + 1} de  {fechaInicioFormateada.month} del, {fechaInicioFormateada.year}
                                                 <strong> hasta el día:</strong>
-                                                {fechaFinFormateada.day} de {fechaFinFormateada.month} del {fechaFinFormateada.year}
+                                                {fechaFinFormateada.day + 1} de {fechaFinFormateada.month} del {fechaFinFormateada.year}
                                             </p>
                                             <p>
                                                 <FontAwesomeIcon className='icons' icon={faClock} />

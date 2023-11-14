@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
-const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo }) => (
+const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo,checked}) => (
     <div className="form-check">
         <input
             id={id}
@@ -10,6 +10,7 @@ const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo }) => 
             name="exampleRadios"
             value={id}
             className="form-check-input"
+            checked={checked} 
             onChange={() => {
                 onPeriodoChange(id, setFilteredDataByPeriodo);
             }}
@@ -22,7 +23,7 @@ const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo }) => 
 );
 
 const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriodo }) => {
-    const [periodoSeleccionado, setPeriodoSeleccionado] = useState('semestreICheck'); // Establecer 'semestreICheck' como seleccionado por defecto
+    const [periodoSeleccionado, setPeriodoSeleccionado] = useState('semestreICheck'); 
 
     useEffect(() => {
         // Filtrar los datos inicialmente
@@ -69,6 +70,7 @@ const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriod
                     label="Semestre I"
                     onPeriodoChange={handlePeriodoChange}
                     setFilteredDataByPeriodo={setFilteredDataByPeriodo}
+                    checked={periodoSeleccionado === 'semestreICheck'}
                 />
                 <RadioItem
                     id="intersemestralICheck"
