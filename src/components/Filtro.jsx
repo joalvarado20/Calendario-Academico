@@ -48,6 +48,12 @@ const Filtro = ({ updateFilteredData }) => {
         setSelectedFechaInicio('');
         setSelectedFechaFin('');
 
+        // Restablecer el valor del checkbox 'Semestre I', si existe
+        const semestreICheck = document.getElementById('semestreICheck');
+        if (semestreICheck) {
+            semestreICheck.checked = true;
+        }
+
         // Actualiza la variable de estado para indicar que se deben limpiar los filtros
         setClearFilters(true);
     };
@@ -230,7 +236,7 @@ const Filtro = ({ updateFilteredData }) => {
                                 />
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select className="form-control" onChange={handleYearChange}>
+                                <select className="form-control" onChange={handleYearChange} value={selectedYear}>
                                     <option disabled selected value="">Año</option>
                                     <option>2022</option>
                                     <option>2023</option>
