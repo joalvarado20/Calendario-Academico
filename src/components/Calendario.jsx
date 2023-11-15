@@ -12,7 +12,7 @@ const ListItems = ({ items }) => (
     </ul>
 );
 
-const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filteredDataByPeriodo }) => {
+const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) => {
     const [dataToShow, setDataToShow] = useState(filteredData);
     const [showNoDataMessage, setShowNoDataMessage] = useState(false);
 
@@ -42,7 +42,7 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filt
                         return ordenAscendente ? fechaInicioA - fechaInicioB : fechaInicioB - fechaInicioA;
                     })
                     .map((item, index) => {
-                        // Formateo de fechas y hora
+                         // Formateo de fechas y hora
                         const fechaInicioFormateada = formatFecha(item.fechaInicio);
                         const fechaFinFormateada = formatFecha(item.fechaFin);
                         const horaInicioAMPM = formatTimeToAMPM(item.horaInicio);
@@ -99,14 +99,42 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filt
                                         </div>
                                         <div className="items_contet d-flex">
                                             <div data-bs-toggle="tooltip" data-placement="bottom" title="Unidad académica." className="Facultad">
-                                                <a data-bs-target="#modalFacultadPregrados0" data-bs-toggle="modal" href="#">
+                                                <a data-bs-target={`#modalFacultadPregrados${index}`} data-bs-toggle="modal" href="#">
                                                     Unidad académica <FontAwesomeIcon className='icons' icon={faPlus} />
                                                 </a>
                                             </div>
                                             <div data-bs-toggle="tooltip" data-placement="bottom" title="Programas." className="Programa">
-                                                <a data-bs-target="#modalProgramasPregrados0" data-bs-toggle="modal" href="#">
+                                                <a data-bs-target={`#modalProgramasPregrados${index}`} data-bs-toggle="modal" href="#">
                                                     Programa <FontAwesomeIcon className='icons' icon={faPlus} />
                                                 </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div aria-labelledby={`ModalFacultad${index}`} id={`modalFacultadPregrados${index}`} tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
+                                        <div className="modal-dialog modal-xl">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h4>Listado de Unidades académicas</h4>
+                                                    <button data-bs-dismiss="modal" type="button" className="close">x</button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <p>Listado de facultades que participan en este evento:</p>
+                                                    <ListItems items={item.facultad.split(';').map(facultad => facultad.trim())} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div aria-labelledby={`ModalProgramas${index}`} id={`modalProgramasPregrados${index}`} tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
+                                        <div className="modal-dialog modal-xl">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h4>Listado de Programas</h4>
+                                                    <button data-bs-dismiss="modal" type="button" className="close">x</button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <p>Listado de programas que participan en este evento:</p>
+                                                    <ListItems items={item.programa.split(';').map(programa => programa.trim())} />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -114,34 +142,6 @@ const Calendario = ({ facultades, programas, filteredData, ordenAscendente, filt
                             </article>
                         );
                     })}
-                <div aria-labelledby="ModalFacultad" id="modalFacultadPregrados0" tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
-                    <div className="modal-dialog modal-xl">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h4>Listado de Unidades académicas</h4>
-                                <button data-bs-dismiss="modal" type="button" className="close">x</button>
-                            </div>
-                            <div className="modal-body">
-                                <p>Listado de facultades que participan en este evento:</p>
-                                <ListItems items={facultades} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div aria-labelledby="ModalProgramas" id="modalProgramasPregrados0" tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
-                    <div className="modal-dialog modal-xl">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h4>Listado de Programas</h4>
-                                <button data-bs-dismiss="modal" type="button" className="close">x</button>
-                            </div>
-                            <div className="modal-body">
-                                <p>Listado de programas que participan en este evento:</p>
-                                <ListItems items={programas} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     );

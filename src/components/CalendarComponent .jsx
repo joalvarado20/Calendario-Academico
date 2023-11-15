@@ -6,15 +6,6 @@ import Calendario from './Calendario';
 
 const CalendarComponent = ({ filteredData }) => {
     // Define las listas de facultades y programas
-    const facultades = [
-        'Decanatura Del Medio Universitario',
-        'Escuela De Administración',
-    ];
-
-    const programas = [
-        'Administración de Empresas',
-        'Administración de Negocios Internacionales',
-    ];
 
     // Define el estado "ordenAscendente" y la función "handleOrdenChange" para gestionar el cambio de orden.
     const [ordenAscendente, setOrdenAscendente] = useState(true);
@@ -35,7 +26,7 @@ const CalendarComponent = ({ filteredData }) => {
                         </aside>
                     </div>
                     <div className="col-12 col-sm-12 col-md-8 col-lg-8 d-flex justify-content-center">
-                        <Calendario filteredData= {filteredData} filteredDataByPeriodo={filteredDataByPeriodo} facultades={facultades} programas={programas} ordenAscendente={ordenAscendente} />
+                        <Calendario filteredData= {filteredData} filteredDataByPeriodo={filteredDataByPeriodo} ordenAscendente={ordenAscendente} />
                     </div>
                 </div>
             </div>
