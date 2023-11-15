@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as utility from 'lodash'; // biblioteca para funciones de utilidad
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSlidersH, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -18,11 +19,12 @@ const Filtro = ({ updateFilteredData }) => {
     const [selectedNivelFormacion, setSelectedNivelFormacion] = useState(''); // Nivel de formación seleccionado
     const [selectedFechaInicio, setSelectedFechaInicio] = useState(''); // Fecha de inicio seleccionada
     const [selectedFechaFin, setSelectedFechaFin] = useState(''); // Fecha de fin seleccionada
+    const [selectedUnidadAcademica, setSelectedUnidadAcademica] = useState(''); // Unidad academica seleccionada
+    const [selectedPrograma, setSelectedPrograma] = useState(''); // programa seleccionado
 
     // Estado para rastrear si se han obtenido datos iniciales de la API
     const [initialDataFetched, setInitialDataFetched] = useState(false);
     const [clearFilters, setClearFilters] = useState(false);
-
 
     // Función genérica para manejar cambios en estados
     const handleInputChange = (stateSetter) => (event) => {
@@ -36,6 +38,8 @@ const Filtro = ({ updateFilteredData }) => {
     const handleFechaInicioChange = handleInputChange(setSelectedFechaInicio);
     const handleFechaFinChange = handleInputChange(setSelectedFechaFin);
     const handleNivelFormacionChange = handleInputChange(setSelectedNivelFormacion);
+    const handleProgramaChange = handleInputChange(setSelectedPrograma);
+    const handleUnidadAcademicaChange = handleInputChange(setSelectedUnidadAcademica);
 
     // ...
 
@@ -47,6 +51,8 @@ const Filtro = ({ updateFilteredData }) => {
         setSelectedNivelFormacion('');
         setSelectedFechaInicio('');
         setSelectedFechaFin('');
+        setSelectedUnidadAcademica('');
+        setSelectedPrograma('');
 
         // Restablecer el valor del checkbox 'Semestre I', si existe
         const semestreICheck = document.getElementById('semestreICheck');
@@ -100,6 +106,25 @@ const Filtro = ({ updateFilteredData }) => {
                         return item.fechaFin === fechaFinApiFormat;
                     });
                 }
+                
+                 // Filtrado de datos por Unidad de programa
+                if (selectedUnidadAcademica) {
+                    const programasSeleccionados = selectedUnidadAcademica.split(';').map(programa => utility.deburr(programa.trim().toLowerCase()));
+                    filteredData = filteredData.filter((item) => {
+                        const programasItem = item.facultad.split(';').map(programa => utility.deburr(programa.trim().toLowerCase()));
+                        return programasSeleccionados.some(programa => programasItem.includes(programa));
+                    });
+                }
+                
+                // Filtrado de datos por programa
+                if (selectedPrograma) {
+                    const programasSeleccionados = selectedPrograma.split(';').map(programa => programa.trim());
+                    filteredData = filteredData.filter((item) => {
+                        const programasItem = item.programa.split(';').map(programa => programa.trim());
+                        return programasSeleccionados.some(programa => programasItem.includes(programa));
+                    });
+                }
+
                 updateFilteredData(filteredData)
                 console.log("Datos filtrados", filteredData);
                 // Aquí tienes los datos filtrados por año, categoría y palabra clave (filteredData)
@@ -259,7 +284,7 @@ const Filtro = ({ updateFilteredData }) => {
 
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select className="form-control">
+                                <select className="form-control" onChange={handleUnidadAcademicaChange} value={selectedUnidadAcademica}>
                                     <option value="" selected disabled>Unidad académica...</option>
                                     {UnidadAcademica.map((facultad, index) => (
                                         <option key={index}>{facultad}</option>
@@ -267,7 +292,7 @@ const Filtro = ({ updateFilteredData }) => {
                                 </select>
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select className="form-control">
+                                <select className="form-control" onChange={handleProgramaChange} value={selectedPrograma}>
                                     <option disabled selected value="">Programa...</option>
                                     {Programa.map((programa, index) => (
                                         <option key={index}>{programa}</option>
