@@ -301,7 +301,7 @@ const Filtro = ({ updateFilteredData }) => {
                             </div>
                             <div className="d-flex justify-content-end gap-2">
                                 <input id="buscar" minLength="6" type="button" value="BUSCAR" className="button form-control buscar btn btn-danger btn-sm w-25" onClick={handleSearch} />
-                                <input minLength="6" type="button" value="Limpiar" className="button form-control item_R limpiar btn btn-danger btn-sm w-25" onClick={handleClearFilters} />
+                                <input minLength="6" type="button" value="" className="button form-control item_R limpiar btn btn-danger btn-sm w-25" onClick={handleClearFilters} />
                             </div>
                         </div>
                     </div>
