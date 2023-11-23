@@ -30,7 +30,16 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
         setShowNoDataMessage(filteredDataByPeriodo.length === 0);
     }, [dataToShow]);
 
-
+    let lista = [
+        "Contratación profesores/as catedra",
+        "Evaluación integral de profesores",
+        "Asignación de Espacios Físicos  y Publicación de Salones",
+        "Incentivos y reconocimientos profesores",
+        "Modificaciones curriculares",
+        "Plan de trabajo del profesor/a",
+        "Proceso de Planeación y Oferta Académica"
+    ]
+    
     return (
         <section id="resultadosActividades">
             <div>
@@ -42,7 +51,7 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
                         return ordenAscendente ? fechaInicioA - fechaInicioB : fechaInicioB - fechaInicioA;
                     })
                     .map((item, index) => {
-                         // Formateo de fechas y hora
+                        // Formateo de fechas y hora
                         const fechaInicioFormateada = formatFecha(item.fechaInicio);
                         const fechaFinFormateada = formatFecha(item.fechaFin);
                         const horaInicioAMPM = formatTimeToAMPM(item.horaInicio);
@@ -54,8 +63,12 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
                         const eventoCerrado = fechaActual > fechaFinDate;
                         const eventoClase = eventoCerrado ? "cerrado" : "abierto";
 
+                        const hideItem = lista.includes(item.categoria);
+
                         return (
-                            <article className="evento eventos0" key={index}>
+                            <article className={`evento eventos0 ${window.location.href.includes('estudiante') ? (hideItem ? 'd-none' : 'd-block') : 'd-block'
+                                }`}
+                                key={index}>
                                 <div className="row">
                                     <div className="col-12 d-flex justify-content-end">
                                         <div className={`card_filter ${item.periodo === "Semestre I" ? "item_1resemestre" : "item_2dosemestre"}`}>

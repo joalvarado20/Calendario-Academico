@@ -221,7 +221,7 @@ const Filtro = ({ updateFilteredData }) => {
                                                 key={categoria.nombre}
                                                 className="ct ct-estudiante ct-profesor-funcionario"
                                                 style={{
-                                                    display: window.location.href.includes("localhost") ? (categoria.display ? 'block' : 'none') : 'block'
+                                                    display: window.location.href.includes("estudiante") ? (categoria.display ? 'block' : 'none') : 'block'
                                                 }}
                                                 value={categoria.nombre}
                                             >
