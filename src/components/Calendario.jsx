@@ -43,12 +43,15 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
     return (
         <section id="resultadosActividades">
             <div>
-                {showNoDataMessage && <p>No hay datos disponibles.</p>}
+            {showNoDataMessage && <p>No hay datos disponibles.</p>}
                 {!showNoDataMessage && dataToShow
                     .sort((a, b) => {
                         const fechaInicioA = new Date(a.fechaInicio);
                         const fechaInicioB = new Date(b.fechaInicio);
-                        return ordenAscendente ? fechaInicioA - fechaInicioB : fechaInicioB - fechaInicioA;
+                        const today = new Date(); // Obtener la fecha actual
+                        const diffA = Math.abs(fechaInicioA - today); // Diferencia de fechas con el evento A
+                        const diffB = Math.abs(fechaInicioB - today); // Diferencia de fechas con el evento B
+                        return ordenAscendente ? diffA - diffB : diffB - diffA;
                     })
                     .map((item, index) => {
                         // Formateo de fechas y hora
