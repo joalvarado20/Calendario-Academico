@@ -1,99 +1,100 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import * as utility from 'lodash'; // biblioteca para funciones de utilidad
+import { SelecteCtegorias, UnidadAcademica } from '../helpers/objects';
+import { Programa } from '../helpers/programas'
 
-const RadioItem = ({ id, label, onPeriodoChange, setFilteredDataByPeriodo,checked}) => (
-    <div className="form-check">
-        <input
-            id={id}
-            type="radio"
-            name="exampleRadios"
-            value={id}
-            className="form-check-input"
-            checked={checked} 
-            onChange={() => {
-                onPeriodoChange(id, setFilteredDataByPeriodo);
-            }}
-        />
-        <label htmlFor={id} className="form-check-label">
-            {label}
-            <p id={id} className="valorAno"></p>
-        </label>
-    </div>
-);
+const PeriodoAcademico = ({ filteredData, setFilteredDataByPeriodo }) => {
+    const [periodoSeleccionado, setPeriodoSeleccionado] = useState('Semestre I');
+    const [selectedUnidadAcademica, setSelectedUnidadAcademica] = useState(''); // Unidad academica seleccionada
+    const [selectedPrograma, setSelectedPrograma] = useState(''); // programa seleccionado
+    const [selectedNivelFormacion, setSelectedNivelFormacion] = useState(''); // Nivel de formación seleccionado
 
-const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriodo }) => {
-    const [periodoSeleccionado, setPeriodoSeleccionado] = useState('semestreICheck'); 
+    // Función genérica para manejar cambios en estados
+    const handleInputChange = (stateSetter) => (event) => {
+        stateSetter(event.target.value);
+    };
+
+    const handleProgramaChange = handleInputChange(setSelectedPrograma);
+    const handleUnidadAcademicaChange = handleInputChange(setSelectedUnidadAcademica);
+    const handleNivelFormacionChange = handleInputChange(setSelectedNivelFormacion);
+
+    // Filtrado de datos por Unidad de programa
+    if (selectedUnidadAcademica) {
+        const programasSeleccionados = selectedUnidadAcademica.split(';').map(programa => utility.deburr(programa.trim().toLowerCase()));
+        filteredData = filteredData.filter((item) => {
+            const programasItem = item.facultad.split(';').map(programa => utility.deburr(programa.trim().toLowerCase()));
+            return programasSeleccionados.some(programa => programasItem.includes(programa));
+        });
+    }
+
+    // Filtrado de datos por programa
+    if (selectedPrograma) {
+        const programasSeleccionados = selectedPrograma.split(';').map(programa => programa.trim());
+        filteredData = filteredData.filter((item) => {
+            const programasItem = item.programa.split(';').map(programa => programa.trim());
+            return programasSeleccionados.some(programa => programasItem.includes(programa));
+        });
+    }
+    // Filtrado de datos por nivel de formación
+    if (selectedNivelFormacion) {
+        filteredData = filteredData.filter((item) => item.tipoPrograma === selectedNivelFormacion);
+    }
 
     useEffect(() => {
         // Filtrar los datos inicialmente
-        const filteredDataByPeriodo = filteredData.filter((item) => item.periodo === 'Semestre I');
+        const filteredDataByPeriodo = filteredData.filter((item) => item.periodo === periodoSeleccionado);
         setFilteredDataByPeriodo(filteredDataByPeriodo);
-    }, [filteredData, setFilteredDataByPeriodo]);
-
-    const idToPeriodo = {
-        semestreICheck: 'Semestre I',
-        intersemestralICheck: 'Intersemestral',
-        semestreIICheck: 'Semestre II',
-        intersemestralIICheck: 'Intersemestral II',
-    };
-
-    const handleOrdenChange = (event) => {
-        const value = event.target.value;
-        if (value === 'Orden ascendente (fecha de inicio)') {
-            onOrdenChange(true);
-        } else if (value === 'Orden descendente (fecha de inicio)') {
-            onOrdenChange(false);
-        }
-    };
-
-    const handlePeriodoChange = (selectedId, setFilteredDataByPeriodo) => {
-        const selectedPeriodo = idToPeriodo[selectedId];
-        setPeriodoSeleccionado(selectedId);
-        const filteredDataByPeriodo = filteredData.filter((item) => item.periodo === selectedPeriodo);
-        setFilteredDataByPeriodo(filteredDataByPeriodo);
-    };
+    }, [filteredData, setFilteredDataByPeriodo, periodoSeleccionado]);
 
     return (
-        <article className="periodos" id='periodos'>
-            <h5>Periodo académico</h5>
-            <select id="exampleFormControlSelect1" className="form-control" onChange={handleOrdenChange}>
-                <option disabled value="">
-                    Ordenar...
-                </option>
-                <option>Orden ascendente (fecha de inicio)</option>
-                <option>Orden descendente (fecha de inicio)</option>
-            </select>
-            <div className="contet_phone">
-                <RadioItem
-                    id="semestreICheck"
-                    label="Semestre I"
-                    onPeriodoChange={handlePeriodoChange}
-                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
-                    checked={periodoSeleccionado === 'semestreICheck'}
-                />
-                <RadioItem
-                    id="intersemestralICheck"
-                    label="Intersemestral"
-                    onPeriodoChange={handlePeriodoChange}
-                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
-                />
-                <RadioItem
-                    id="semestreIICheck"
-                    label="Semestre II"
-                    onPeriodoChange={handlePeriodoChange}
-                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
-                />
-                <RadioItem
-                    id="intersemestralIICheck"
-                    label="Intersemestral II"
-                    onPeriodoChange={handlePeriodoChange}
-                    setFilteredDataByPeriodo={setFilteredDataByPeriodo}
-                />
+        <article className="periodos" id="periodos">
+            <h5>Periodo Académico</h5>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h6 style={{ marginRight: '10px' }}>Nivel de Formacion</h6>
+                <select
+                    className="form-control"
+                    onChange={handleNivelFormacionChange}
+                    value={selectedNivelFormacion}
+                >
+                    <option disabled value="" selected>
+                        Nivel de formación...
+                    </option>
+                    <option>Pregrados</option>
+                    <option>Posgrados</option>
+                    <option>Especializaciones</option>
+                </select>
             </div>
-            <hr />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h6 style={{ marginRight: '10px' }}>Unidad Academica</h6>
+                <select className="form-control" onChange={handleUnidadAcademicaChange} value={selectedUnidadAcademica}>
+                    <option value="" selected disabled>Unidad académica...</option>
+                    {UnidadAcademica.map((facultad, index) => (
+                        <option key={index}>{facultad}</option>
+                    ))}
+                </select>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h6 style={{ marginRight: '10px' }}>Programa</h6>
+                <select className="form-control" onChange={handleProgramaChange} value={selectedPrograma}>
+                    <option disabled selected value="">Programa...</option>
+                    {Programa.map((programa, index) => (
+                        <option key={index}>{programa}</option>
+                    ))}
+                </select>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h6 style={{ marginRight: '10px' }}>Semestre</h6>
+                <select id="exampleFormControlSelect1" className="form-control" onChange={(e) => setPeriodoSeleccionado(e.target.value)}>
+                    <option value="Semestre I">Semestre I</option>
+                    <option value="Intersemestral">Intersemestral</option>
+                    <option value="Semestre II">Semestre II</option>
+                    <option value="Intersemestral II">Intersemestral II</option>
+                </select>
+            </div>
         </article>
     );
 };
 
 export default PeriodoAcademico;
+
+

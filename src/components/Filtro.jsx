@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import * as utility from 'lodash'; // biblioteca para funciones de utilidad
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSlidersH, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Programa } from '../helpers/programas'
-import { SelecteCtegorias, UnidadAcademica } from '../helpers/objects';
+import { SelecteCtegorias } from '../helpers/objects';
 import { fetchDataFromAPI } from '../helpers/api';
-import { convertDateFormatToAPI } from '../helpers/functions'
 
 const Filtro = ({ updateFilteredData }) => {
     // Estado para controlar si el menú está abierto o cerrado
@@ -16,11 +13,6 @@ const Filtro = ({ updateFilteredData }) => {
     const [selectedYear, setSelectedYear] = useState(''); // Año seleccionado
     const [selectedCategory, setSelectedCategory] = useState(''); // Categoría seleccionada
     const [keyword, setKeyword] = useState(''); // Palabra clave ingresada
-    const [selectedNivelFormacion, setSelectedNivelFormacion] = useState(''); // Nivel de formación seleccionado
-    const [selectedFechaInicio, setSelectedFechaInicio] = useState(''); // Fecha de inicio seleccionada
-    const [selectedFechaFin, setSelectedFechaFin] = useState(''); // Fecha de fin seleccionada
-    const [selectedUnidadAcademica, setSelectedUnidadAcademica] = useState(''); // Unidad academica seleccionada
-    const [selectedPrograma, setSelectedPrograma] = useState(''); // programa seleccionado
 
     // Estado para rastrear si se han obtenido datos iniciales de la API
     const [initialDataFetched, setInitialDataFetched] = useState(false);
@@ -35,13 +27,6 @@ const Filtro = ({ updateFilteredData }) => {
     const handleYearChange = handleInputChange(setSelectedYear);
     const handleCategoryChange = handleInputChange(setSelectedCategory);
     const handleKeywordChange = handleInputChange(setKeyword);
-    const handleFechaInicioChange = handleInputChange(setSelectedFechaInicio);
-    const handleFechaFinChange = handleInputChange(setSelectedFechaFin);
-    const handleNivelFormacionChange = handleInputChange(setSelectedNivelFormacion);
-    const handleProgramaChange = handleInputChange(setSelectedPrograma);
-    const handleUnidadAcademicaChange = handleInputChange(setSelectedUnidadAcademica);
-
-    // ...
 
     // Función para limpiar todos los filtros
     const handleClearFilters = () => {
@@ -49,16 +34,6 @@ const Filtro = ({ updateFilteredData }) => {
         setSelectedCategory('');
         setKeyword('');
         setSelectedNivelFormacion('');
-        setSelectedFechaInicio('');
-        setSelectedFechaFin('');
-        setSelectedUnidadAcademica('');
-        setSelectedPrograma('');
-
-        // Restablecer el valor del checkbox 'Semestre I', si existe
-        const semestreICheck = document.getElementById('semestreICheck');
-        if (semestreICheck) {
-            semestreICheck.checked = true;
-        }
 
         // Actualiza la variable de estado para indicar que se deben limpiar los filtros
         setClearFilters(true);
@@ -84,45 +59,6 @@ const Filtro = ({ updateFilteredData }) => {
                         item.contenido.toLowerCase().includes(keywordLower) ||
                         item.nombre.toLowerCase().includes(keywordLower)
                     );
-                }
-
-                // Filtrado de datos por nivel de formación
-                if (selectedNivelFormacion) {
-                    filteredData = filteredData.filter((item) => item.tipoPrograma === selectedNivelFormacion);
-                }
-
-                // Filtrado de datos por fecha de inicio
-                if (selectedFechaInicio) {
-                    filteredData = filteredData.filter((item) => {
-                        const fechaInicioApiFormat = convertDateFormatToAPI(selectedFechaInicio);
-                        return item.fechaInicio === fechaInicioApiFormat;
-                    });
-                }
-
-                // Filtrado de datos por fecha de fin
-                if (selectedFechaFin) {
-                    filteredData = filteredData.filter((item) => {
-                        const fechaFinApiFormat = convertDateFormatToAPI(selectedFechaFin);
-                        return item.fechaFin === fechaFinApiFormat;
-                    });
-                }
-
-                // Filtrado de datos por Unidad de programa
-                if (selectedUnidadAcademica) {
-                    const programasSeleccionados = selectedUnidadAcademica.split(';').map(programa => utility.deburr(programa.trim().toLowerCase()));
-                    filteredData = filteredData.filter((item) => {
-                        const programasItem = item.facultad.split(';').map(programa => utility.deburr(programa.trim().toLowerCase()));
-                        return programasSeleccionados.some(programa => programasItem.includes(programa));
-                    });
-                }
-
-                // Filtrado de datos por programa
-                if (selectedPrograma) {
-                    const programasSeleccionados = selectedPrograma.split(';').map(programa => programa.trim());
-                    filteredData = filteredData.filter((item) => {
-                        const programasItem = item.programa.split(';').map(programa => programa.trim());
-                        return programasSeleccionados.some(programa => programasItem.includes(programa));
-                    });
                 }
 
                 updateFilteredData(filteredData)
@@ -232,23 +168,6 @@ const Filtro = ({ updateFilteredData }) => {
 
                                 </div>
                             </div>
-                            {/* <div className="col-12 col-sm-12 col-md-4 col-lg-3 d-flex align-items-center">
-                                <input
-                                    id="date-input-inicio"
-                                    type="date"
-                                    className="form-control date"
-                                    onChange={handleFechaInicioChange}
-                                    value={selectedFechaInicio}
-                                />
-                                <span className="date">/</span>
-                                <input
-                                    id="date-input-fin"
-                                    type="date"
-                                    className="form-control date"
-                                    onChange={handleFechaFinChange}
-                                    value={selectedFechaFin}
-                                />
-                            </div> */}
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <input
                                     type="text"
@@ -260,44 +179,12 @@ const Filtro = ({ updateFilteredData }) => {
                                     value={keyword}
                                 />
                             </div>
-
-                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select
-                                    className="form-control"
-                                    onChange={handleNivelFormacionChange}
-                                    value={selectedNivelFormacion}
-                                >
-                                    <option disabled value="" selected>
-                                        Nivel de formación...
-                                    </option>
-                                    <option>Pregrados</option>
-                                    <option>Posgrados</option>
-                                    <option>Especializaciones</option>
-                                </select>
-
-                            </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center" id='year'>
                                 <select className="form-control" onChange={handleYearChange} value={selectedYear}>
                                     <option disabled selected value="">Año</option>
                                     <option>2022</option>
                                     <option>2023</option>
                                     <option>2024</option>
-                                </select>
-                            </div>
-                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select className="form-control" onChange={handleUnidadAcademicaChange} value={selectedUnidadAcademica}>
-                                    <option value="" selected disabled>Unidad académica...</option>
-                                    {UnidadAcademica.map((facultad, index) => (
-                                        <option key={index}>{facultad}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select className="form-control" onChange={handleProgramaChange} value={selectedPrograma}>
-                                    <option disabled selected value="">Programa...</option>
-                                    {Programa.map((programa, index) => (
-                                        <option key={index}>{programa}</option>
-                                    ))}
                                 </select>
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center gap-2">
