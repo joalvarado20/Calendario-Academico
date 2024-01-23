@@ -55,7 +55,7 @@ const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriod
     };
 
     return (
-        <article className="periodos">
+        <article className="periodos" id='periodos'>
             <h5>Periodo académico</h5>
             <select id="exampleFormControlSelect1" className="form-control" onChange={handleOrdenChange}>
                 <option disabled value="">
@@ -92,11 +92,6 @@ const PeriodoAcademico = ({ onOrdenChange, filteredData, setFilteredDataByPeriod
                 />
             </div>
             <hr />
-            <div className="descarga">
-                <a download="Descargar calendario" href="#" className="btn-download d-none">
-                    Descargar calendario <FontAwesomeIcon icon={faCalendar} />
-                </a>
-            </div>
         </article>
     );
 };

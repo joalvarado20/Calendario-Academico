@@ -106,8 +106,8 @@ const Filtro = ({ updateFilteredData }) => {
                         return item.fechaFin === fechaFinApiFormat;
                     });
                 }
-                
-                 // Filtrado de datos por Unidad de programa
+
+                // Filtrado de datos por Unidad de programa
                 if (selectedUnidadAcademica) {
                     const programasSeleccionados = selectedUnidadAcademica.split(';').map(programa => utility.deburr(programa.trim().toLowerCase()));
                     filteredData = filteredData.filter((item) => {
@@ -115,7 +115,7 @@ const Filtro = ({ updateFilteredData }) => {
                         return programasSeleccionados.some(programa => programasItem.includes(programa));
                     });
                 }
-                
+
                 // Filtrado de datos por programa
                 if (selectedPrograma) {
                     const programasSeleccionados = selectedPrograma.split(';').map(programa => programa.trim());
@@ -200,9 +200,9 @@ const Filtro = ({ updateFilteredData }) => {
                         </button>
                     </p>
                     <div id="collapsibleNavbar" className="navbar-collapse collapse">
-                        <div className="form-row row">
+                        <div className="form-row row" id='filtro'>
                             <div className="col-12 col-sm-12 col-md-5 col-lg-6 d-flex align-items-center">
-                                <div className="input-group">
+                                <div className="input-group" id='busqueda'>
                                     <div className="input-group-prepend">
                                         <label htmlFor="validatedInputGroupSelect" className="input-group-text">
                                             <i><FontAwesomeIcon icon={faSearch} /></i>
@@ -232,7 +232,7 @@ const Filtro = ({ updateFilteredData }) => {
 
                                 </div>
                             </div>
-                            <div className="col-12 col-sm-12 col-md-4 col-lg-3 d-flex align-items-center">
+                            {/* <div className="col-12 col-sm-12 col-md-4 col-lg-3 d-flex align-items-center">
                                 <input
                                     id="date-input-inicio"
                                     type="date"
@@ -248,7 +248,7 @@ const Filtro = ({ updateFilteredData }) => {
                                     onChange={handleFechaFinChange}
                                     value={selectedFechaFin}
                                 />
-                            </div>
+                            </div> */}
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <input
                                     type="text"
@@ -260,14 +260,7 @@ const Filtro = ({ updateFilteredData }) => {
                                     value={keyword}
                                 />
                             </div>
-                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
-                                <select className="form-control" onChange={handleYearChange} value={selectedYear}>
-                                    <option disabled selected value="">Año</option>
-                                    <option>2022</option>
-                                    <option>2023</option>
-                                    <option>2024</option>
-                                </select>
-                            </div>
+
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <select
                                     className="form-control"
@@ -282,6 +275,14 @@ const Filtro = ({ updateFilteredData }) => {
                                     <option>Especializaciones</option>
                                 </select>
 
+                            </div>
+                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center" id='year'>
+                                <select className="form-control" onChange={handleYearChange} value={selectedYear}>
+                                    <option disabled selected value="">Año</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                </select>
                             </div>
                             <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
                                 <select className="form-control" onChange={handleUnidadAcademicaChange} value={selectedUnidadAcademica}>
@@ -299,9 +300,9 @@ const Filtro = ({ updateFilteredData }) => {
                                     ))}
                                 </select>
                             </div>
-                            <div className="d-flex justify-content-end gap-2">
-                                <input id="buscar" minLength="6" type="button" value="BUSCAR" className="button form-control buscar btn btn-danger btn-sm w-25" onClick={handleSearch} />
-                                <input minLength="6" type="button" value="" className="button form-control item_R limpiar btn btn-danger btn-sm w-25" onClick={handleClearFilters} />
+                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center gap-2">
+                                <input id="buscar" minLength="6" type="button" value="BUSCAR" className="button form-control buscar btn btn-danger btn-sm" onClick={handleSearch} />
+                                <input id='limpiar' minLength="6" type="button" value="" className="button form-control item_R limpiar btn btn-danger btn-sm " onClick={handleClearFilters} />
                             </div>
                         </div>
                     </div>

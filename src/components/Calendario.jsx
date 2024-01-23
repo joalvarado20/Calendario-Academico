@@ -39,11 +39,11 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
         "Plan de trabajo del profesor/a",
         "Proceso de Planeación y Oferta Académica"
     ]
-    
+
     return (
         <section id="resultadosActividades">
             <div>
-            {showNoDataMessage && <p>No hay datos disponibles.</p>}
+                {showNoDataMessage && <p>No hay datos disponibles.</p>}
                 {!showNoDataMessage && dataToShow
                     .sort((a, b) => {
                         const fechaInicioA = new Date(a.fechaInicio);
@@ -69,9 +69,10 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
                         const hideItem = lista.includes(item.categoria);
 
                         return (
-                            <article className={`evento eventos0 ${window.location.href.includes('estudiante') ? (hideItem ? 'd-none' : 'd-block') : 'd-block'
-                                }`}
-                                key={index}>
+                            <article
+                                className={`evento eventos0 ${window.location.href.includes('estudiante') ? (hideItem ? 'd-none' : 'd-block') : 'd-block'}`}
+                                key={index}
+                                id={window.location.href.includes('estudiante') && !hideItem ? 'eventos' : undefined}>
                                 <div className="row">
                                     <div className="col-12 d-flex justify-content-end">
                                         <div className={`card_filter ${item.periodo === "Semestre I" ? "item_1resemestre" : "item_2dosemestre"}`}>
