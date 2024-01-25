@@ -1,1415 +1,1098 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,600;0,900;1,100&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,800;0,900;1,200;1,300;1,400;1,600;1,800;1,900&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --transition-duration: 0.2s;
-  --transition-delay: 0.2s;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-size: 62.5%;
-}
-
-body::-webkit-scrollbar {
-  width: 12px;
-  /* width of the entire scrollbar */
-}
-
-body::-webkit-scrollbar-track {
-  background: #F8F8F8;
-  /* color of the tracking area */
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: #15286F;
-  /* color of the scroll thumb */
-  border-radius: 20px;
-  /* roundness of the scroll thumb */
-  border: 3px solid #F8F8F8;
-  /* creates padding around scroll thumb */
-}
-
-/* Works on Firefox */
-body {
-  scrollbar-width: thin;
-  scrollbar-color: #15286F #F8F8F8;
-}
-
-/* Works on Chrome, Edge, and Safari */
-body::-webkit-scrollbar {
-  width: 12px;
-}
-
-body::-webkit-scrollbar-track {
-  background: #F8F8F8;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: #15286F;
-  border-radius: 20px;
-  border: 3px solid #F8F8F8;
-}
-
-.introjs-skipbutton {
-  color: #ffffff;
-  font-size: 12px;
-}
-
-.introjs-skipbutton:focus,
-.introjs-skipbutton:hover {
-  color: #fd021d;
-}
-
-.introjs-tooltiptext {
-  font-size: 1.2em;
-  background: #1d1b47;
-}
-
-.introjs-progressbar {
-  background-color: #3b60e9;
-}
-
-.introjs-tooltip {
-  background-color: #1d1b47;
-  color: #fff;
-}
-
-.introjs-tooltip-header {
-  border-bottom: 1px solid #b5b5bc;
-  padding-bottom: 10px;
-}
-
-.introjs-bullets ul li a.active {
-  width: 15px;
-  background: #3452c1;
-}
-
-.introjs-bullets ul li a {
-  background: #425392;
-}
-
-.introjs-bullets ul li a:focus,
-.introjs-bullets ul li a:hover {
-  background: #425392;
-}
-
-a.introjs-button.introjs-prevbutton.introjs-disabled {
-  color: #cfcfcf;
-}
-
-a.introjs-button.introjs-nextbutton {
-  border: 1px solid #ffffff;
-  background-color: #fd021d;
-  color: #fff;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.introjs-skipbutton i {
-  font-size: 1.5em;
-}
-
-.introjs-button,
-.introjs-button:hover,
-.introjs-button:focus,
-.introjs-button:active,
-.introjs-disabled,
-.introjs-disabled:focus,
-.introjs-disabled:hover {
-  outline: none;
-  background-image: none;
-  background-color: transparent;
-  color: #fff;
-  border: 1px solid transparent;
-  border-radius: 50px;
-  box-shadow: none;
-  border-shadow: none;
-  text-shadow: none;
-}
-
-.introjs-button:hover,
-.introjs-button:focus,
-.introjs-button:active {
-  background: #252258;
-}
-
-.introjs-disabled,
-.introjs-disabled:focus,
-.introjs-disabled:hover {
-  color: #ccc;
-  border: 1px solid transparent;
-}
-
-.introjs-arrow {
-  border: 10px solid #fff;
-}
-
-.introjs-arrow.top,
-.introjs-arrow.top-middle,
-.introjs-arrow.top-right {
-  border-color: transparent transparent rgba(000, 0, 0, 0.5);
-  top: -20px;
-  left: 20px;
-}
-
-.introjs-arrow.bottom,
-.introjs-arrow.bottom-middle,
-.introjs-arrow.bottom-right {
-  border-color: rgba(000, 0, 0, 0.5) transparent transparent;
-  bottom: -20px;
-  left: 20px;
-}
-
-.introjs-arrow.left,
-.introjs-arrow.right {
-  top: 20px;
-}
-
-.introjs-arrow.left-bottom,
-.introjs-arrow.right-bottom {
-  bottom: 20px;
-}
-
-.introjs-arrow.left,
-.introjs-arrow.left-bottom {
-  left: -20px;
-  border-color: transparent rgba(000, 0, 0, 0.5) transparent transparent;
-}
-
-.introjs-arrow.right,
-.introjs-arrow.right-bottom {
-  right: -20px;
-  border-color: transparent transparent transparent rgba(000, 0, 0, 0.5);
-}
-
-.modal-backdrop.show {
-  opacity: 0.8;
-}
-
-.modal-backdrop {
-  background: -webkit-linear-gradient(0deg, #1b142d 0%, #2e3180 80%);
-  background: -o-linear-gradient(0deg, #1b142d 0%, #2e3180 80%);
-  background: -moz-linear-gradient(0deg, #1b142d 0%, #2e3180 80%);
-  background: linear-gradient(0deg, #1b142d 0%, #2e3180 80%);
-}
-
-.modal {
-  -webkit-transform: scale(1.15);
-  transform: scale(1.15);
-  -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  transition: transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-}
-
-.modal.show {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946), opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-}
-
-#menu-pagina-ur.menu_evento {
-  /* background: #46444470; */
-  position: sticky;
-  top: -5px;
-  z-index: 6;
-  background: #fff;
-  box-shadow: 2px 2px 5px rgb(0 0 0 / 10%);
-}
-
-img {
-  width: 100%;
-}
-
-.gsst_a .gscb_a {
-  color: #190456;
-  cursor: pointer;
-}
-
-.search-wrap .close-search:hover {
-  border-color: #190456;
-  background-color: #190456;
-}
-
-.content_Calendario {
-  width: 100%;
-  padding-right: 5%;
-  padding-left: 5%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
-
-.container-fluid {
-  width: 100%;
-  padding-right: 5%;
-  padding-left: 5%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-p {
-  color: #6F6F6E;
-  font-size: 1.1rem;
-  line-height: 25px;
-  font-weight: 200;
-}
-
-h2 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #15286F;
-  line-height: 3.0rem;
-}
-
-h2 span {
-  color: #fff;
-}
-
-strong {
-  font-weight: 600;
-}
-
-h3 {
-  font-size: 1.8rem;
-  font-weight: 200;
-}
-
-h4 {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-h5 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #000;
-}
-
-h6 {
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: #fff;
-}
-
-small {
-  font-size: 0.8rem;
-  font-weight: 100;
-}
-
-a {
-  font-size: 1.2rem;
-  font-weight: 100;
-  text-decoration: none;
-}
-
-section.background-blue figure {
-  justify-content: flex-start;
-  overflow: initial;
-  max-height: inherit;
-  position: relative;
-  margin: 0px;
-}
-
-section.background-blue figcaption {
-  padding: 10px 0px 5%;
-}
-
-section.background-blue figure::before {
-  content: "";
-  background: -webkit-linear-gradient(6deg, #2c2f79 0%, #1d1737 56%);
-  background: -o-linear-gradient(6deg, #2c2f79 0%, #1d1737 56%);
-  background: -moz-linear-gradient(6deg, #2c2f79 0%, #1d1737 56%);
-  background: linear-gradient(6deg, #2c2f79 0%, #1d1737 56%);
-  position: absolute;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-section.background-blue figure .fondo_section {
-  justify-content: center;
-  position: absolute;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  align-content: flex-end;
-  background-color: #d7d5ff;
-  z-index: 0;
-  opacity: 0.1;
-}
-
-section.background-blue figure .fondo_section img {
-  width: 100vw;
-}
-
-small#anoSeleccionado {
-  font-size: 2.1rem;
-  color: #da0920;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.background-blue h2 {
-  color: #fff;
-}
-
-.background-blue p {
-  color: #fff;
-}
-
-h1 img.initial_title {
-  max-width: 980px;
-}
-
-.card_boton {
-  width: 70%;
-  padding: 30px 20px;
-}
-
-.card_boton a {
-  background: #FFFFFF;
-  -webkit-box-shadow: 7px 4px 20px 0px #00081f;
-  -moz-box-shadow: 7px 4px 20px 0px #00081f;
-  box-shadow: 7px 4px 20px 0px #00081f;
-  border-radius: 20px;
-  padding: 20px 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  align-content: stretch;
-  height: 100%;
-}
-
-.card_boton a:hover img {
-  background: #ffffff;
-  opacity: 0.4;
-  filter: grayscale(50%) sepia(1);
-  -webkit-filter: grayscale(70%) sepia(1);
-}
-
-.card_boton a:hover h3 {
-  color: #fff;
-}
-
-.card_boton a:hover {
-  background: #DA0921;
-  text-decoration: none;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-}
-
-
-.card_boton a img {
-  max-width: 200px;
-  padding: 5px 5px;
-  background: #D7D7E2;
-  border-radius: 50%;
-  max-height: 200px;
-}
-
-.card_boton a h3 {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 30px 0px;
-  color: #14286F;
-  font-weight: 700;
-}
-
-.card_boton a h3 span {
-  display: block;
-  font-size: 2.0rem;
-}
-
-.login img {
-  max-width: 600px;
-  filter: drop-shadow(2px 4px 6px black);
-}
-
-section.headeer_calendario {
-  background: #D7D7E2;
-  padding: 10px 0px;
-}
-
-#navbarSupportedContent {
-  padding-bottom: 10px;
-  background: #D7D7E2;
-  box-shadow: none !important;
-}
-
-#navbarSupportedContent ul {
-  display: flex;
-  flex-wrap: inherit;
-  list-style: ethiopic-halehame;
-  flex-direction: inherit;
-  padding: 0px 30px;
-  margin: 0px;
-  justify-content: flex-start;
-}
-
-#navbarSupportedContent li {
-  padding: 5px 0;
-  display: flex;
-  border: none !important;
-  padding-right: 20px;
-}
-
-#navbarSupportedContent li:before {
-  color: #dA0921;
-  margin-right: 8px;
-  font-size: 16px;
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "/";
-}
-
-#navbarSupportedContent li a.active {
-  color: #000000;
-  text-shadow: 0px 1px 6px #ffffff;
-  text-decoration: none;
-  cursor: alias;
-}
-
-#navbarSupportedContent li a {
-  color: #848383;
-}
-
-#navbarSupportedContent li a:hover {
-  color: #dA0921;
-  text-decoration: none;
-}
-
-.perfil {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  align-content: center;
-  height: 100%;
-}
-
-
-.perfil img {
-  max-width: 65px;
-  padding: 0px;
-  background: #EDEDF6;
-  border-radius: 50%;
-  max-height: 200px;
-}
-
-.perfil h4 {
-  color: #dA0921;
-  padding-left: 15px;
-}
-
-section.headeer_calendario h3 {
-  text-align: center;
-}
-
-nav.navbar-expand-md {
-  padding: 20px 0px;
-}
-
-.navbar-expand-md .des_title {
-  padding: 20px 0px;
-  display: flex;
-  align-items: flex-start;
-  align-content: flex-start;
-  justify-content: flex-start;
-}
-
-.navbar-expand-md .des_title {
-  padding: 10px 0px;
-  display: flex;
-}
-
-.navbar-expand-md .des_title i {
-  padding-right: 10px;
-  font-size: 1.6em;
-  color: #9C9B9B;
-}
-
-.contet_gris aside .descarga .input-group {
-  margin-top: 15px;
-}
-
-.contet_gris aside #exampleFormControlSelect1 {
-  width: 90%;
-  margin: 20px auto;
-}
-
-.navbar-expand-md .input-group-prepend label.input-group-text i {
-  max-width: 26px;
-}
-
-.navbar-expand-md .input-group-text {
-  font-size: 0.8rem;
-  padding: 10px;
-  height: 38px;
-  background: #15286F;
-  border: 1px solid #15286F;
-}
-
-.navbar-expand-md .form-control.date {
-  width: 45%;
-}
-
-.navbar-expand-md .input-group select.form-control.categorias-azul {
-  background-color: #15296f;
-  color: #fff;
-  border: 1px solid #15286F;
-}
-
-.navbar-expand-md .input-group-text i {
-  color: #fff;
-  font-size: 1.5em;
-}
-
-.navbar-expand-md span.date {
-  padding: 0px 10px;
-  color: #15296f;
-  font-size: 1.5em;
-}
-
-.navbar-expand-md select.custom-select {
-  background-color: #ffffff;
-  color: #9C9B9B;
-  border: transparent;
-  border-bottom: 2px solid #9C9B9B;
-  background-image: url(/PortalUrosario/media/UR-V4/Calendario-Academico-2022/img/slect_down.png);
-  background-size: 18px;
-}
-
-.navbar-expand-md .form-control {
-  background-color: #ffffff;
-  color: #9C9B9B;
-  border: transparent;
-  border-bottom: 2px solid #9C9B9B;
-}
-
-.navbar-expand-md .d-flex.align-items-center {
-  padding: 10px 20px;
-}
-
-.navbar-expand-md input.button.form-control {
-  background: #DA0921;
-  color: #fff;
-  font-weight: 500;
-  border-radius: 8px;
-  border-bottom: transparent;
-  transition: 0.3s;
-}
-
-.navbar-expand-md input.button.form-control:hover {
-  background: -webkit-linear-gradient(90deg, #ad0505 0%, #510101 80%);
-  background: -o-linear-gradient(90deg, #ad0505 0%, #510101 80%);
-  background: -moz-linear-gradient(90deg, #ad0505 0%, #510101 80%);
-  background: linear-gradient(90deg, #ad0505 0%, #510101 80%);
-}
-
-.navbar-expand-md input.button.form-control.item_R {
-  background: #15286F;
-  background-image: url(../img/noun-return.png);
-  background-repeat: no-repeat;
-  background-size: 24px;
-  background-position-x: center;
-  background-position-y: center;
-  width: 100%;
-  transition: 0.3s;
-}
-
-.navbar-expand-md input.button.form-control.item_R:hover {
-  background: #1b132e;
-  background-image: url(../img/noun-return.png);
-  background-repeat: no-repeat;
-  background-size: 24px;
-  background-position-x: center;
-  background-position-y: center;
-}
-
-.navbar-expand-md .d-flex.datepicker .input-group {
-  padding: 0px 10px;
-}
-
-.navbar-expand-md .d-flex.datepicker span {
-  color: #6F6F6E;
-  font-size: 1.5em;
-}
-
-.navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 {
-  border: transparent;
-  border-bottom: 2px solid #9C9B9B;
-}
-
-.navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {
-  color: #15286F;
-  font-size: 1.3em;
-}
-
-.contet_gris {
-  background: #F8F8F8;
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
-.contet_gris aside {
-  width: 100%;
-}
-
-.contet_gris section {
-  width: 100%;
-}
-
-article {
-  background: #FFFFFF;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
-
-article.periodos .form-check {
-  background: #D7D7E2;
-  margin: 10px 20px;
-  padding: 10px;
-  display: flex;
-  align-items: baseline;
-  align-content: baseline;
-  justify-content: flex-start;
-  border-radius: 10px;
-}
-
-article.periodos .form-check input.form-check-input {
-  position: relative;
-  margin-left: 10px;
-}
-
-article.periodos .form-check .form-check-label {
-  color: #190456;
-  font-size: 1.2rem;
-  padding-left: 10px;
-  font-weight: 600;
-}
-
-article.periodos .form-check .form-check-label small {
-  color: #838383;
-  width: 100%;
-  display: block;
-  font-weight: 300;
-}
-
-article.periodos .descarga select.custom-select {
-  background-color: #15296f;
-  color: #fff;
-  border: 1px solid #15286F;
-  background-image: url(../img/slect_down_white.png);
-  background-size: 18px;
-}
-
-article.periodos hr {
-  border-top: 1px solid #9C9B9B;
-}
-
-article.periodos {
-  padding-bottom: 50px;
-}
-
-article.periodos a.btn-download {
-  padding: 20px;
-  position: relative;
-  margin-bottom: 20px;
-  color: #190456;
-  font-weight: 200;
-}
-
-article.periodos .input-group.is-invalid {
-  padding: 20px 0;
-}
-
-article.evento .fecha {
-  text-align: center;
-  padding: 20px;
-  width: 100%;
-}
-
-article.evento .evento_icon {
-  padding: 7px 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-}
-
-article.evento .evento_icon small {
-  font-size: 1.0rem;
-  text-align: center;
-  padding-top: 5px;
-  font-weight: 300;
-  text-transform: capitalize;
-}
-
-article.evento .evento_icon.abierto {
-  background: #E4FFE3;
-  color: #82AA74;
-}
-
-article.evento .evento_icon.cerrado {
-  background: #FFE0E0;
-  color: #E58585;
-}
-
-article.evento .evento_icon i {
-  font-size: 2.0em;
-}
-
-article.evento .fecha h2 {
-  color: #000;
-  margin: 0px;
-}
-
-article.evento .fecha hr {
-  border-top: 2px solid #DA0921;
-}
-
-article.evento .fecha h3 {
-  color: #000;
-  font-size: 2.0rem;
-  font-weight: 700;
-}
-
-article.evento .fecha small {
-  font-size: 1.0rem;
-  font-weight: 300;
-}
-
-article.evento h6 {
-  color: #190456;
-  font-weight: 800;
-  padding-bottom: 10px;
-}
-
-article.evento p {
-  font-size: 1.0rem;
-  line-height: 22px;
-}
-
-article.evento .items_lugar p {
-  margin: 0px;
-}
-
-article.evento .items_lugar .icons {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  color: #B5B5B5;
-  padding-right: 10px;
-  font-size: 1.2rem;
-}
-
-article.evento .items_lugar p strong {
-  color: #190456;
-  font-weight: 800;
-  padding-right: 10px;
-}
-
-article.evento .items_contet a .icons {
-  font-family: 'Font Awesome 5 Free';
-  font-style: inherit;
-  border-radius: 20px;
-  padding: 4px;
-  color: #fff;
-  font-size: 0.7rem;
-}
-
-article.evento .items_contet {
-  padding: 30px 0px 20px;
-}
-
-article.evento .items_contet .Facultad,
-article.evento .items_contet .Programa {
-  padding-right: 20px;
-}
-
-article.evento .items_contet a {
-  padding: 3px 10px;
-  border-radius: 5px;
-}
-
-article.evento .items_contet .Facultad a {
-  color: #DA0921;
-  font-weight: 800;
-}
-
-article.evento .items_contet .Facultad a:hover {
-  background: #da0920;
-  color: #fff;
-  text-decoration: none;
-}
-
-article.evento .items_contet .Facultad a:hover .icons {
-  background: #da0920;
-}
-
-article.evento .items_contet .Facultad a .icons {
-  background: #ffbfc6;
-}
-
-article.evento .items_contet .Programa a {
-  color: #15286F;
-  font-weight: 800;
-}
-
-article.evento .items_contet .Programa a:hover {
-  background: #15286F;
-  color: #fff;
-  text-decoration: none;
-}
-
-article.evento .items_contet .Programa a .icons {
-  background: #B8C5F7;
-}
-
-article.evento .items_contet .Programa a:hover .icons {
-  background: #15286F;
-}
-
-
-article.evento .card_filter {
-  padding: 3px 10px;
-  border-radius: 5px;
-  margin: 5px;
-  max-width: 220px;
-  overflow: hidden;
-  height: 30px;
-  font-size: 0.9rem;
-  line-height: 22px;
-  font-weight: 800;
-}
-
-article.evento .card_filter.item_1resemestre {
-  background-color: #FEE8CE;
-  color: #FDAB55;
-}
-
-article.evento .card_filter.item_2dosemestre {
-  background-color: #FBDDFD;
-  color: #C49CC4;
-}
-
-article.evento .card_filter.item_1Intersemestre {
-  background-color: #D5D5FF;
-  color: #455ACE;
-}
-
-article.evento .card_filter.item_2Intersemestre {
-  background-color: #d5fff9;
-  color: #45cecc;
-}
-
-article.evento .card_filter.item_pregrado {
-  background-color: #9FD9FF;
-  color: #4098D0;
-}
-
-article.evento .card_filter.item_posgrado {
-  background-color: #CFFFB5;
-  color: #86B26E;
-}
-
-article.evento .card_filter.item_busqueda {
-  background-color: #EBEBEB;
-  color: #B2B2B2;
-}
-
-
-
-
-.modal-header h4 {
-  color: #14286F;
-  font-weight: 700;
-}
-
-.modal-header button.close {
-  font-size: 2.5rem;
-  color: #160852;
-  opacity: 1.5;
-}
-
-.modal-body ul {
-  position: relative;
-  padding: 0px 20px;
-}
-
-.modal-body ul li {
-  color: #6F6F6E;
-  font-size: 1.1rem;
-  font-weight: 300;
-  list-style: none;
-}
-
-.modal-body ul li:before {
-  margin-right: 8px;
-  font-size: 11px;
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f00c";
-  color: #da0820;
-}
-
-.contet_gris a.mas_eventos {
-  background: #D7D7E2;
-  border-radius: 10px;
-  color: #ffff;
-  padding: 3px 10px;
-  font-weight: 700;
-  transition: 0.3s;
-}
-
-.contet_gris a.mas_eventos i {
-  color: #da0820;
-  font-family: "Font Awesome 5 Free";
-  font-style: inherit;
-}
-
-.contet_gris a.mas_eventos:hover {
-  color: #190456;
-  text-decoration: none;
-  background: white;
-}
-
-.contet_gris a.mas_eventos:hover i {
-  color: #190456;
-}
-
-.top {
-  position: sticky;
-  padding: 15px 30px;
-  bottom: 70px;
-  float: right;
-  z-index: 1003;
-}
-
-.top i {
-  background: #D7D7E2;
-  padding: 10px;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.2em;
-}
-
-a img {
-  max-width: 38px;
-  background: #D7D7E2;
-  padding: 10px;
-  border-radius: 50%;
-}
-
-a:hover img {
-  background: #b9b9c6;
-}
-
-.perfil .blob {
-  transform: scale(1);
-  animation: pulse-black 2s infinite;
-  cursor: pointer;
-}
-
-.perfil .blob.blue {
-  box-shadow: 0 0 0 0 rgba(52, 172, 224, 1);
-  animation: pulse-blue 2s infinite;
-}
-
-
-@keyframes pulse-blue {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(52, 172, 224, 0.7);
-  }
-
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(52, 172, 224, 0);
-  }
-
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(52, 172, 224, 0);
-  }
-}
-
-
-@media screen and (min-width: 1426px) {
-  p {
-    font-size: 1.2rem;
-  }
-
-  .card_boton {
-    width: 50%;
-    padding: 30px 20px;
-  }
-
-
-}
-
-@media screen and (max-width: 1200px) {
-  .card_boton {
-    width: 100%;
-  }
-
-}
-
-@media screen and (max-width: 1024px) {
-  .card_boton {
-    width: 100%;
-  }
-
-  .navbar-expand-md .d-flex.align-items-center {
-    padding: 10px 5px;
-  }
-
-  article {
-    padding: 10px;
-  }
-
-  article.periodos .form-check {
-    margin: 10px 10px;
-  }
-
-  article.periodos .form-check input.form-check-input {
-    margin-left: 5px;
-  }
-
-  article.evento .fecha h3 {
-    font-size: 1.6rem;
-  }
-}
-
-@media screen and (max-width: 991px) {
-  article.periodos .form-check {
-    margin: 10px 0px;
-  }
-
-  article.periodos a.btn-download {
-    padding: 10px;
-    font-size: 1.0rem;
-  }
-
-  article.evento .evento_icon {
-    margin-top: 20px;
-  }
-
-  .top {
-    padding: 10px 5px;
-  }
-
-  a img {
-    max-width: 30px;
-    padding: 7px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  h2 {
-    font-size: 2.3rem;
-    line-height: 3.0rem;
-  }
-
-  p {
-    font-size: 1.0rem;
-    line-height: 21px;
-    font-weight: 200;
-    letter-spacing: 0px;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-  }
-
-  h6 {
-    font-size: 1.0rem;
-  }
-
-  h4 {
-    font-size: 1.4rem;
-  }
-
-  h5 {
-    font-size: 1.2rem;
-  }
-
-  .card_boton {
-    padding: 20px 0px;
-  }
-
-  section.background-blue figcaption {
-    padding: 30px 0px 15%;
-  }
-
-  .navbar-expand-md input.button.form-control.item_R {
-    width: 100%;
-  }
-
-  .navbar-expand-md .d-flex.datepicker {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .navbar-expand-md .des_title {
-    display: none;
-  }
-
-  article.periodos {
-    padding-bottom: 10px;
-  }
-
-  .navbar-expand-md button.navbar-toggler {
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,600;0,900;1,100&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,800;0,900;1,200;1,300;1,400;1,600;1,800;1,900&display=swap);
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box 
+}
+ :root {
+     --transition-duration: 0.2s;
+     --transition-delay: 0.2s 
+}
+ html {
+     scroll-behavior: smooth 
+}
+ body {
+     font-size: 62.5%;
+     scrollbar-width: thin;
+     scrollbar-color: #15286F #F8F8F8 
+}
+ body::-webkit-scrollbar {
+     width: 12px 
+}
+ body::-webkit-scrollbar-track {
+     background: #f8f8f8 
+}
+ body::-webkit-scrollbar-thumb {
+     background-color: #15286f;
+     border-radius: 20px;
+     border: 3px solid #f8f8f8 
+}
+ .introjs-skipbutton {
+     color: #fff;
+     font-size: 12px 
+}
+ .introjs-skipbutton:focus, .introjs-skipbutton:hover {
+     color: #fd021d 
+}
+ .introjs-tooltiptext {
+     font-size: 1.2em;
+     background: #1d1b47 
+}
+ .introjs-progressbar {
+     background-color: #3b60e9 
+}
+ .introjs-tooltip {
+     background-color: #1d1b47;
+     color: #fff 
+}
+ .introjs-tooltip-header {
+     border-bottom: 1px solid #b5b5bc;
+     padding-bottom: 10px 
+}
+ .introjs-bullets ul li a.active {
+     width: 15px;
+     background: #3452c1 
+}
+ .introjs-bullets ul li a, .introjs-bullets ul li a:focus, .introjs-bullets ul li a:hover {
+     background: #425392 
+}
+ a.introjs-button.introjs-prevbutton.introjs-disabled {
+     color: #cfcfcf 
+}
+ a.introjs-button.introjs-nextbutton {
+     border: 1px solid #fff;
+     background-color: #fd021d;
+     color: #fff;
+     font-weight: 500;
+     text-transform: uppercase 
+}
+ .introjs-skipbutton i {
+     font-size: 1.5em 
+}
+ .introjs-button, .introjs-button:active, .introjs-button:focus, .introjs-button:hover, .introjs-disabled, .introjs-disabled:focus, .introjs-disabled:hover {
+     outline: 0;
+     background-image: none;
+     background-color: transparent;
+     color: #fff;
+     border: 1px solid transparent;
+     border-radius: 50px;
+     box-shadow: none;
+     border-shadow: none;
+     text-shadow: none 
+}
+ .introjs-button:active, .introjs-button:focus, .introjs-button:hover {
+     background: #252258 
+}
+ .introjs-disabled, .introjs-disabled:focus, .introjs-disabled:hover {
+     color: #ccc;
+     border: 1px solid transparent 
+}
+ .introjs-arrow {
+     border: 10px solid #fff 
+}
+ .introjs-arrow.top, .introjs-arrow.top-middle, .introjs-arrow.top-right {
+     border-color: transparent transparent rgba(000, 0, 0, .5);
+     top: -20px;
+     left: 20px 
+}
+ .introjs-arrow.bottom, .introjs-arrow.bottom-middle, .introjs-arrow.bottom-right {
+     border-color: rgba(000, 0, 0, .5) transparent transparent;
+     bottom: -20px;
+     left: 20px 
+}
+ .introjs-arrow.left, .introjs-arrow.right {
+     top: 20px 
+}
+ .introjs-arrow.left-bottom, .introjs-arrow.right-bottom {
+     bottom: 20px 
+}
+ .introjs-arrow.left, .introjs-arrow.left-bottom {
+     left: -20px;
+     border-color: transparent rgba(000, 0, 0, .5) transparent transparent 
+}
+ .introjs-arrow.right, .introjs-arrow.right-bottom {
+     right: -20px;
+     border-color: transparent transparent transparent rgba(000, 0, 0, .5) 
+}
+ .modal-backdrop.show {
+     opacity: .8 
+}
+ .modal-backdrop {
+     background: -webkit-linear-gradient(0deg, #1b142d 0, #2e3180 80%);
+     background: -o-linear-gradient(0deg, #1b142d 0, #2e3180 80%);
+     background: -moz-linear-gradient(0deg, #1b142d 0, #2e3180 80%);
+     background: linear-gradient(0deg, #1b142d 0, #2e3180 80%) 
+}
+ .modal {
+     -webkit-transform: scale(1.15);
+     transform: scale(1.15);
+     -webkit-transition: -webkit-transform .1s cubic-bezier(.465, .183, .153, .946), opacity .1s cubic-bezier(.465, .183, .153, .946);
+     transition: transform .1s cubic-bezier(.465, .183, .153, .946), opacity .1s cubic-bezier(.465, .183, .153, .946) 
+}
+ .modal.show {
+     -webkit-transform: scale(1);
+     transform: scale(1);
+     -webkit-transition: -webkit-transform .3s cubic-bezier(.465, .183, .153, .946), opacity .3s cubic-bezier(.465, .183, .153, .946);
+     transition: transform .3s cubic-bezier(.465, .183, .153, .946), opacity .3s cubic-bezier(.465, .183, .153, .946) 
+}
+ #menu-pagina-ur.menu_evento {
+     position: sticky;
+     top: -5px;
+     z-index: 6;
+     background: #fff;
+     box-shadow: 2px 2px 5px rgb(0 0 0 / 10%) 
+}
+ .contet_gris aside, .contet_gris section, img {
+     width: 100% 
+}
+ .gsst_a .gscb_a {
+     color: #190456;
+     cursor: pointer 
+}
+ .search-wrap .close-search:hover {
+     border-color: #190456;
+     background-color: #190456 
+}
+ .content_Calendario {
+     width: 100%;
+     margin-right: auto;
+     margin-left: auto;
+     padding: 5% 
+}
+ .container-fluid {
+     width: 100%;
+     padding-right: 5%;
+     padding-left: 5%;
+     margin-right: auto;
+     margin-left: auto 
+}
+ p {
+     color: #6f6f6e;
+     font-size: 1.1rem;
+     line-height: 25px;
+     font-weight: 200 
+}
+ h2 {
+     font-size: 2.8rem;
+     font-weight: 700;
+     color: #15286f;
+     line-height: 3rem 
+}
+ .background-blue h2, .background-blue p, .card_boton a:hover h3, h2 span {
+     color: #fff 
+}
+ strong {
+     font-weight: 600 
+}
+ h3 {
+     font-size: 1.8rem;
+     font-weight: 200 
+}
+ h4, h5 {
+     font-size: 1.6rem 
+}
+ h4 {
+     font-weight: 600;
+     color: #fff 
+}
+ h5 {
+     font-weight: 700;
+     color: #000 
+}
+ h6 {
+     font-size: 1.4rem;
+     font-weight: 400;
+     color: #fff 
+}
+ a, small {
+     font-weight: 100 
+}
+ small {
+     font-size: .8rem 
+}
+ a {
+     font-size: 1.2rem;
+     text-decoration: none 
+}
+ section.background-blue figure {
+     justify-content: flex-start;
+     overflow: initial;
+     max-height: inherit;
+     position: relative;
+     margin: 0 
+}
+ section.background-blue figcaption {
+     padding: 10px 0 5% 
+}
+ section.background-blue figure::before {
+     content: "";
+     background: -webkit-linear-gradient(6deg, #2c2f79 0, #1d1737 56%);
+     background: -o-linear-gradient(6deg, #2c2f79 0, #1d1737 56%);
+     background: -moz-linear-gradient(6deg, #2c2f79 0, #1d1737 56%);
+     background: linear-gradient(6deg, #2c2f79 0, #1d1737 56%);
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     z-index: 0 
+}
+ section.background-blue figure .fondo_section {
+     justify-content: center;
+     position: absolute;
+     height: 100%;
+     overflow: hidden;
+     display: flex;
+     align-items: flex-end;
+     align-content: flex-end;
+     background-color: #d7d5ff;
+     z-index: 0;
+     opacity: .1 
+}
+ section.background-blue figure .fondo_section img {
+     width: 100vw 
+}
+ small#anoSeleccionado {
+     font-size: 2.1rem;
+     color: #da0920;
+     font-weight: 300;
+     font-style: italic 
+}
+ h1 img.initial_title {
+     max-width: 980px 
+}
+ .card_boton {
+     width: 70%;
+     padding: 30px 20px 
+}
+ .card_boton a {
+     background: #fff;
+     -webkit-box-shadow: 7px 4px 20px 0 #00081f;
+     -moz-box-shadow: 7px 4px 20px 0 #00081f;
+     box-shadow: 7px 4px 20px 0 #00081f;
+     border-radius: 20px;
+     padding: 20px 30px;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     align-items: stretch;
+     align-content: stretch;
+     height: 100% 
+}
+ .card_boton a:hover img {
+     background: #fff;
+     opacity: .4;
+     filter: grayscale(50%) sepia(1);
+     -webkit-filter: grayscale(70%) sepia(1) 
+}
+ .card_boton a:hover {
+     background: #da0921;
+     text-decoration: none;
+     -webkit-transition: .3s;
+     -o-transition: .3s;
+     transition: .3s 
+}
+ .card_boton a img {
+     max-width: 200px;
+     padding: 5px;
+     background: #d7d7e2;
+     border-radius: 50%;
+     max-height: 200px 
+}
+ .card_boton a h3 {
+     display: block;
+     width: 100%;
+     text-align: center;
+     padding: 30px 0;
+     color: #14286f;
+     font-weight: 700 
+}
+ .card_boton a h3 span {
+     display: block;
+     font-size: 2rem 
+}
+ .login img {
+     max-width: 600px;
+     filter: drop-shadow(2px 4px 6px black) 
+}
+ section.headeer_calendario {
+     background: #d7d7e2;
+     padding: 10px 0 
+}
+ #navbarSupportedContent {
+     padding-bottom: 10px;
+     background: #d7d7e2;
+     box-shadow: none !important 
+}
+ #navbarSupportedContent ul {
+     display: flex;
+     flex-wrap: inherit;
+     list-style: ethiopic-halehame;
+     flex-direction: inherit;
+     padding: 0 30px;
+     margin: 0;
+     justify-content: flex-start 
+}
+ #navbarSupportedContent li {
+     padding: 5px 20px 5px 0;
+     display: flex;
+     border: none !important 
+}
+ #navbarSupportedContent li:before {
+     color: #da0921;
+     margin-right: 8px;
+     font-size: 16px;
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     content: "/" 
+}
+ #navbarSupportedContent li a.active {
+     color: #000;
+     text-shadow: 0 1px 6px #fff;
+     text-decoration: none;
+     cursor: alias 
+}
+ #navbarSupportedContent li a {
+     color: #848383 
+}
+ #navbarSupportedContent li a:hover {
+     color: #da0921;
+     text-decoration: none 
+}
+ .perfil {
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+     align-content: center;
+     height: 100% 
+}
+ .perfil img {
+     max-width: 65px;
+     padding: 0;
+     background: #ededf6;
+     border-radius: 50%;
+     max-height: 200px 
+}
+ .perfil h4 {
+     color: #da0921;
+     padding-left: 15px 
+}
+ section.headeer_calendario h3 {
+     text-align: center 
+}
+ article.periodos .input-group.is-invalid, nav.navbar-expand-md {
+     padding: 20px 0 
+}
+ .navbar-expand-md .des_title {
+     padding: 10px 0;
+     display: flex;
+     align-items: flex-start;
+     align-content: flex-start;
+     justify-content: flex-start;
+     display: flex 
+}
+ .navbar-expand-md .des_title i {
+     padding-right: 10px;
+     font-size: 1.6em;
+     color: #9c9b9b 
+}
+ .contet_gris aside .descarga .input-group {
+     margin-top: 15px 
+}
+ .contet_gris aside #exampleFormControlSelect1 {
+     width: 90%;
+     margin: 20px auto 
+}
+ .navbar-expand-md .input-group-prepend label.input-group-text i {
+     max-width: 26px 
+}
+ .navbar-expand-md .input-group-text {
+     font-size: .8rem;
+     padding: 10px;
+     height: 38px;
+     background: #15286f;
+     border: 1px solid #15286f 
+}
+ .navbar-expand-md .form-control.date {
+     width: 45% 
+}
+ .categorias-azul {
+     background-color: #15296f !important;
+     color: #fff !important;
+     border: 1px solid #15286f !important 
+}
+ .navbar-expand-md .input-group-text i {
+     color: #fff;
+     font-size: 1.5em 
+}
+ .navbar-expand-md span.date {
+     padding: 0 10px;
+     color: #15296f;
+     font-size: 1.5em 
+}
+ .navbar-expand-md select.custom-select {
+     background-color: #fff;
+     color: #9c9b9b;
+     border: transparent;
+     border-bottom: 2px solid #9c9b9b;
+     background-image: url(/PortalUrosario/media/UR-V4/Calendario-Academico-2022/img/slect_down.png);
+     background-size: 18px 
+}
+ .navbar-expand-md .form-control {
+     background-color: #fff;
+     color: #9c9b9b;
+     border: transparent;
+     border-bottom: 2px solid #9c9b9b 
+}
+ .navbar-expand-md .d-flex.align-items-center {
+     padding: 10px 20px 
+}
+ .navbar-expand-md input.button.form-control {
+     background: #da0921;
+     color: #fff;
+     font-weight: 500;
+     border-radius: 8px;
+     border-bottom: transparent;
+     transition: .3s 
+}
+ .navbar-expand-md input.button.form-control:hover {
+     background: -webkit-linear-gradient(90deg, #ad0505 0, #510101 80%);
+     background: -o-linear-gradient(90deg, #ad0505 0, #510101 80%);
+     background: -moz-linear-gradient(90deg, #ad0505 0, #510101 80%);
+     background: linear-gradient(90deg, #ad0505 0, #510101 80%) 
+}
+ .navbar-expand-md input.button.form-control.item_R {
+     background: url(../img/noun-return.png) 0 0/24px no-repeat #15286f;
+     background-position-x: center;
+     background-position-y: center;
+     width: 100%;
+     transition: .3s 
+}
+ .navbar-expand-md input.button.form-control.item_R:hover {
+     background: url(../img/noun-return.png) 0 0/24px no-repeat #1b132e;
+     background-position-x: center;
+     background-position-y: center 
+}
+ .navbar-expand-md .d-flex.datepicker .input-group {
+     padding: 0 10px 
+}
+ .navbar-expand-md .d-flex.datepicker span {
+     color: #6f6f6e;
+     font-size: 1.5em 
+}
+ .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 {
+     border: transparent;
+     border-bottom: 2px solid #9c9b9b 
+}
+ .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {
+     color: #15286f;
+     font-size: 1.3em 
+}
+ .contet_gris {
+     background: #f8f8f8;
+     padding-top: 40px;
+     padding-bottom: 40px 
+}
+ article {
+     background: #fff;
+     padding: 20px;
+     border-radius: 8px;
+     margin-bottom: 30px 
+}
+ article.periodos .form-check {
+     background: #d7d7e2;
+     margin: 10px 20px;
+     padding: 10px;
+     display: flex;
+     align-items: baseline;
+     align-content: baseline;
+     justify-content: flex-start;
+     border-radius: 10px 
+}
+ article.periodos .form-check input.form-check-input {
+     position: relative;
+     margin-left: 10px 
+}
+ article.periodos .form-check .form-check-label {
+     color: #190456;
+     font-size: 1.2rem;
+     padding-left: 10px;
+     font-weight: 600 
+}
+ article.periodos .form-check .form-check-label small {
+     color: #838383;
+     width: 100%;
+     display: block;
+     font-weight: 300 
+}
+ article.periodos .descarga select.custom-select {
+     background-color: #15296f;
+     color: #fff;
+     border: 1px solid #15286f;
+     background-image: url(../img/slect_down_white.png);
+     background-size: 18px 
+}
+ article.periodos hr {
+     border-top: 1px solid #9c9b9b 
+}
+ article.periodos {
+     padding-bottom: 50px 
+}
+ article.periodos a.btn-download {
+     padding: 20px;
+     position: relative;
+     margin-bottom: 20px;
+     color: #190456;
+     font-weight: 200 
+}
+ article.evento .fecha {
+     text-align: center;
+     padding: 20px;
+     width: 100% 
+}
+ article.evento .evento_icon {
+     padding: 7px 10px;
+     border-radius: 10px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     align-content: center 
+}
+ article.evento .card_filter, article.evento .items_contet a {
+     border-radius: 5px;
+     padding: 3px 10px 
+}
+ article.evento .evento_icon small {
+     font-size: 1rem;
+     text-align: center;
+     padding-top: 5px;
+     font-weight: 300;
+     text-transform: capitalize 
+}
+ article.evento .evento_icon.abierto {
+     background: #e4ffe3;
+     color: #82aa74 
+}
+ article.evento .evento_icon.cerrado {
+     background: #ffe0e0;
+     color: #e58585 
+}
+ article.evento .evento_icon i {
+     font-size: 2em 
+}
+ article.evento .fecha h2 {
+     color: #000;
+     margin: 0 
+}
+ article.evento .fecha hr {
+     border-top: 2px solid #da0921 
+}
+ article.evento .fecha h3 {
+     color: #000;
+     font-size: 2rem;
+     font-weight: 700 
+}
+ article.evento .fecha small {
+     font-size: 1rem;
+     font-weight: 300 
+}
+ article.evento h6 {
+     color: #190456;
+     font-weight: 800;
+     padding-bottom: 10px 
+}
+ article.evento p {
+     font-size: 1rem;
+     line-height: 22px 
+}
+ article.evento .items_lugar p {
+     margin: 0 
+}
+ article.evento .items_lugar .icons {
+     font-family: 'Font Awesome 5 Free';
+     font-style: normal;
+     color: #b5b5b5;
+     padding-right: 10px;
+     font-size: 1.2rem 
+}
+ article.evento .items_lugar p strong {
+     color: #190456;
+     font-weight: 800;
+     padding-right: 10px 
+}
+ article.evento .items_contet a .icons {
+     font-family: 'Font Awesome 5 Free';
+     font-style: inherit;
+     border-radius: 20px;
+     padding: 4px;
+     color: #fff;
+     font-size: .7rem 
+}
+ article.evento .items_contet {
+     padding: 30px 0 20px 
+}
+ article.evento .items_contet .Facultad, article.evento .items_contet .Programa {
+     padding-right: 20px 
+}
+ article.evento .items_contet .Facultad a {
+     color: #da0921;
+     font-weight: 800 
+}
+ article.evento .items_contet .Facultad a:hover {
+     background: #da0920;
+     color: #fff;
+     text-decoration: none 
+}
+ article.evento .items_contet .Facultad a:hover .icons {
+     background: #da0920 
+}
+ article.evento .items_contet .Facultad a .icons {
+     background: #ffbfc6 
+}
+ article.evento .items_contet .Programa a {
+     color: #15286f;
+     font-weight: 800 
+}
+ article.evento .items_contet .Programa a:hover {
+     background: #15286f;
+     color: #fff;
+     text-decoration: none 
+}
+ article.evento .items_contet .Programa a .icons {
+     background: #b8c5f7 
+}
+ article.evento .items_contet .Programa a:hover .icons {
+     background: #15286f 
+}
+ article.evento .card_filter {
+     margin: 5px;
+     max-width: 220px;
+     overflow: hidden;
+     height: 30px;
+     font-size: .9rem;
+     line-height: 22px;
+     font-weight: 800 
+}
+ article.evento .card_filter.item_1resemestre {
+     background-color: #fee8ce;
+     color: #fdab55 
+}
+ article.evento .card_filter.item_2dosemestre {
+     background-color: #fbddfd;
+     color: #c49cc4 
+}
+ article.evento .card_filter.item_1Intersemestre {
+     background-color: #d5d5ff;
+     color: #455ace 
+}
+ article.evento .card_filter.item_2Intersemestre {
+     background-color: #d5fff9;
+     color: #45cecc 
+}
+ article.evento .card_filter.item_pregrado {
+     background-color: #9fd9ff;
+     color: #4098d0 
+}
+ article.evento .card_filter.item_posgrado {
+     background-color: #cfffb5;
+     color: #86b26e 
+}
+ article.evento .card_filter.item_busqueda {
+     background-color: #ebebeb;
+     color: #b2b2b2 
+}
+ .modal-header h4 {
+     color: #14286f;
+     font-weight: 700 
+}
+ .modal-header button.close {
+     font-size: 2.5rem;
+     color: #160852;
+     opacity: 1.5 
+}
+ .modal-body ul {
+     position: relative;
+     padding: 0 20px 
+}
+ .top i, a img {
+     background: #d7d7e2;
+     padding: 10px;
+     border-radius: 50% 
+}
+ .modal-body ul li {
+     color: #6f6f6e;
+     font-size: 1.1rem;
+     font-weight: 300;
+     list-style: none 
+}
+ .modal-body ul li:before {
+     margin-right: 8px;
+     font-size: 11px;
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     content: "\f00c";
+     color: #da0820 
+}
+ .contet_gris a.mas_eventos {
+     background: #d7d7e2;
+     border-radius: 10px;
+     color: #ffff;
+     padding: 3px 10px;
+     font-weight: 700;
+     transition: .3s 
+}
+ .contet_gris a.mas_eventos i {
+     color: #da0820;
+     font-family: "Font Awesome 5 Free";
+     font-style: inherit 
+}
+ .contet_gris a.mas_eventos:hover {
+     color: #190456;
+     text-decoration: none;
+     background: #fff 
+}
+ .contet_gris a.mas_eventos:hover i {
+     color: #190456 
+}
+ .top {
+     position: sticky;
+     padding: 15px 30px;
+     bottom: 70px;
+     float: right;
+     z-index: 1003 
+}
+ .top i {
+     color: #fff;
+     font-size: 1.2em 
+}
+ a img {
+     max-width: 38px 
+}
+ a:hover img {
+     background: #b9b9c6 
+}
+ .perfil .blob {
+     transform: scale(1);
+     animation: 2s infinite pulse-black;
+     cursor: pointer 
+}
+ .perfil .blob.blue {
+     box-shadow: 0 0 0 0 #34ace0;
+     animation: 2s infinite pulse-blue 
+}
+ @keyframes pulse-blue {
+     0% {
+         transform: scale(.95);
+         box-shadow: 0 0 0 0 rgba(52, 172, 224, .7) 
+    }
+     70% {
+         transform: scale(1);
+         box-shadow: 0 0 0 10px rgba(52, 172, 224, 0) 
+    }
+     100% {
+         transform: scale(.95);
+         box-shadow: 0 0 0 0 rgba(52, 172, 224, 0) 
+    }
+}
+ @media screen and (min-width:1426px) {
+     p {
+         font-size: 1.2rem 
+    }
+     .card_boton {
+         width: 50%;
+         padding: 30px 20px 
+    }
+}
+ @media screen and (max-width:1200px) {
+     .card_boton {
+         width: 100% 
+    }
+}
+ @media screen and (max-width:1024px) {
+     .card_boton {
+         width: 100% 
+    }
+     .navbar-expand-md .d-flex.align-items-center {
+         padding: 10px 5px 
+    }
+     article {
+         padding: 10px 
+    }
+     article.periodos .form-check {
+         margin: 10px 
+    }
+     article.periodos .form-check input.form-check-input {
+         margin-left: 5px 
+    }
+     article.evento .fecha h3 {
+         font-size: 1.6rem 
+    }
+}
+ @media screen and (max-width:991px) {
+     article.periodos .form-check {
+         margin: 10px 0 
+    }
+     article.periodos a.btn-download {
+         padding: 10px;
+         font-size: 1rem 
+    }
+     article.evento .evento_icon {
+         margin-top: 20px 
+    }
+     .top {
+         padding: 10px 5px 
+    }
+     a img {
+         max-width: 30px;
+         padding: 7px 
+    }
+}
+ @media screen and (max-width:768px) {
+     h2 {
+         font-size: 2.3rem;
+         line-height: 3rem 
+    }
+     p {
+         font-size: 1rem;
+         line-height: 21px;
+         font-weight: 200;
+         letter-spacing: 0 
+    }
+     h3 {
+         font-size: 1.5rem 
+    }
+     h6 {
+         font-size: 1rem 
+    }
+     h4 {
+         font-size: 1.4rem 
+    }
+     h5 {
+         font-size: 1.2rem 
+    }
+     .card_boton {
+         padding: 20px 0 
+    }
+     section.background-blue figcaption {
+         padding: 30px 0 15% 
+    }
+     .navbar-expand-md .d-flex.datepicker, .navbar-expand-md input.button.form-control.item_R {
+         width: 100% 
+    }
+}
+ @media screen and (max-width:767px) {
+     .navbar-expand-md .des_title, .navbar-expand-md button.navbar-toggler i.fas.fa-sliders-h, .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-times {
+         display: none 
+    }
+     article.periodos {
+         padding-bottom: 10px 
+    }
+     .navbar-expand-md button.navbar-toggler {
+         display: flex;
+         align-items: center;
+         align-content: center;
+         justify-content: flex-start;
+         width: 100%;
+         padding: 0 10px 
+    }
+     .contet_gris {
+         padding-top: 10px;
+         padding-bottom: 20px 
+    }
+     .navbar-expand-md button.navbar-toggler p span {
+         color: #15296f;
+         font-weight: 600;
+         text-decoration: underline 
+    }
+     .navbar-expand-md button.navbar-toggler img {
+         max-width: 40px;
+         padding-right: 10px 
+    }
+     .navbar-expand-md button.navbar-toggler p {
+         margin-bottom: 0;
+         font-size: 1.1em 
+    }
+     #menu-pagina-ur.menu_evento {
+         top: 10% 
+    }
+     .navbar-expand-md select.custom-select {
+         background-size: 12px;
+         font-size: .9rem 
+    }
+     .navbar-expand-md .input-group-text {
+         height: 38px 
+    }
+     article.periodos .contet_phone {
+         display: flex 
+    }
+     article.periodos .form-check {
+         margin: 10px 5px;
+         padding: 5px;
+         width: 100% 
+    }
+     article.periodos .form-check input.form-check-input {
+         margin-left: 2px 
+    }
+     article.periodos .form-check .form-check-label {
+         font-size: 1rem;
+         padding-left: 5px 
+    }
+     .perfil img {
+         max-width: 50px;
+         max-height: 50px 
+    }
+     .navbar-expand-md button.navbar-toggler i {
+         padding-right: 5px;
+         font-size: 1.2em;
+         color: #15296f 
+    }
+     .navbar-expand-md button.navbar-toggler i.fas.fa-times, .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-sliders-h {
+         display: block 
+    }
+     .top {
+         bottom: 130px 
+    }
+}
+ @media (max-width:480px) {
+     h2 {
+         font-size: 2rem 
+    }
+     p {
+         font-size: .9rem;
+         line-height: 18px;
+         font-weight: 200;
+         letter-spacing: 0 
+    }
+     a, h5 {
+         font-size: 1rem 
+    }
+     h3 {
+         font-size: 1.3rem 
+    }
+     article.evento .evento_icon small, h6 {
+         font-size: .9rem 
+    }
+     h4 {
+         font-size: 1.1rem 
+    }
+     .navbar-expand-md button.navbar-toggler p {
+         font-size: .9em 
+    }
+     .navbar-expand-md .input-group-text i {
+         color: #ffff;
+         font-size: 1.5em 
+    }
+     article.evento .card_filter {
+         padding: 3px;
+         margin: 3px;
+         font-size: .8rem 
+    }
+     section.headeer_calendario h3 {
+         text-align: center;
+         font-size: 1.4rem 
+    }
+     article.evento .evento_icon {
+         padding: 7px 
+    }
+     #navbarSupportedContent {
+         padding-bottom: 0 
+    }
+     article.periodos .contet_phone {
+         display: flex;
+         flex-direction: column 
+    }
+     article.periodos .form-check {
+         margin: 5px 
+    }
+     .perfil h4 {
+         padding-left: 10px 
+    }
+     #menu-pagina-ur.menu_evento {
+         top: 11% 
+    }
+     .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {
+         font-size: 1.2em 
+    }
+}
+ @media (max-width:360px) {
+     .navbar-expand-md button.navbar-toggler p {
+         font-size: .8em 
+    }
+     .navbar-expand-md button.navbar-toggler img {
+         max-width: 30px;
+         padding-right: 5px 
+    }
+     article.evento .items_contet .Facultad, article.evento .items_contet .Programa {
+         padding-right: 10px 
+    }
+     section.headeer_calendario h3 {
+         text-align: center;
+         font-size: 1.2rem 
+    }
+     .perfil img {
+         max-width: 50px 
+    }
+     h2 {
+         font-size: 1.6rem 
+    }
+}
+ .custom-select {
+     width: 100% !important 
+}
+ .fa, .far, .fas {
+     font-family: "Font Awesome 5 Free" !important 
+}
+ .card_boton .a {
+     text-decoration: none 
+}
+ #navCalendario, #segmentoSeleccionado {
+     text-transform: capitalize 
+}
+/* Agrega estos estilos a tu hoja de estilos CSS */
+.pagination {
     display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 0px 10px;
-  }
-
-  .contet_gris {
-    padding-top: 10px;
-    padding-bottom: 20px;
-  }
-
-  .navbar-expand-md button.navbar-toggler p span {
-    color: #15296f;
-    font-weight: 600;
-    text-decoration: underline;
-  }
-
-  .navbar-expand-md button.navbar-toggler img {
-    max-width: 40px;
-    padding-right: 10px;
-  }
-
-  .navbar-expand-md button.navbar-toggler p {
-    margin-bottom: 0px;
-    font-size: 1.1em;
-  }
-
-  #menu-pagina-ur.menu_evento {
-    top: 10%;
-  }
-
-  .navbar-expand-md select.custom-select {
-    background-size: 12px;
-    font-size: 0.9rem;
-  }
-
-  .navbar-expand-md .input-group-text {
-    height: 38px;
-  }
-
-  article.periodos .contet_phone {
-    display: flex;
-  }
-
-  article.periodos .form-check {
-    margin: 10px 5px;
-    padding: 5px;
-  }
-
-  article.periodos .form-check {
-    width: 100%;
-  }
-
-  article.periodos .form-check input.form-check-input {
-    margin-left: 2px;
-  }
-
-  article.periodos .form-check .form-check-label {
-    font-size: 1.0rem;
-    padding-left: 5px;
-  }
-
-  .perfil img {
-    max-width: 50px;
-    max-height: 50px;
-  }
-
-  .navbar-expand-md button.navbar-toggler i {
-    padding-right: 5px;
-    font-size: 1.2em;
-    color: #15296f;
-  }
-
-  .navbar-expand-md button.navbar-toggler i.fas.fa-sliders-h {
-    display: none;
-  }
-
-  .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-sliders-h {
-    display: block;
-  }
-
-  .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-times {
-    display: none;
-  }
-
-  .navbar-expand-md button.navbar-toggler i.fas.fa-times {
-    display: block;
-  }
-
-  .top {
-    bottom: 130px;
-  }
-
+    justify-content: center;
+    list-style: none;
+    padding: 0;
 }
 
-@media (max-width: 480px) {
-  h2 {
-    font-size: 2.0rem;
-  }
+.pagination-item {
+    margin: 0 5px;
+    display: inline-block;
+    background-color: #15286f;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
 
-  p {
-    font-size: 0.9rem;
-    line-height: 18px;
-    font-weight: 200;
-    letter-spacing: 0px;
-  }
+.pagination-link {
+    text-decoration: none;
+    color: #faf9f9;
+}
 
-  a {
-    font-size: 1.0rem;
-  }
-
-  h3 {
-    font-size: 1.3rem;
-  }
-
-  h6 {
-    font-size: 0.9rem;
-  }
-
-  h4 {
-    font-size: 1.1rem;
-  }
-
-  h5 {
-    font-size: 1.0rem;
-  }
-
-  .navbar-expand-md button.navbar-toggler p {
-    font-size: 0.9em;
-  }
-
-  .navbar-expand-md .input-group-text i {
+.pagination-previous,
+.pagination-next {
+    margin: 0 5px;
+    display: inline-block;
+    background-color: #da0921 ;
+    border: 1px solid #da0921;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.pagination-previous a,
+.pagination-next a {
+    text-decoration: none;
+    color: #0d6efd; /* Ajusta el color del texto según tu preferencia */
     color: #ffff;
-    font-size: 1.5em;
-  }
-
-  article.evento .card_filter {
-    padding: 3px 3px;
-    margin: 3px;
-    font-size: 0.8rem;
-  }
-
-  section.headeer_calendario h3 {
-    text-align: center;
-    font-size: 1.4rem;
-  }
-
-  article.evento .evento_icon small {
-    font-size: 0.9rem;
-  }
-
-  article.evento .evento_icon {
-    padding: 7px 7px;
-  }
-
-  #navbarSupportedContent {
-    padding-bottom: 0px;
-  }
-
-  article.periodos .contet_phone {
-    display: flex;
-    flex-direction: column;
-  }
-
-  article.periodos .form-check {
-    margin: 5px 5px;
-  }
-
-
-  .perfil h4 {
-    padding-left: 10px;
-  }
-
-  #menu-pagina-ur.menu_evento {
-    top: 11%;
-  }
-
-  .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {
-    font-size: 1.2em;
-  }
-
 }
 
-@media (max-width: 360px) {
-  .navbar-expand-md button.navbar-toggler p {
-    font-size: 0.8em;
-  }
-
-  .navbar-expand-md button.navbar-toggler img {
-    max-width: 30px;
-    padding-right: 5px;
-  }
-
-  article.evento .items_contet .Facultad,
-  article.evento .items_contet .Programa {
-    padding-right: 10px;
-  }
-
-  section.headeer_calendario h3 {
-    text-align: center;
-    font-size: 1.2rem;
-  }
-
-  .perfil img {
-    max-width: 50px;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
+.pagination-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
-.custom-select {
-  width: 100% !important;
-}
-
-.fa,
-.far,
-.fas {
-  font-family: "Font Awesome 5 Free" !important;
-}
-
-.card_boton .a {
-  text-decoration: none;
-}
-
-#navCalendario {
-  text-transform: capitalize;
-}
-
-#segmentoSeleccionado {
-  text-transform: capitalize;
-}
+.pagination-active {
+    background-color: #da0921;
+    border-color: #da0921;
+    color: #faf9f9;
+} 

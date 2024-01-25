@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSlidersH, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSlidersH, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { SelecteCtegorias } from '../helpers/objects';
 import { fetchDataFromAPI } from '../helpers/api';
 
 const Filtro = ({ updateFilteredData }) => {
-    // Estado para controlar si el menú está abierto o cerrado
+// Estado para controlar si el menú está abierto o cerrado
     const [menuOpen, setMenuOpen] = useState(false);
-
+    
     // Estados para almacenar selecciones del usuario
     const [selectedYear, setSelectedYear] = useState(''); // Año seleccionado
     const [selectedCategory, setSelectedCategory] = useState(''); // Categoría seleccionada
@@ -18,40 +18,37 @@ const Filtro = ({ updateFilteredData }) => {
     const [initialDataFetched, setInitialDataFetched] = useState(false);
     const [clearFilters, setClearFilters] = useState(false);
 
-    // Función genérica para manejar cambios en estados
+// Función genérica para manejar cambios en estados
     const handleInputChange = (stateSetter) => (event) => {
         stateSetter(event.target.value);
     };
 
-    // manejadores de eventos
+// manejadores de eventos
     const handleYearChange = handleInputChange(setSelectedYear);
     const handleCategoryChange = handleInputChange(setSelectedCategory);
     const handleKeywordChange = handleInputChange(setKeyword);
 
-    // Función para limpiar todos los filtros
+// Función para limpiar todos los filtros
     const handleClearFilters = () => {
         setSelectedYear('');
         setSelectedCategory('');
         setKeyword('');
-        setSelectedNivelFormacion('');
 
         // Actualiza la variable de estado para indicar que se deben limpiar los filtros
         setClearFilters(true);
     };
 
-    // Función para realizar la búsqueda y filtrado de datos
+// Función para realizar la búsqueda y filtrado de datos
     const handleSearch = () => {
-        // Llama a la función fetchDataFromAPI para obtener datos de la API
+// Llama a la función fetchDataFromAPI para obtener datos de la API
         fetchDataFromAPI(selectedYear)
             .then((data) => {
-                console.log('Respuesta exitosa:');
-                // Filtrado de datos por categoría
                 let filteredData = data.data.Actividades;
                 if (selectedCategory) {
                     filteredData = filteredData.filter((item) => item.categoria === selectedCategory);
                 }
 
-                // Filtrado de datos por palabra clave
+// Filtrado de datos por palabra clave
                 if (keyword) {
                     const keywordLower = keyword.toLowerCase();
                     filteredData = filteredData.filter((item) =>
@@ -61,38 +58,35 @@ const Filtro = ({ updateFilteredData }) => {
                     );
                 }
 
-                updateFilteredData(filteredData)
+                updateFilteredData(filteredData);
                 console.log("Datos filtrados", filteredData);
-                // Aquí tienes los datos filtrados por año, categoría y palabra clave (filteredData)
             })
             .catch((error) => {
                 console.error('Error al realizar la solicitud:', error);
             });
     };
 
-    // Maneja la apertura y cierre del menú
+// Maneja la apertura y cierre del menú
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
 
-    // Utiliza useEffect para realizar la llamada inicial a la API solo una vez al cargar la página
+// Utiliza useEffect para realizar la llamada inicial a la API solo una vez al cargar la página
     useEffect(() => {
         if (!initialDataFetched) {
             handleSearch(); // Realiza la llamada a la API al cargar la página
             setInitialDataFetched(true); // Marca que los datos iniciales se han obtenido
         }
-    }, []); // Dependencias vacías para que se ejecute solo una vez
-
+    }, []);
 
     useEffect(() => {
-        // Verifica si se debe limpiar los filtros y llama a handleSearch
+// Verifica si se debe limpiar los filtros y llama a handleSearch
         if (clearFilters) {
             handleSearch();
-            // Restablece la variable de estado después de llamar a handleSearch
+// Restablece la variable de estado después de llamar a handleSearch
             setClearFilters(false);
         }
     }, [clearFilters]);
-
 
     return (
         <div id="menu-pagina-ur" className="menu_evento">
@@ -135,40 +129,44 @@ const Filtro = ({ updateFilteredData }) => {
                             Selecciona <span>aquí</span> una o varias opciones.
                         </button>
                     </p>
-                    <div id="collapsibleNavbar" className="navbar-collapse collapse">
-                        <div className="form-row row" id='filtro'>
-                            <div className="col-12 col-sm-12 col-md-5 col-lg-6 d-flex align-items-center">
+                    <div id="collapsibleNavbar" className="navbar-collapse collapse d-flex">
+                        <div className="form-row row justify-content-start" id='filtro'>
+                            <div className="col-12 col-md-3 col-lg-2 d-flex align-items-center" id='year'>
+                                <select className="form-control categorias-azul" onChange={handleYearChange} value={selectedYear}>
+                                    <option disabled selected value="">Año</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                </select>
+                            </div>
+                            <div className="col-12 col-md-5 col-lg-4 d-flex align-items-center">
                                 <div className="input-group" id='busqueda'>
                                     <div className="input-group-prepend">
-                                        <label htmlFor="validatedInputGroupSelect" className="input-group-text">
-                                            <i><FontAwesomeIcon icon={faSearch} /></i>
-                                        </label>
-                                    </div>
-                                    <select
-                                        className="form-control categorias-azul"
-                                        onChange={handleCategoryChange}
-                                        value={selectedCategory}
-                                    >
-                                        <option disabled value="">
-                                            Categoría de búsqueda...
-                                        </option>
-                                        {SelecteCtegorias.map((categoria) => (
-                                            <option
-                                                key={categoria.nombre}
-                                                className="ct ct-estudiante ct-profesor-funcionario"
-                                                style={{
-                                                    display: window.location.href.includes("estudiante") ? (categoria.display ? 'block' : 'none') : 'block'
-                                                }}
-                                                value={categoria.nombre}
-                                            >
-                                                {categoria.nombre}
+                                        <select
+                                            className="form-control"
+                                            onChange={handleCategoryChange}
+                                            value={selectedCategory}
+                                        >
+                                            <option disabled value="">
+                                                Categoría de búsqueda...
                                             </option>
-                                        ))}
-                                    </select>
-
+                                            {SelecteCtegorias.map((categoria) => (
+                                                <option
+                                                    key={categoria.nombre}
+                                                    className="ct ct-estudiante ct-profesor-funcionario"
+                                                    style={{
+                                                        display: window.location.href.includes("estudiante") ? (categoria.display ? 'block' : 'none') : 'block'
+                                                    }}
+                                                    value={categoria.nombre}
+                                                >
+                                                    {categoria.nombre}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center">
+                            <div className="col-12 col-md-3 col-lg-2 d-flex align-items-center">
                                 <input
                                     type="text"
                                     id="buscarTexto"
@@ -179,15 +177,7 @@ const Filtro = ({ updateFilteredData }) => {
                                     value={keyword}
                                 />
                             </div>
-                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center" id='year'>
-                                <select className="form-control" onChange={handleYearChange} value={selectedYear}>
-                                    <option disabled selected value="">Año</option>
-                                    <option>2022</option>
-                                    <option>2023</option>
-                                    <option>2024</option>
-                                </select>
-                            </div>
-                            <div className="col-12 col-sm-12 col-md-3 col-lg-3 d-flex align-items-center gap-2">
+                            <div className="col-12 col-md-3 col-lg-2 d-flex align-items-center gap-2">
                                 <input id="buscar" minLength="6" type="button" value="BUSCAR" className="button form-control buscar btn btn-danger btn-sm" onClick={handleSearch} />
                                 <input id='limpiar' minLength="6" type="button" value="" className="button form-control item_R limpiar btn btn-danger btn-sm " onClick={handleClearFilters} />
                             </div>

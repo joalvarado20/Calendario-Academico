@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faMap, faClock, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { formatFecha, formatTimeToAMPM, mesNumerico } from '../helpers/functions';
+import ReactPaginate from 'react-paginate';
 
 // Componente para mostrar una lista de elementos
 const ListItems = ({ items }) => (
@@ -15,6 +16,12 @@ const ListItems = ({ items }) => (
 const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) => {
     const [dataToShow, setDataToShow] = useState(filteredData);
     const [showNoDataMessage, setShowNoDataMessage] = useState(false);
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5; // items por pagina
+
+    const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = dataToShow.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
         if (filteredDataByPeriodo.length > 0) {
@@ -23,7 +30,6 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
             setDataToShow(filteredData);
         }
     }, [filteredDataByPeriodo, filteredData]);
-
 
     useEffect(() => {
         // Mostrar el mensaje de "No hay datos" si no hay datos para mostrar
@@ -38,13 +44,13 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
         "Modificaciones curriculares",
         "Plan de trabajo del profesor/a",
         "Proceso de Planeación y Oferta Académica"
-    ]
+    ];
 
     return (
         <section id="resultadosActividades">
             <div>
                 {showNoDataMessage && <p>No hay datos disponibles.</p>}
-                {!showNoDataMessage && dataToShow
+                {!showNoDataMessage && currentItems
                     .sort((a, b) => {
                         const fechaInicioA = new Date(a.fechaInicio);
                         const fechaInicioB = new Date(b.fechaInicio);
@@ -160,8 +166,27 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
                         );
                     })}
             </div>
+            {dataToShow.length > itemsPerPage && !showNoDataMessage && (
+                <ReactPaginate
+                    pageCount={Math.ceil(dataToShow.length / itemsPerPage)}
+                    pageRangeDisplayed={1}
+                    marginPagesDisplayed={2}
+                    onPageChange={({ selected }) => setCurrentPage(selected)}
+                    containerClassName={'pagination'}
+                    activeClassName={'pagination-active'}
+                    previousLabel={'Anterior'}
+                    nextLabel={'Siguiente'}
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    pageClassName={'pagination-item'}
+                    pageLinkClassName={'pagination-link'}
+                    previousClassName={'pagination-previous'}
+                    nextClassName={'pagination-next'}
+                    disabledClassName={'pagination-disabled'}
+                />
+            )}
         </section>
     );
-}
+};
 
 export default Calendario;
