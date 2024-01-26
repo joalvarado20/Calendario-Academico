@@ -8,6 +8,8 @@ const PeriodoAcademico = ({ filteredData, setFilteredDataByPeriodo }) => {
     const [selectedUnidadAcademica, setSelectedUnidadAcademica] = useState(''); // Unidad academica seleccionada
     const [selectedPrograma, setSelectedPrograma] = useState(''); // programa seleccionado
     const [selectedNivelFormacion, setSelectedNivelFormacion] = useState(''); // Nivel de formación seleccionado
+    const [tipoActividad, setTipoActividad] = useState('Abiertas');
+
 
     // Función genérica para manejar cambios en estados
     const handleInputChange = (stateSetter) => (event) => {
@@ -42,13 +44,35 @@ const PeriodoAcademico = ({ filteredData, setFilteredDataByPeriodo }) => {
 
     useEffect(() => {
         // Filtrar los datos inicialmente
-        const filteredDataByPeriodo = filteredData.filter((item) => item.periodo === periodoSeleccionado);
+        let filteredDataByPeriodo = filteredData.filter((item) => item.periodo === periodoSeleccionado);
+    
+        if (tipoActividad === 'Abiertas') {
+            filteredDataByPeriodo = filteredDataByPeriodo.filter((item) => {
+                const fechaFinDate = new Date(item.fechaFin);
+                const fechaActual = new Date();
+                return fechaActual <= fechaFinDate; // Filtrar eventos que aún no han finalizado
+            });
+        } else if (tipoActividad === 'Finalizadas') {
+            filteredDataByPeriodo = filteredDataByPeriodo.filter((item) => {
+                const fechaFinDate = new Date(item.fechaFin);
+                const fechaActual = new Date();
+                return fechaActual > fechaFinDate; // Filtrar eventos que ya han finalizado
+            });
+        }
+    
         setFilteredDataByPeriodo(filteredDataByPeriodo);
-    }, [filteredData, setFilteredDataByPeriodo, periodoSeleccionado]);
+    }, [filteredData, setFilteredDataByPeriodo, periodoSeleccionado, tipoActividad]);
+    
 
     return (
         <article className="periodos" id="periodos">
             <h5>Periodo Académico</h5>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h6 style={{ marginRight: '10px' }}>Actividad</h6>
+                <a href="#" onClick={() => setTipoActividad('Abiertas')}>Actividades Abiertas</a>
+                <a href="#" onClick={() => setTipoActividad('Finalizadas')}>Actividades Finalizadas</a>
+
+            </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <h6 style={{ marginRight: '10px' }}>Nivel de Formacion</h6>
                 <select
