@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as utility from 'lodash'; // biblioteca para funciones de utilidad
+import 'font-awesome/css/font-awesome.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { SelecteCtegorias, UnidadAcademica } from '../helpers/objects';
 import { Programa } from '../helpers/programas'
 
@@ -66,15 +69,25 @@ const PeriodoAcademico = ({ filteredData, setFilteredDataByPeriodo }) => {
 
     return (
         <article className="periodos" id="periodos">
-            <h5>Periodo Académico</h5>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <h6 style={{ marginRight: '10px' }}>Actividad</h6>
-                <a href="#" onClick={() => setTipoActividad('Abiertas')}>Actividades Abiertas</a>
-                <a href="#" onClick={() => setTipoActividad('Finalizadas')}>Actividades Finalizadas</a>
-
+            <h3><i><FontAwesomeIcon icon={faFilter} /></i> Filtrar resultados por:</h3>
+            <div className='mb-4'>
+                <h4>Actividades</h4>
+                <ul>
+                    <li><a href="#" onClick={() => setTipoActividad('Abiertas')}>Actividades Abiertas</a></li>
+                    <li><a href="#" onClick={() => setTipoActividad('Finalizadas')}>Actividades Finalizadas</a></li>
+                </ul>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <h6 style={{ marginRight: '10px' }}>Nivel de Formacion</h6>
+            <div className='mb-4'>
+                <h4>Nivel de Formacion</h4>
+                <ul>
+                    <li><a href="#" onClick={() => setSelectedNivelFormacion('Pregrados')}>Pregrados</a></li>
+                    <li><a href="#" onClick={() => setSelectedNivelFormacion('Posgrados')}>Posgrados</a></li>
+                    <li><a href="#" onClick={() => setSelectedNivelFormacion('Especializaciones')}>Especializaciones</a></li>
+                </ul>
+            </div>
+
+            <div style={{ display: 'none', alignItems: 'center' }}>
+                <h4>Nivel de Formacion</h4>
                 <select
                     className="form-control"
                     onChange={handleNivelFormacionChange}
@@ -88,32 +101,35 @@ const PeriodoAcademico = ({ filteredData, setFilteredDataByPeriodo }) => {
                     <option>Especializaciones</option>
                 </select>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <h6 style={{ marginRight: '10px' }}>Unidad Academica</h6>
-                <select className="form-control" onChange={handleUnidadAcademicaChange} value={selectedUnidadAcademica}>
-                    <option value="" selected disabled>Unidad académica...</option>
-                    {UnidadAcademica.map((facultad, index) => (
-                        <option key={index}>{facultad}</option>
-                    ))}
-                </select>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <h6 style={{ marginRight: '10px' }}>Programa</h6>
-                <select className="form-control" onChange={handleProgramaChange} value={selectedPrograma}>
-                    <option disabled selected value="">Programa...</option>
-                    {Programa.map((programa, index) => (
-                        <option key={index}>{programa}</option>
-                    ))}
-                </select>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <h6 style={{ marginRight: '10px' }}>Semestre</h6>
-                <select id="exampleFormControlSelect1" className="form-control" onChange={(e) => setPeriodoSeleccionado(e.target.value)}>
-                    <option value="Semestre I">Semestre I</option>
-                    <option value="Intersemestral">Intersemestral</option>
-                    <option value="Semestre II">Semestre II</option>
-                    <option value="Intersemestral II">Intersemestral II</option>
-                </select>
+
+            <div>
+                <div className='input-group'>
+                    <h4>Unidad Academica</h4>
+                    <select className="form-control" onChange={handleUnidadAcademicaChange} value={selectedUnidadAcademica}>
+                        <option value="" selected disabled>Unidad académica...</option>
+                        {UnidadAcademica.map((facultad, index) => (
+                            <option key={index}>{facultad}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className='input-group'>
+                    <h4>Programa</h4>
+                    <select className="form-control" onChange={handleProgramaChange} value={selectedPrograma}>
+                        <option disabled selected value="">Programa...</option>
+                        {Programa.map((programa, index) => (
+                            <option key={index}>{programa}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className='input-group'>
+                    <h4>Semestre</h4>
+                    <select className="form-control" onChange={(e) => setPeriodoSeleccionado(e.target.value)}>
+                        <option value="Semestre I">Semestre I</option>
+                        <option value="Intersemestral">Intersemestral</option>
+                        <option value="Semestre II">Semestre II</option>
+                        <option value="Intersemestral II">Intersemestral II</option>
+                    </select>
+                </div>
             </div>
         </article>
     );

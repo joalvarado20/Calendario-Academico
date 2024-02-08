@@ -101,21 +101,7 @@ const Filtro = ({ updateFilteredData }) => {
                             seleccionar una o varias opciones según tus intereses de búsqueda.
                         </p>
                     </div>
-                    <button
-                        aria-controls="collapsibleNavbar"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                        data-bs-target="#collapsibleNavbar"
-                        data-bs-toggle="collapse"
-                        type="button"
-                        className="navbar-toggler"
-                        onClick={toggleMenu}
-                    >
-                        <i>
-                            <FontAwesomeIcon icon={menuOpen ? faTimes : faSlidersH} />
-                        </i>
-                    </button>
-                    <p>
+                    <p className='d-flex text-left'>
                         <button
                             aria-controls="collapsibleNavbar"
                             aria-expanded="false"
@@ -126,20 +112,35 @@ const Filtro = ({ updateFilteredData }) => {
                             className="navbar-toggler"
                             onClick={toggleMenu}
                         >
+                            <i>
+                                <FontAwesomeIcon icon={menuOpen ? faTimes : faSlidersH} />
+                            </i>
+                        </button>
+                        <button
+                            aria-controls="collapsibleNavbar"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                            data-bs-target="#collapsibleNavbar"
+                            data-bs-toggle="collapse"
+                            type="button"
+                            className="navbar-toggler text-start"
+                            onClick={toggleMenu}
+                        >
                             Selecciona <span>aquí</span> una o varias opciones.
                         </button>
                     </p>
-                    <div id="collapsibleNavbar" className="navbar-collapse collapse d-flex">
-                        <div className="form-row row justify-content-start" id='filtro'>
-                            <div className="col-12 col-md-3 col-lg-2 d-flex align-items-center" id='year'>
-                                <select className="form-control categorias-azul" onChange={handleYearChange} value={selectedYear}>
-                                    <option disabled selected value="">Año</option>
-                                    <option>2022</option>
-                                    <option>2023</option>
-                                    <option>2024</option>
-                                </select>
-                            </div>
-                            <div className="col-12 col-md-5 col-lg-4 d-flex align-items-center">
+                    <div id="collapsibleNavbar" className="navbar-collapse collapse">
+                        <div className="form-row" id='filtro'>
+                            <div><p><strong>Buscar por:</strong></p></div>
+                            <div className="d-flex">
+                                <div id='year'>
+                                    <select className="form-control categorias-azul" onChange={handleYearChange} value={selectedYear}>
+                                        <option disabled selected value="">Año</option>
+                                        <option>2022</option>
+                                        <option>2023</option>
+                                        <option>2024</option>
+                                    </select>
+                                </div>
                                 <div className="input-group" id='busqueda'>
                                     <div className="input-group-prepend">
                                         <select
@@ -166,7 +167,7 @@ const Filtro = ({ updateFilteredData }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-3 col-lg-2 d-flex align-items-center">
+                            <div className="d-flex">
                                 <input
                                     type="text"
                                     id="buscarTexto"
@@ -177,9 +178,9 @@ const Filtro = ({ updateFilteredData }) => {
                                     value={keyword}
                                 />
                             </div>
-                            <div className="col-12 col-md-3 col-lg-2 d-flex align-items-center gap-2">
-                                <input id="buscar" minLength="6" type="button" value="BUSCAR" className="button form-control buscar btn btn-danger btn-sm" onClick={handleSearch} />
-                                <input id='limpiar' minLength="6" type="button" value="" className="button form-control item_R limpiar btn btn-danger btn-sm " onClick={handleClearFilters} />
+                            <div className="d-flex align-items-center gap-2">
+                                <input id="buscar" type="button" value="BUSCAR" className="button form-control buscar" onClick={handleSearch} />
+                                <input id='limpiar' type="button" value="Restablecer" className="button form-control" onClick={handleClearFilters} />
                             </div>
                         </div>
                     </div>

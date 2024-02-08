@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faMap, faClock, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faLocationDot, faClock, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { formatFecha, formatTimeToAMPM, mesNumerico } from '../helpers/functions';
 import ReactPaginate from 'react-paginate';
 
@@ -48,6 +48,13 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
 
     return (
         <section id="resultadosActividades">
+            <article className="titulo_evento">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12"><h2>Periodo académico <strong>2024</strong></h2></div>
+                    </div>
+                </div>
+            </article>
             <div>
                 {showNoDataMessage && <p>No hay datos disponibles.</p>}
                 {!showNoDataMessage && currentItems
@@ -76,87 +83,101 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
 
                         return (
                             <article
-                                className={`evento eventos0 ${window.location.href.includes('estudiante') ? (hideItem ? 'd-none' : 'd-block') : 'd-block'}`}
+                                className={`evento ${window.location.href.includes('estudiante') ? (hideItem ? 'd-none' : 'd-block') : 'd-block'}`}
                                 key={index}
                                 id={window.location.href.includes('estudiante') && !hideItem ? 'eventos' : undefined}>
-                                <div className="row">
-                                    <div className="col-12 d-flex justify-content-end">
-                                        <div className={`card_filter ${item.periodo === "Semestre I" ? "item_1resemestre" : "item_2dosemestre"}`}>
-                                            {item.periodo}
+                                <div className="container-fluid">
+                                    <div className='row'>
+                                        <div className="col-12 col-sm-3 col-lg-2 d-flex justify-content-center justify-content-sm-start">
+                                            <div className={`evento_icon ${eventoClase}`}>
+                                                <FontAwesomeIcon icon={faCalendar} />
+                                                <p>{eventoClase}</p>
+                                            </div>
                                         </div>
-                                        <div className="card_filter item_pregrado">{item.tipoPrograma}</div>
-                                        <div className="card_filter item_busqueda">{item.categoria}</div>
+                                        <div className="col-12 col-sm-9 col-lg-10">
+                                            <div className="card-content d-flex justify-content-center justify-content-sm-end">
+                                                <div className={`card_filter ${item.periodo === "Semestre I" ? "item_1resemestre" : "item_2dosemestre"}`}>
+                                                    {item.periodo}
+                                                </div>
+                                                <div className="card_filter item_pregrado">{item.tipoPrograma}</div>
+                                                <div className="card_filter item_busqueda">{item.categoria}</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-4 d-flex align-items-start flex-column">
-                                        <div className={`evento_icon ${eventoClase}`}>
-                                            <FontAwesomeIcon icon={faCalendar} />
-                                            <small>{eventoClase}</small>
+                                    <div className="row">
+                                        <div className="col-12 col-lg-4 col-xxl-3">
+                                            <div className="fecha">
+                                                <h2>{fechaInicioFormateada.day + 1}</h2>
+                                                <hr className={`${eventoClase}`} />
+                                                <h3>{fechaInicioFormateada.month}</h3>
+                                                <p><small>al {fechaFinFormateada.day + 1} de {fechaFinFormateada.month}</small></p>
+                                            </div>
                                         </div>
-                                        <div className="fecha">
-                                            <h2>{fechaInicioFormateada.day + 1}</h2>
+                                        <div className="col-12 col-lg-8 col-xxl-9">
                                             <hr />
-                                            <h3>{fechaInicioFormateada.month}</h3>
-                                            <small>al {fechaFinFormateada.day + 1} de {fechaFinFormateada.month}</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-sm-12 col-md-12 col-lg-8 flex-column">
-                                        <hr />
-                                        <h6>{item.categoria}</h6>
-                                        <p>{item.nombre}</p>
-                                        <div className="items_lugar">
-                                            <p>
-                                                <FontAwesomeIcon className='icons' icon={faMap} />
-                                                <strong>Ciudad:</strong>{item.ciudad}
-                                            </p>
-                                            <p>
-                                                <FontAwesomeIcon className='icons' icon={faCalendar} />
-                                                <strong>Desde el día:</strong>
-                                                {fechaInicioFormateada.day + 1} de  {fechaInicioFormateada.month} del, {fechaInicioFormateada.year}
-                                                <strong> hasta el día:</strong>
-                                                {fechaFinFormateada.day + 1} de {fechaFinFormateada.month} del {fechaFinFormateada.year}
-                                            </p>
-                                            <p>
-                                                <FontAwesomeIcon className='icons' icon={faClock} />
-                                                <strong>Hora:</strong>{horaInicioAMPM} - {horaFinAMPM}
-                                            </p>
-                                        </div>
-                                        <div className="items_contet d-flex">
-                                            <div data-bs-toggle="tooltip" data-placement="bottom" title="Unidad académica." className="Facultad">
-                                                <a data-bs-target={`#modalFacultadPregrados${index}`} data-bs-toggle="modal" href="#">
-                                                    Unidad académica <FontAwesomeIcon className='icons' icon={faPlus} />
-                                                </a>
-                                            </div>
-                                            <div data-bs-toggle="tooltip" data-placement="bottom" title="Programas." className="Programa">
-                                                <a data-bs-target={`#modalProgramasPregrados${index}`} data-bs-toggle="modal" href="#">
-                                                    Programa <FontAwesomeIcon className='icons' icon={faPlus} />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div aria-labelledby={`ModalFacultad${index}`} id={`modalFacultadPregrados${index}`} tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
-                                        <div className="modal-dialog modal-xl">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h4>Listado de Unidades académicas</h4>
-                                                    <button data-bs-dismiss="modal" type="button" className="close">x</button>
+                                            <h4>{item.categoria}</h4>
+                                            <p>{item.nombre}</p>
+                                            <div className="items_lugar">
+                                                <div className='d-grid'>
+                                                    <i><FontAwesomeIcon className='icons' icon={faLocationDot} /></i>
+                                                    <p>
+                                                        <strong>Ciudad:</strong>{item.ciudad}
+                                                    </p>
                                                 </div>
-                                                <div className="modal-body">
-                                                    <p>Listado de facultades que participan en este evento:</p>
-                                                    <ListItems items={item.facultad.split(';').map(facultad => facultad.trim())} />
+                                                <div className='d-grid'>
+                                                    <i><FontAwesomeIcon className='icons' icon={faCalendar} /></i>
+                                                    <p>                                               
+                                                        <strong>Desde el día:</strong>
+                                                        {fechaInicioFormateada.day + 1} de  {fechaInicioFormateada.month} del, {fechaInicioFormateada.year}
+                                                        <strong> hasta el día:</strong>
+                                                        {fechaFinFormateada.day + 1} de {fechaFinFormateada.month} del {fechaFinFormateada.year}
+                                                    </p>
+                                                </div>
+                                                <div className='d-grid'>
+                                                    <i><FontAwesomeIcon className='icons' icon={faClock} /></i>
+                                                    <p>
+                                                        <strong>Hora:</strong>{horaInicioAMPM} - {horaFinAMPM}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="items_content">
+                                                <div data-bs-toggle="tooltip" data-placement="bottom" title="Unidad académica." className="Facultad">
+                                                    <a data-bs-target={`#modalFacultadPregrados${index}`} data-bs-toggle="modal" href="#">
+                                                        Unidad académica <FontAwesomeIcon className='icons' icon={faPlus} />
+                                                    </a>
+                                                </div>
+                                                <div data-bs-toggle="tooltip" data-placement="bottom" title="Programas." className="Programa">
+                                                    <a data-bs-target={`#modalProgramasPregrados${index}`} data-bs-toggle="modal" href="#">
+                                                        Programa <FontAwesomeIcon className='icons' icon={faPlus} />
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div aria-labelledby={`ModalProgramas${index}`} id={`modalProgramasPregrados${index}`} tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
-                                        <div className="modal-dialog modal-xl">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h4>Listado de Programas</h4>
-                                                    <button data-bs-dismiss="modal" type="button" className="close">x</button>
+                                        <div aria-labelledby={`ModalFacultad${index}`} id={`modalFacultadPregrados${index}`} tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
+                                            <div className="modal-dialog modal-xl">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h4>Listado de Unidades académicas</h4>
+                                                        <button data-bs-dismiss="modal" type="button" className="close"><FontAwesomeIcon icon={faXmark} /></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <p>Listado de facultades que participan en este evento:</p>
+                                                        <ListItems items={item.facultad.split(';').map(facultad => facultad.trim())} />
+                                                    </div>
                                                 </div>
-                                                <div className="modal-body">
-                                                    <p>Listado de programas que participan en este evento:</p>
-                                                    <ListItems items={item.programa.split(';').map(programa => programa.trim())} />
+                                            </div>
+                                        </div>
+                                        <div aria-labelledby={`ModalProgramas${index}`} id={`modalProgramasPregrados${index}`} tabIndex="-1" aria-hidden="true" className="modal" style={{ display: 'none' }}>
+                                            <div className="modal-dialog modal-xl">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h4>Listado de Programas</h4>
+                                                        <button data-bs-dismiss="modal" type="button" className="close"><FontAwesomeIcon icon={faXmark} /></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <p>Listado de programas que participan en este evento:</p>
+                                                        <ListItems items={item.programa.split(';').map(programa => programa.trim())} />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,8 +195,8 @@ const Calendario = ({ filteredData, ordenAscendente, filteredDataByPeriodo }) =>
                     onPageChange={({ selected }) => setCurrentPage(selected)}
                     containerClassName={'pagination'}
                     activeClassName={'pagination-active'}
-                    previousLabel={'Anterior'}
-                    nextLabel={'Siguiente'}
+                    previousLabel={'« Ant'}
+                    nextLabel={'Sig »'}
                     breakLabel={'...'}
                     breakClassName={'break-me'}
                     pageClassName={'pagination-item'}

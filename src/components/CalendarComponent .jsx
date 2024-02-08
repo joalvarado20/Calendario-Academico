@@ -17,7 +17,7 @@ const CalendarComponent = ({ filteredData }) => {
     const [filteredDataByPeriodo, setFilteredDataByPeriodo] = useState([]); // Agrega un estado para almacenar los datos filtrados por período.
 
     return (
-        <div className="contet_gris">
+        <div className="content_gris">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 col-sm-12 col-md-4 col-lg-4 d-flex justify-content-center">
@@ -30,7 +30,7 @@ const CalendarComponent = ({ filteredData }) => {
                     </div>
                 </div>
             </div>
-            <div className="d-flex top"><a href="#"><FontAwesomeIcon icon={faArrowUp} /></a></div>
+            <div className="top"><a href="#"><FontAwesomeIcon icon={faArrowUp} /></a></div>
         </div>
     );
 };
