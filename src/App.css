@@ -1,9 +1,4 @@
 @import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,600;0,900;1,100&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,800;0,900;1,200;1,300;1,400;1,600;1,800;1,900&display=swap);
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 :root {
   --white: #FFF;
   --black: #000;
@@ -18,61 +13,48 @@
   --primary-font: 'Nunito', sans-serif;
   --secondary-font: 'Montserrat', sans-serif;
 }
-html {scroll-behavior: smooth;}
-body {
-  font-size: 62.5%;
-  scrollbar-width: thin;
-  scrollbar-color: var(--blue) var(--gray-10); 
-}
-body::-webkit-scrollbar {width: 12px;}
-body::-webkit-scrollbar-track {background: var(--gray-10);}
-body::-webkit-scrollbar-thumb {
-  background-color: var(--blue);
-  border-radius: 20px;
-  border: 3px solid var(--gray-10);
-}
-h2 {
+#Calendario {font-family: var(--primary-font);}
+#Calendario h2 {
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--blue);
   line-height: 3rem; 
 }
-h3 {
+#Calendario h2 strong {font-weight: bolder;}
+#Calendario h3 {
   font-size: 1.3rem;
   font-weight: 200; 
 }
-h4 {
+#Calendario h4 {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--white); 
 }
-h5 {
+#Calendario h5 {
   font-size: 1rem;
   font-weight: 700;
   color: var(--black); 
 }
-h6 {
+#Calendario h6 {
   font-size: 0.9rem;
   font-weight: 400;
   color: var(--white); 
 }
 .background-blue h2, .background-blue p, .card_boton a:hover h3, h2 span {color: var(--white);}
-a, small {font-weight: 100;}
-small {font-size: .8rem;}
-a {
+#Calendario a, #Calendario small {font-weight: 100;}
+#Calendario small {font-size: .8rem;}
+#Calendario a {
   font-size: 1.2rem;
   text-decoration: none;
 }
-a img {
+#Calendario a img {
   background: #d7d7e2;
-  border-radius: 50%; 
-}
-a img {
   max-width: 30px;
   padding: 7px;
+  border-radius: 50%; 
 }
-a:hover img {background: #b9b9c6;}
-p, li {
+#Calendario a:hover img {background: #b9b9c6;}
+#Calendario p, #Calendario li {
   font-size: 0.9rem;
   font-weight: 300; 
   line-height: 1.2;
@@ -80,18 +62,18 @@ p, li {
   color: var(--font-color);
   margin: 0.25rem 0;
 }
-p:first-of-type, li:first-of-type {margin-top: 0;}
-p:last-of-type, li:last-of-type {margin-bottom: 0;}
-p a, li a {font-size: inherit;}
-strong {font-weight: 600;}
+#Calendario p:first-of-type, #Calendario li:first-of-type {margin-top: 0;}
+#Calendario p:last-of-type, #Calendario li:last-of-type {margin-bottom: 0;}
+#Calendario p a, #Calendario li a {font-size: inherit;}
+#Calendario strong {font-weight: 600;}
 .fa, .far, .fas {font-family: "Font Awesome 5 Free" !important;}
-.top {
+#Calendario .top {
   float: right;
   position: sticky;
   bottom: 130px;
   z-index: 1000; 
 }
-.top a {
+#Calendario .top a {
   color: var(--white);
   background-color: var(--blue);
   display: flex;
@@ -101,80 +83,74 @@ strong {font-weight: 600;}
   height: 32px;
   border-radius: 0.5rem;
 }
-.custom-select {width: 100% !important;}
-.General_calendario {font-family: var(--primary-font);}
-.General_calendario .row>* {
-  padding-right: calc(var(--bs-gutter-x) * .5);
-  padding-left: calc(var(--bs-gutter-x) * .5);
-  margin-top: var(--bs-gutter-y);
-}
-.container-fluid {
+#Calendario .custom-select {width: 100% !important;}
+#Calendario .container-fluid {
   width: 100%;
   padding-right: 5%;
   padding-left: 5%;
   margin-right: auto;
   margin-left: auto; 
 }
-#collapsibleNavbar #filtro {
+#Calendario #collapsibleNavbar #filtro {
   display: grid;
   gap: 0.8rem;
   grid-template-columns: 100%;
   width: calc(100% - 1rem);
   padding: 1rem 0;
 }
-#collapsibleNavbar #filtro p {font-size: 0.9rem;}
-#collapsibleNavbar #filtro p strong {font-weight: 700;}
-#collapsibleNavbar #filtro .form-control {font-size: 0.9rem;}
-#collapsibleNavbar #filtro .form-control#limpiar {font-size: 0.75rem;}
-.navbar-expand-md button.navbar-toggler p {
+#Calendario #collapsibleNavbar #filtro p {font-size: 0.9rem;}
+#Calendario #collapsibleNavbar #filtro p strong {font-weight: 700;}
+#Calendario #collapsibleNavbar #filtro .form-control {font-size: 0.9rem;}
+#Calendario #collapsibleNavbar #filtro .form-control#limpiar {font-size: 0.75rem;}
+#Calendario .navbar-expand-md button.navbar-toggler p {
   font-size: 1.1rem;
   margin-bottom: 0;
 }
-.navbar-expand-md button.navbar-toggler p span {
+#Calendario .navbar-expand-md button.navbar-toggler p span {
   color: var(--blue);
   font-weight: 600;
   text-decoration: underline;
 }
-.navbar-expand-md button.navbar-toggler img {
+#Calendario .navbar-expand-md button.navbar-toggler img {
   max-width: 40px;
   padding-right: 10px; 
 }
-.navbar-expand-md button.navbar-toggler i {
+#Calendario .navbar-expand-md button.navbar-toggler i {
   font-size: 1.2rem;
   color: var(--blue);
   padding-right: 5px;
 }
-.navbar-expand-md .des_title,
-.navbar-expand-md button.navbar-toggler i.fas.fa-sliders-h,
-.navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-times {display: none;} 
-.navbar-expand-md .des_title {
+#Calendario .navbar-expand-md .des_title,
+#Calendario .navbar-expand-md button.navbar-toggler i.fas.fa-sliders-h,
+#Calendario .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-times {display: none;} 
+#Calendario .navbar-expand-md .des_title {
   padding: 0 0 1rem;
   align-items: center;
 }
-.navbar-expand-md .des_title i {
+#Calendario .navbar-expand-md .des_title i {
   font-size: 1.6em;
   color: var(--gray-40);
   padding-right: 10px;
 }
-.navbar-expand-md .input-group-prepend label.input-group-text i {max-width: 26px;}
-.navbar-expand-md .input-group-text {
+#Calendario .navbar-expand-md .input-group-prepend label.input-group-text i {max-width: 26px;}
+#Calendario .navbar-expand-md .input-group-text {
   font-size: .8rem;
   padding: 10px;
   height: 38px;
   background: var(--blue);
   border: 1px solid var(--blue);
 }
-.navbar-expand-md .form-control.date {width: 45%;}
-.navbar-expand-md .input-group-text i {
+#Calendario .navbar-expand-md .form-control.date {width: 45%;}
+#Calendario .navbar-expand-md .input-group-text i {
   color: var(--white);
   font-size: 1.5em;
 }
-.navbar-expand-md span.date {
+#Calendario .navbar-expand-md span.date {
   font-size: 1.5em;
   color: var(--blue);
   padding: 0 10px;
 }
-.navbar-expand-md select.custom-select {
+#Calendario .navbar-expand-md select.custom-select {
   font-size: 0.9rem;
   background-color: var(--white);
   background-image: url(/PortalUrosario/media/UR-V4/Calendario-Academico-2022/img/slect_down.png);
@@ -183,16 +159,16 @@ strong {font-weight: 600;}
   border: transparent;
   border-bottom: 2px solid var(--gray-40);
 }
-.navbar-expand-md .form-control {
+#Calendario .navbar-expand-md .form-control {
   color: var(--gray-25);
   border: 1px solid var(--gray-40);
   border-radius: 0.25rem;
 }
-.navbar-expand-md .form-control::placeholder {
+#Calendario .navbar-expand-md .form-control::placeholder {
   color: var(--gray-25);
   font-style: italic;
 }
-.navbar-expand-md .form-control.categorias-azul {
+#Calendario .navbar-expand-md .form-control.categorias-azul {
   color: var(--white);
   background-color: var(--blue);
   min-width: 80px;
@@ -201,8 +177,8 @@ strong {font-weight: 600;}
   border-bottom-left-radius: 0.25rem;
   border-right: none;
 }
-.navbar-expand-md #busqueda {display: block;}
-.navbar-expand-md #busqueda .form-control {
+#Calendario .navbar-expand-md #busqueda {display: block;}
+#Calendario .navbar-expand-md #busqueda .form-control {
   font-style: italic;
   color: var(--gray-40);
   padding: .375rem 0.75rem;
@@ -210,30 +186,30 @@ strong {font-weight: 600;}
   border-bottom-left-radius: 0;
   border-left: none;
 }
-.navbar-expand-md #busqueda .form-control option {
+#Calendario .navbar-expand-md #busqueda .form-control option {
   font-style: normal;
   color: var(--font-color);
 }
-.navbar-expand-md input.button.form-control {
+#Calendario .navbar-expand-md input.button.form-control {
   font-weight: 500;
   color: var(--white);
   background: var(--red);
   border-radius: 0.25rem;
   transition: .3s;
 }
-.navbar-expand-md input.button.form-control#buscar {
+#Calendario .navbar-expand-md input.button.form-control#buscar {
   background: var(--red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200.04'%3E%3Cpath id='ico-search-2' fill='%23fff' data-name='ico-search' d='M162.51,81.25c0,17.93-5.82,34.49-15.63,47.93l49.46,49.49c4.88,4.88,4.88,12.81,0,17.7-4.88,4.88-12.81,4.88-17.7,0l-49.46-49.49c-13.44,9.84-30,15.63-47.93,15.63C36.37,162.51,0,126.14,0,81.25S36.37,0,81.25,0s81.25,36.37,81.25,81.25ZM81.25,137.51c31.07,0,56.25-25.19,56.25-56.25s-25.19-56.25-56.25-56.25-56.25,25.19-56.25,56.25,25.19,56.25,56.25,56.25Z'/%3E%3C/svg%3E") right 0.8rem center/1.2rem auto no-repeat;
   width: auto;
   padding: 0.35rem 2.5rem 0.35rem 1.2rem;
   border: none;
 }
-.navbar-expand-md input.button.form-control:hover {
+#Calendario .navbar-expand-md input.button.form-control:hover {
   background: -webkit-linear-gradient(90deg, #ad0505 0, #510101 80%);
   background: -o-linear-gradient(90deg, #ad0505 0, #510101 80%);
   background: -moz-linear-gradient(90deg, #ad0505 0, #510101 80%);
   background: linear-gradient(90deg, #ad0505 0, #510101 80%);
 }
-.navbar-expand-md .button#limpiar {
+#Calendario .navbar-expand-md .button#limpiar {
   font-style: italic;
   font-weight: 300;
   color: var(--gray-40);
@@ -244,53 +220,53 @@ strong {font-weight: 600;}
   border-radius: 0;
   border: none;
 }
-.navbar-expand-md .d-flex.datepicker {width: 100%;}
-.navbar-expand-md .d-flex.datepicker .input-group {padding: 0 10px;}
-.navbar-expand-md .d-flex.datepicker span {
+#Calendario .navbar-expand-md .d-flex.datepicker {width: 100%;}
+#Calendario .navbar-expand-md .d-flex.datepicker .input-group {padding: 0 10px;}
+#Calendario .navbar-expand-md .d-flex.datepicker span {
   color: var(--font-color);
   font-size: 1.5em;
 }
-.navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 {
+#Calendario .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 {
   border: transparent;
   border-bottom: 2px solid var(--gray-40);
 }
-.navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {
+#Calendario .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {
   color: var(--blue);
   font-size: 1.3em;
 }
-.introjs-skipbutton {
+#Calendario .introjs-skipbutton {
   color: var(--white);
   font-size: 12px;
 }
-.introjs-skipbutton:focus,.introjs-skipbutton:hover {color: #fd021d;}
-.introjs-tooltiptext {
+#Calendario .introjs-skipbutton:focus,.introjs-skipbutton:hover {color: #fd021d;}
+#Calendario .introjs-tooltiptext {
   font-size: 1.2em;
   background: #1d1b47; 
 }
-.introjs-progressbar {background-color: #3b60e9;}
-.introjs-tooltip {
+#Calendario .introjs-progressbar {background-color: #3b60e9;}
+#Calendario .introjs-tooltip {
   background-color: #1d1b47;
   color: var(--white);
 }
-.introjs-tooltip-header {
+#Calendario .introjs-tooltip-header {
   border-bottom: 1px solid #b5b5bc;
   padding-bottom: 10px;
 }
-.introjs-bullets ul li a.active {
+#Calendario .introjs-bullets ul li a.active {
   width: 15px;
   background: #3452c1; 
 }
-.introjs-bullets ul li a,.introjs-bullets ul li a:focus,.introjs-bullets ul li a:hover {background: #425392;}
-a.introjs-button.introjs-prevbutton.introjs-disabled {color: #cfcfcf;}
-a.introjs-button.introjs-nextbutton {
+#Calendario .introjs-bullets ul li a, #Calendario .introjs-bullets ul li a:focus, #Calendario .introjs-bullets ul li a:hover {background: #425392;}
+#Calendario a.introjs-button.introjs-prevbutton.introjs-disabled {color: #cfcfcf;}
+#Calendario a.introjs-button.introjs-nextbutton {
   border: 1px solid var(--white);
   background-color: #fd021d;
   color: var(--white);
   font-weight: 500;
   text-transform: uppercase;
 }
-.introjs-skipbutton i {font-size: 1.5em;}
-.introjs-button,.introjs-button:active,.introjs-button:focus,.introjs-button:hover,.introjs-disabled,.introjs-disabled:focus,.introjs-disabled:hover {
+#Calendario .introjs-skipbutton i {font-size: 1.5em;}
+#Calendario .introjs-button, #Calendario .introjs-button:active, #Calendario .introjs-button:focus, #Calendario .introjs-button:hover, #Calendario .introjs-disabled, #Calendario .introjs-disabled:focus, #Calendario .introjs-disabled:hover {
   outline: 0;
   background-image: none;
   background-color: transparent;
@@ -300,63 +276,63 @@ a.introjs-button.introjs-nextbutton {
   box-shadow: none;
   text-shadow: none;
 }
-.introjs-button:active,.introjs-button:focus,.introjs-button:hover {background: #252258;}
-.introjs-disabled,.introjs-disabled:focus,.introjs-disabled:hover {
+#Calendario .introjs-button:active, #Calendario .introjs-button:focus, #Calendario .introjs-button:hover {background: #252258;}
+#Calendario .introjs-disabled, #Calendario .introjs-disabled:focus, #Calendario .introjs-disabled:hover {
   color: #ccc;
   border: 1px solid transparent; 
 }
-.introjs-arrow {border: 10px solid var(--white);}
-.introjs-arrow.top,.introjs-arrow.top-middle,.introjs-arrow.top-right {
+#Calendario .introjs-arrow {border: 10px solid var(--white);}
+#Calendario .introjs-arrow.top, #Calendario .introjs-arrow.top-middle, #Calendario .introjs-arrow.top-right {
   border-color: transparent transparent rgba(000, 0, 0, .5);
   top: -20px;
   left: 20px; 
 }
-.introjs-arrow.bottom,.introjs-arrow.bottom-middle,.introjs-arrow.bottom-right {
+#Calendario .introjs-arrow.bottom, #Calendario .introjs-arrow.bottom-middle, #Calendario .introjs-arrow.bottom-right {
   border-color: rgba(000, 0, 0, .5) transparent transparent;
   bottom: -20px;
   left: 20px; 
 }
-.introjs-arrow.left,.introjs-arrow.right {top: 20px;}
-.introjs-arrow.left-bottom,.introjs-arrow.right-bottom {bottom: 20px;}
-.introjs-arrow.left,.introjs-arrow.left-bottom {
+#Calendario .introjs-arrow.left, #Calendario .introjs-arrow.right {top: 20px;}
+#Calendario .introjs-arrow.left-bottom, #Calendario .introjs-arrow.right-bottom {bottom: 20px;}
+#Calendario .introjs-arrow.left, #Calendario .introjs-arrow.left-bottom {
   left: -20px;
   border-color: transparent rgba(000, 0, 0, .5) transparent transparent; 
 }
-.introjs-arrow.right,.introjs-arrow.right-bottom {
+#Calendario .introjs-arrow.right, #Calendario .introjs-arrow.right-bottom {
   right: -20px;
   border-color: transparent transparent transparent rgba(000, 0, 0, .5); 
 }
-#menu-pagina-ur.menu_evento {
+#Calendario #menu-pagina-ur.menu_evento {
   position: sticky;
   top: 11%;
   z-index: 6;
   background: var(--white);
   box-shadow: 2px 2px 5px rgb(0 0 0 / 10%); 
 }
-.content_gris aside, .content_gris section, img {width: 100%;}
+#Calendario .content_gris aside, #Calendario .content_gris section, #Calendario img {width: 100%;}
 .gsst_a .gscb_a {
   color: var(--blue);
   cursor: pointer; 
 }
-.search-wrap .close-search:hover {
+#Calendario .search-wrap .close-search:hover {
   border-color: var(--blue);
   background-color: var(--blue); 
 }
-.content_Calendario {
+#Calendario .content_Calendario {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
   padding: 5%; 
 }
-section.background-blue figure {
+#Calendario section.background-blue figure {
   justify-content: flex-start;
   overflow: initial;
   max-height: inherit;
   position: relative;
   margin: 0; 
 }
-section.background-blue figcaption {padding: 30px 0 15%;}
-section.background-blue figure::before {
+#Calendario section.background-blue figcaption {padding: 30px 0 15%;}
+#Calendario section.background-blue figure::before {
   content: "";
   background: -webkit-linear-gradient(6deg, #2c2f79 0, #1d1737 56%);
   background: -o-linear-gradient(6deg, #2c2f79 0, #1d1737 56%);
@@ -367,7 +343,7 @@ section.background-blue figure::before {
   height: 100%;
   z-index: 0; 
 }
-section.background-blue figure .fondo_section {
+#Calendario section.background-blue figure .fondo_section {
   justify-content: center;
   position: absolute;
   height: 100%;
@@ -379,19 +355,19 @@ section.background-blue figure .fondo_section {
   z-index: 0;
   opacity: .1;
 }
-section.background-blue figure .fondo_section img {width: 100vw;}
-small#anoSeleccionado {
+#Calendario section.background-blue figure .fondo_section img {width: 100vw;}
+#Calendario small#anoSeleccionado {
   font-size: 2.1rem;
   color: var(--red);
   font-weight: 300;
   font-style: italic;
 }
-h1 img.initial_title {max-width: 980px;}
-.card_boton {
+#Calendario h1 img.initial_title {max-width: 980px;}
+#Calendario .card_boton {
   width: 100%;
   padding: 20px 0;
 }
-.card_boton a {
+#Calendario .card_boton a {
   background: var(--white);
   -webkit-box-shadow: 7px 4px 20px 0 #00081f;
   -moz-box-shadow: 7px 4px 20px 0 #00081f;
@@ -405,28 +381,28 @@ h1 img.initial_title {max-width: 980px;}
   align-content: stretch;
   height: 100%;
 }
-.card_boton .a {text-decoration: none;}
-.card_boton a:hover img {
+#Calendario .card_boton .a {text-decoration: none;}
+#Calendario .card_boton a:hover img {
   background: var(--white);
   opacity: .4;
   filter: grayscale(50%) sepia(1);
   -webkit-filter: grayscale(70%) sepia(1);
 }
-.card_boton a:hover {
+#Calendario .card_boton a:hover {
   background: var(--red);
   text-decoration: none;
   -webkit-transition: .3s;
   -o-transition: .3s;
   transition: .3s;
 }
-.card_boton a img {
+#Calendario .card_boton a img {
   max-width: 200px;
   padding: 5px;
   background: #d7d7e2;
   border-radius: 50%;
   max-height: 200px;
 }
-.card_boton a h3 {
+#Calendario .card_boton a h3 {
   display: block;
   width: 100%;
   text-align: center;
@@ -434,28 +410,28 @@ h1 img.initial_title {max-width: 980px;}
   color: var(--blue);
   font-weight: 700;
 }
-.card_boton a h3 span {
+#Calendario .card_boton a h3 span {
   display: block;
   font-size: 2rem;
 }
-.login img {
+#Calendario .login img {
   max-width: 600px;
   filter: drop-shadow(2px 4px 6px black);
 }
-section.headeer_calendario {
+#Calendario section.headeer_calendario {
   background: #d7d7e2;
   padding: 10px 0;
 }
-section.headeer_calendario h3 {
+#Calendario section.headeer_calendario h3 {
   font-size: 1.2rem;
   text-align: center;
 }
-#navbarSupportedContent {
+#Calendario #navbarSupportedContent {
   padding-bottom: 0;
   background: #d7d7e2;
   box-shadow: none !important;
 }
-#navbarSupportedContent ul {
+#Calendario #navbarSupportedContent ul {
   display: flex;
   flex-wrap: inherit;
   list-style: ethiopic-halehame;
@@ -464,12 +440,12 @@ section.headeer_calendario h3 {
   margin: 0;
   justify-content: flex-start;
 }
-#navbarSupportedContent li {
+#Calendario #navbarSupportedContent li {
   padding: 5px 20px 5px 0;
   display: flex;
   border: none !important;
 }
-#navbarSupportedContent li:before {
+#Calendario #navbarSupportedContent li:before {
   color: var(--red);
   margin-right: 8px;
   font-size: 16px;
@@ -477,95 +453,96 @@ section.headeer_calendario h3 {
   font-weight: 900;
   content: "/";
 }
-#navbarSupportedContent li a.active {
+#Calendario #navbarSupportedContent li a.active {
   color: var(--black);
   text-shadow: 0 1px 6px var(--white);
   text-decoration: none;
   cursor: alias;
 }
-#navbarSupportedContent li a {color: #848383;}
-#navbarSupportedContent li a:hover {
+#Calendario #navbarSupportedContent li a {color: #848383;}
+#Calendario #navbarSupportedContent li a:hover {
   color: var(--red);
   text-decoration: none;
 }
-#navCalendario, #segmentoSeleccionado {text-transform: capitalize;}
-.perfil {
+#Calendario #navCalendario, #segmentoSeleccionado {text-transform: capitalize;}
+#Calendario .perfil {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   align-content: center;
   height: 100%;
 }
-.perfil img {
+#Calendario .perfil img {
   background: #ededf6;
   max-width: 50px;
   max-height: 200px;
   padding: 0;
   border-radius: 50%;
 }
-.perfil h4 {
+#Calendario .perfil h4 {
   color: var(--red);
   padding-left: 10px;
 }
-article.periodos .input-group.is-invalid, nav.navbar-expand-md {padding: 20px 0;}
-.content_gris aside .descarga .input-group {margin-top: 15px;}
-.content_gris aside #exampleFormControlSelect1 {
+#Calendario article.periodos .input-group.is-invalid,
+#Calendario nav.navbar-expand-md {padding: 20px 0;}
+#Calendario .content_gris aside .descarga .input-group {margin-top: 15px;}
+#Calendario .content_gris aside #exampleFormControlSelect1 {
   width: 90%;
   margin: 20px auto;
 }
-.content_gris {
+#Calendario .content_gris {
   background: var(--gray-10);
   padding-top: 10px;
   padding-bottom: 20px;
 }
-article {
+#Calendario article {
   font-family: var(--primary-font);
   background: var(--white);
   padding: 20px 10px;
   border-radius: 8px;
   margin-bottom: 30px;
 }
-article.periodos {
+#Calendario article.periodos {
   color: var(--black);
   padding: 1.5rem;
   margin-top: 5rem;
 }
-article.periodos h3 {
+#Calendario article.periodos h3 {
   font-size: 1.125rem;
   font-weight: 400;
   margin-bottom: 1.5rem;
 }
-article.periodos h3 i {
+#Calendario article.periodos h3 i {
   font-size: 0.9rem;
   margin-right: 0.5rem;
 }
-article.periodos h4 {
+#Calendario article.periodos h4 {
   font-size: 1rem;
   font-weight: 700;
   color: var(--black);
 }
-article.periodos ul {
+#Calendario article.periodos ul {
   list-style: none;
   margin-bottom: 1rem;
   padding-left: 2rem;
 }
-article.periodos p, article.periodos li {font-weight: 400;}
-article.periodos a {
+#Calendario article.periodos p, #Calendario article.periodos li {font-weight: 400;}
+#Calendario article.periodos a {
   color: var(--black);
   text-decoration: none;
 }
-article.periodos a:hover {text-decoration: underline;}
-article.periodos hr {border-top: 1px solid var(--gray-40);}
-article.periodos select.form-control {
+#Calendario article.periodos a:hover {text-decoration: underline;}
+#Calendario article.periodos hr {border-top: 1px solid var(--gray-40);}
+#Calendario article.periodos select.form-control {
   color: var(--gray-40);
   font-style: italic;
   padding: 0.375rem 0.75rem;
 }
-article.periodos select.form-control option {
+#Calendario article.periodos select.form-control option {
   font-style: normal;
   color: var(--font-color);
 }
-article.periodos .form-check {
+#Calendario article.periodos .form-check {
   background: #d7d7e2;
   margin: 5px;
   padding: 10px;
@@ -575,63 +552,63 @@ article.periodos .form-check {
   justify-content: flex-start;
   border-radius: 10px;
 }
-article.periodos .form-check input.form-check-input {
+#Calendario article.periodos .form-check input.form-check-input {
   margin-left: 2px;
   position: relative;
 }
-article.periodos .form-check .form-check-label {
+#Calendario article.periodos .form-check .form-check-label {
   font-size: 1rem;
   font-weight: 600;
   color: var(--blue);
   padding-left: 5px;
 }
-article.periodos .form-check .form-check-label small {
+#Calendario article.periodos .form-check .form-check-label small {
   color: #838383;
   width: 100%;
   display: block;
   font-weight: 300;
 }
-article.periodos .descarga select.custom-select {
+#Calendario article.periodos .descarga select.custom-select {
   background-color: var(--blue);
   color: var(--white);
   border: 1px solid var(--blue);
   background-image: url(../img/slect_down_white.png);
   background-size: 18px;
 }
-article.periodos a.btn-download {
+#Calendario article.periodos a.btn-download {
   font-weight: 200;
   color: var(--blue);
   margin-bottom: 20px;
   padding: 10px;
   position: relative;
 }
-article.periodos .content_phone {
+#Calendario article.periodos .content_phone {
   display: flex;
   flex-direction: column;
 }
-article.periodos .input-group {
+#Calendario article.periodos .input-group {
   display: flex;
   flex-direction: column;
   column-gap: 1rem;
   row-gap: 0.5rem;
   margin-bottom: 1rem;
 }
-article.periodos .input-group h4 {margin-bottom: 0;}
-article.periodos .input-group select {width: 100%;}
-article.periodos .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {border-radius: 0.25rem;}
-article.titulo_evento h2 {
+#Calendario article.periodos .input-group h4 {margin-bottom: 0;}
+#Calendario article.periodos .input-group select {width: 100%;}
+#Calendario article.periodos .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {border-radius: 0.25rem;}
+#Calendario #Calendario article.titulo_evento h2 {
   font-size: 2rem;
   text-align: center;
   color: var(--blue);
   margin-bottom: 0;
 }
-article.evento .fecha {
+#Calendario article.evento .fecha {
   text-align: center;
   padding-top: 1.5rem;
   width: 100%;
 }
-article.evento .container-fluid > .row {row-gap: 1rem;}
-article.evento .evento_icon {
+#Calendario article.evento .container-fluid > .row {row-gap: 1rem;}
+#Calendario article.evento .evento_icon {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -640,74 +617,74 @@ article.evento .evento_icon {
   padding: 0.8rem 0.8rem 0.5rem;
   border-radius: 0.5rem;
 }
-article.evento .evento_icon p {
+#Calendario article.evento .evento_icon p {
   font-size: 1rem;
   font-weight: 700;
   text-align: center;
   text-transform: capitalize;
 }
-article.evento .evento_icon.abierto {
+#Calendario article.evento .evento_icon.abierto {
   background: #E4FFE3;
   color: #40782D;
 }
-article.evento .evento_icon.cerrado {
+#Calendario article.evento .evento_icon.cerrado {
   background: #FFE0E0;
   color: #E58585;
 }
-article.evento .evento_icon p {color: inherit;}
-article.evento .evento_icon i {font-size: 2rem;}
-article.evento h4 {
+#Calendario article.evento .evento_icon p {color: inherit;}
+#Calendario article.evento .evento_icon i {font-size: 2rem;}
+#Calendario article.evento h4 {
   font-size: 1.7rem;
   font-weight: 800;
   text-align: center;
   color: var(--blue);
   margin: 2rem 0;
 }
-article.evento .fecha hr {
+#Calendario article.evento .fecha hr {
   margin: 0.5rem 0;
   border: none;
   border-top-width: 3px;
   border-top-style: solid;
   opacity: 1;
 }
-article.evento .fecha hr.abierto {border-top-color: #40782D;}
-article.evento .fecha hr.cerrado {border-top-color: var(--red);}
-article.evento .fecha h2, article.evento .fecha h3, article.evento .fecha p {
+#Calendario article.evento .fecha hr.abierto {border-top-color: #40782D;}
+#Calendario article.evento .fecha hr.cerrado {border-top-color: var(--red);}
+#Calendario article.evento .fecha h2, #Calendario article.evento .fecha h3, #Calendario article.evento .fecha p {
   color: var(--black);
   margin: 0;
 }
-article.evento .fecha h2 {font-size: 3rem;}
-article.evento .fecha h3 {
+#Calendario article.evento .fecha h2 {font-size: 3rem;}
+#Calendario article.evento .fecha h3 {
   font-size: 1.5rem;
   font-weight: 700;
 }
-article.evento .fecha small {
+#Calendario article.evento .fecha small {
   font-size: 0.8rem;
   font-weight: 300;
 }
-article.evento p, article.evento li {font-size: 1rem;}
-article.evento .items_lugar {margin: 1rem 0;}
-article.evento .items_lugar .d-grid {
+#Calendario article.evento p, #Calendario article.evento li {font-size: 1rem;}
+#Calendario article.evento .items_lugar {margin: 1rem 0;}
+#Calendario article.evento .items_lugar .d-grid {
   grid-template-columns: 25px auto;
 }
-article.evento .items_lugar p {margin: 0;}
-article.evento .items_lugar .icons {
+#Calendario article.evento .items_lugar p {margin: 0;}
+#Calendario article.evento .items_lugar .icons {
   font-size: 1.2rem;
   color: #b5b5b5;
 }
-article.evento .items_lugar p strong {
+#Calendario article.evento .items_lugar p strong {
   color: var(--blue);
   font-weight: 800;
   padding-right: 10px;
 }
-article.evento .items_content {
+#Calendario article.evento .items_content {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
   padding: 0.5rem 0;
 }
-article.evento .items_content a {
+#Calendario article.evento .items_content a {
   font-weight: 800;
   text-decoration: none;
   display: flex;
@@ -718,7 +695,7 @@ article.evento .items_content a {
   border-width: 1px;
   border-style: solid;
 }
-article.evento .items_content a .icons {
+#Calendario article.evento .items_content a .icons {
   font-family: 'Font Awesome 5 Free';
   font-style: inherit;
   border-radius: 20px;
@@ -726,66 +703,65 @@ article.evento .items_content a .icons {
   color: var(--white);
   font-size: .7rem;
 }
-
-article.evento .items_content .Facultad a {
+#Calendario article.evento .items_content .Facultad a {
   color: var(--red);
   border-color: var(--red);
 }
-article.evento .items_content .Facultad a:hover {
+#Calendario article.evento .items_content .Facultad a:hover {
   color: var(--white);
   background: var(--red);
 }
-article.evento .items_content .Facultad a .icons {background: #ffbfc6;}
-article.evento .items_content .Facultad a:hover .icons {color: var(--red);}
-article.evento .items_content .Programa a {
+#Calendario article.evento .items_content .Facultad a .icons {background: #ffbfc6;}
+#Calendario article.evento .items_content .Facultad a:hover .icons {color: var(--red);}
+#Calendario article.evento .items_content .Programa a {
   color: var(--blue);
   border-color: var(--blue);
 }
-article.evento .items_content .Programa a:hover {
+#Calendario article.evento .items_content .Programa a:hover {
   background: var(--blue);
   color: var(--white);
 }
-article.evento .items_content .Programa a .icons {background: #b8c5f7;}
-article.evento .items_content .Programa a:hover .icons {color: var(--blue);}
-article.evento .card-content {
+#Calendario article.evento .items_content .Programa a .icons {background: #b8c5f7;}
+#Calendario article.evento .items_content .Programa a:hover .icons {color: var(--blue);}
+#Calendario article.evento .card-content {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-article.evento .card_filter {
+#Calendario article.evento .card_filter {
   font-size: 0.9rem;
   font-weight: 400;
   padding: 0.3rem 0.75rem;
   border-radius: 0.25rem;
 }
-article.evento .card_filter.item_1resemestre {
+#Calendario article.evento .card_filter.item_1resemestre {
   background-color: #FEE8CE;
   color: #FF8400;
 }
-article.evento .card_filter.item_2dosemestre {
+#Calendario article.evento .card_filter.item_2dosemestre {
   background-color: #FBDDFD;
   color: #D100D1;
 }
-article.evento .card_filter.item_1Intersemestre {
+#Calendario article.evento .card_filter.item_1Intersemestre {
   background-color: #D5D5FF;
   color: #011CAF;
 }
-article.evento .card_filter.item_2Intersemestre {
+#Calendario article.evento .card_filter.item_2Intersemestre {
   background-color: #D5FFF9;
   color: #00706F;
 }
-article.evento .card_filter.item_pregrado {
+#Calendario article.evento .card_filter.item_pregrado {
   background-color: #BBE4FF;
   color: #0062A1;
 }
-article.evento .card_filter.item_posgrado {
+#Calendario article.evento .card_filter.item_posgrado {
   background-color: #cfffb5;
   color: #86b26e;
 }
-article.evento .card_filter.item_busqueda {
+#Calendario article.evento .card_filter.item_busqueda {
   background-color: #EBEBEB;
   color: #666;
 }
-.content_gris a.mas_eventos {
+#Calendario .content_gris a.mas_eventos {
   background: #d7d7e2;
   border-radius: 10px;
   color: var(--white);
@@ -793,52 +769,52 @@ article.evento .card_filter.item_busqueda {
   font-weight: 700;
   transition: .3s; 
 }
-.content_gris a.mas_eventos i {
+#Calendario .content_gris a.mas_eventos i {
   color: #da0820;
   font-family: "Font Awesome 5 Free";
   font-style: inherit; 
 }
-.content_gris a.mas_eventos:hover {
+#Calendario .content_gris a.mas_eventos:hover {
   color: var(--blue);
   text-decoration: none;
   background: var(--white); 
 }
-.content_gris a.mas_eventos:hover i {color: var(--blue);}
+#Calendario .content_gris a.mas_eventos:hover i {color: var(--blue);}
 
-.perfil .blob {
+#Calendario .perfil .blob {
   transform: scale(1);
   animation: 2s infinite pulse-black;
   cursor: pointer; 
 }
-.perfil .blob.blue {
+#Calendario .perfil .blob.blue {
   box-shadow: 0 0 0 0 #34ace0;
   animation: 2s infinite pulse-blue; 
 }
-.modal-backdrop.show {opacity: .8;}
-.modal-backdrop {
+#Calendario .modal-backdrop.show {opacity: .8;}
+#Calendario .modal-backdrop {
   background: -webkit-linear-gradient(0deg, #1b142d 0, #2e3180 80%);
   background: -o-linear-gradient(0deg, #1b142d 0, #2e3180 80%);
   background: -moz-linear-gradient(0deg, #1b142d 0, #2e3180 80%);
   background: linear-gradient(0deg, #1b142d 0, #2e3180 80%); 
 }
-.modal {
+#Calendario .modal {
   -webkit-transform: scale(1.15);
   transform: scale(1.15);
   -webkit-transition: -webkit-transform .1s cubic-bezier(.465, .183, .153, .946), opacity .1s cubic-bezier(.465, .183, .153, .946);
   transition: transform .1s cubic-bezier(.465, .183, .153, .946), opacity .1s cubic-bezier(.465, .183, .153, .946); 
 }
-.modal.show {
+#Calendario .modal.show {
   -webkit-transform: scale(1);
   transform: scale(1);
   -webkit-transition: -webkit-transform .3s cubic-bezier(.465, .183, .153, .946), opacity .3s cubic-bezier(.465, .183, .153, .946);
   transition: transform .3s cubic-bezier(.465, .183, .153, .946), opacity .3s cubic-bezier(.465, .183, .153, .946); 
 }
-.modal-content .modal-header h4 {
+#Calendario .modal-content .modal-header h4 {
   font-weight: 700; 
   color: var(--blue);
   margin: 0;
 }
-.modal-content .modal-header button.close {
+#Calendario .modal-content .modal-header button.close {
   font-size: 2.5rem;
   line-height: 1;
   color: var(--blue);
@@ -846,13 +822,13 @@ article.evento .card_filter.item_busqueda {
   border: none;
   opacity: 0.7;
 }
-.modal-content .modal-header button.close:hover {opacity: 1;}
-.modal-content .modal-body ul {
+#Calendario .modal-content .modal-header button.close:hover {opacity: 1;}
+#Calendario .modal-content .modal-body ul {
   margin: 0.5rem 0;
   padding-left: 1rem; 
 }
-.modal-content .modal-body ul li {list-style: none;}
-.modal-content .modal-body ul li:before {
+#Calendario .modal-content .modal-body ul li {list-style: none;}
+#Calendario .modal-content .modal-body ul li:before {
   content: "\f00c";
   font-family: "Font Awesome 5 Free";
   font-size: 11px;
@@ -860,16 +836,16 @@ article.evento .card_filter.item_busqueda {
   color: var(--red); 
   margin-right: 8px;
 }
-.pagination {
+#Calendario .pagination {
   display: flex;
   justify-content: center;
   list-style: none;
   padding: 0;
 }
-.pagination li {margin: 0 0.25rem;}
-.pagination li:first-of-type {margin-left: 0;}
-.pagination li:last-of-type {margin-right: 0;}
-.pagination li a {
+#Calendario .pagination li {margin: 0 0.25rem;}
+#Calendario .pagination li:first-of-type {margin-left: 0;}
+#Calendario .pagination li:last-of-type {margin-right: 0;}
+#Calendario .pagination li a {
   font-size: 1rem;
   font-weight: 600;
   line-height: 1;
@@ -880,15 +856,15 @@ article.evento .card_filter.item_busqueda {
   min-width: 32px;
   padding: 0.5rem;
 }
-.pagination li a:hover {text-decoration: underline;}
-.pagination .pagination-active a {
+#Calendario .pagination li a:hover {text-decoration: underline;}
+#Calendario .pagination .pagination-active a {
   color: var(--white);
   font-weight: 700;
   background-color: var(--red);
   border-radius: 50%;
 }
-.pagination .pagination-active a:hover {text-decoration: none;}
-.pagination-disabled {display: none;}
+#Calendario .pagination .pagination-active a:hover {text-decoration: none;}
+#Calendario .pagination-disabled {display: none;}
 
 @keyframes pulse-blue {
   0% {
@@ -906,126 +882,126 @@ article.evento .card_filter.item_busqueda {
 }
 
 @media (min-width:576px) {
-  h2 {font-size: 2rem;}
-  h3 {font-size: 1.5rem;}
-  h4 {font-size: 1.4rem;}
-  h5 {font-size: 1.2rem;}
-  h6 {font-size: 1rem;}
-  #collapsibleNavbar #filtro {gap: 1rem;}
-  #collapsibleNavbar #filtro p {font-size: 1rem;}
-  #collapsibleNavbar #filtro .form-control {font-size: 1rem;}
-  #menu-pagina-ur.menu_evento {top: 10%;}
-  #navbarSupportedContent {padding-bottom: 10px;}
-  .navbar-expand-md button.navbar-toggler p {font-size: 0.9rem;}
-  .navbar-expand-md .input-group-text i {
+  #Calendario h2 {font-size: 2rem;}
+  #Calendario h3 {font-size: 1.5rem;}
+  #Calendario h4 {font-size: 1.4rem;}
+  #Calendario h5 {font-size: 1.2rem;}
+  #Calendario h6 {font-size: 1rem;}
+  #Calendario #collapsibleNavbar #filtro {gap: 1rem;}
+  #Calendario #collapsibleNavbar #filtro p {font-size: 1rem;}
+  #Calendario #collapsibleNavbar #filtro .form-control {font-size: 1rem;}
+  #Calendario #menu-pagina-ur.menu_evento {top: 10%;}
+  #Calendario #navbarSupportedContent {padding-bottom: 10px;}
+  #Calendario .navbar-expand-md button.navbar-toggler p {font-size: 0.9rem;}
+  #Calendario .navbar-expand-md .input-group-text i {
     font-size: 1.5rem;
     color: var(--white);
   }
-  .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {font-size: 1.2rem;}
-  .perfil h4 {padding-left: 15px;}
-  .perfil img {max-height: 50px;}
-  section.headeer_calendario h3 {font-size: 1.4rem;}
-  article.periodos {padding: 2rem 1.5rem;}
-  article.periodos .form-check {
+  #Calendario .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {font-size: 1.2rem;}
+  #Calendario .perfil h4 {padding-left: 15px;}
+  #Calendario .perfil img {max-height: 50px;}
+  #Calendario section.headeer_calendario h3 {font-size: 1.4rem;}
+  #Calendario article.periodos {padding: 2rem 1.5rem;}
+  #Calendario article.periodos .form-check {
     margin: 10px 5px;
     padding: 5px;
     width: 100%;
   }
-  article.periodos .input-group {
+  #Calendario article.periodos .input-group {
     flex-direction: row;
     align-items: center;
   }
-  article.periodos .input-group h4 {width: 145px;}
-  article.periodos .input-group select {width: calc(100% - 161px);}
+  #Calendario article.periodos .input-group h4 {width: 145px;}
+  #Calendario article.periodos .input-group select {width: calc(100% - 161px);}
 }
 @media (min-width:768px) {
-  h2 {font-size: 2.3rem;}
-  h3 {font-size: 1.8rem;}
-  h4, h5 {font-size: 1.6rem;}
-  h6 {font-size: 1.4rem;}
-  .top {bottom: 70px;}
-  .custom-select {width: auto !important;}
-  #menu-pagina-ur.menu_evento {top: -5px;}
-  #collapsibleNavbar #filtro {
+  #Calendario h2 {font-size: 2.3rem;}
+  #Calendario h3 {font-size: 1.8rem;}
+  #Calendario h4, #Calendario h5 {font-size: 1.6rem;}
+  #Calendario h6 {font-size: 1.4rem;}
+  #Calendario .top {bottom: 70px;}
+  #Calendario .custom-select {width: auto !important;}
+  #Calendario #menu-pagina-ur.menu_evento {top: -5px;}
+  #Calendario #collapsibleNavbar #filtro {
     grid-template-columns: 95px calc(50% - 111px) calc(50% - 210px) 196px;
     flex-direction: row;
     align-items: center;
     padding: 0;
   }
-  section.background-blue figcaption {padding: 10px 0 5%;}
-  .navbar-expand-md .d-flex.datepicker {width: auto;}
-  .navbar-expand-md select.custom-select {
+  #Calendario section.background-blue figcaption {padding: 10px 0 5%;}
+  #Calendario .navbar-expand-md .d-flex.datepicker {width: auto;}
+  #Calendario .navbar-expand-md select.custom-select {
     font-size: 1rem;
     background-size: 18px;
   }
-  .navbar-expand-md button.navbar-toggler p {font-size: 0.8rem;}
-  .navbar-expand-md button.navbar-toggler img {
+  #Calendario .navbar-expand-md button.navbar-toggler p {font-size: 0.8rem;}
+  #Calendario .navbar-expand-md button.navbar-toggler img {
     max-width: 30px;
     padding-right: 5px; 
   }
-  .navbar-expand-md .des_title {display: flex;}
-  .navbar-expand-md button.navbar-toggler i.fas.fa-sliders-h,
-  .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-times {display: block;}
-  .navbar-expand-md button.navbar-toggler i.fas.fa-times, .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-sliders-h {display: none;}
-  .content_gris {
+  #Calendario .navbar-expand-md .des_title {display: flex;}
+  #Calendario .navbar-expand-md button.navbar-toggler i.fas.fa-sliders-h,
+  #Calendario .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-times {display: block;}
+  #Calendario .navbar-expand-md button.navbar-toggler i.fas.fa-times, #Calendario .navbar-expand-md button.navbar-toggler.collapsed i.fas.fa-sliders-h {display: none;}
+  #Calendario .content_gris {
     padding-top: 40px;
     padding-bottom: 40px;
   }
-  .perfil img {max-width: 65px;}
-  .card_boton {padding: 30px 20px;}
-  article.periodos {
+  #Calendario .perfil img {max-width: 65px;}
+  #Calendario .card_boton {padding: 30px 20px;}
+  #Calendario article.periodos {
     margin-top: 0;
     padding: 1rem;
   }
-  article.periodos .content_phone {
+  #Calendario article.periodos .content_phone {
     display: flex;
     flex-direction: row;
   }
-  article.periodos .form-check {
+  #Calendario article.periodos .form-check {
     width: auto;
     margin: 10px 0;
   }
-  article.periodos .form-check input.form-check-input {margin-left: 5px;}
-  article.periodos .form-check .form-check-label {
+  #Calendario article.periodos .form-check input.form-check-input {margin-left: 5px;}
+  #Calendario article.periodos .form-check .form-check-label {
     font-size: 1.2rem;
     padding-left: 10px;
   }
-  article.periodos .input-group {
+  #Calendario article.periodos .input-group {
     flex-direction: column;
     align-items: flex-start;
   }
-  article.periodos .input-group h4 {width: auto;}
-  article.periodos .input-group select {width: 100%;}
-  article.titulo_evento h2 {text-align: left;}
+  #Calendario article.periodos .input-group h4 {width: auto;}
+  #Calendario article.periodos .input-group select {width: 100%;}
+  #Calendario article.titulo_evento h2 {text-align: left;}
 }
 @media (min-width:992px) {
-  h2 {font-size: 2.8rem;}
-  p, li {font-size: 1rem;}
-  a img {
+  #Calendario h2 {font-size: 2.8rem;}
+  #Calendario p, #Calendario li {font-size: 1rem;}
+  #Calendario a img {
     max-width: 38px;
     padding: 10px;
   }
-  article {padding: 32px 20px;}
-  article.periodos {padding: 1.5rem;}
-  article.periodos .form-check {margin: 10px;}
-  article.periodos .form-check input.form-check-input {margin-left: 10px;}
-  article.periodos a.btn-download {padding: 20px;}
-  article.evento h4 {text-align: left;}
-  article.evento .fecha h2 {font-size: 4rem;}
-  article.evento .fecha h3 {font-size: 2rem;}
-  article.evento .fecha small {font-size: 1rem;}
-  article.evento .items_content {justify-content: flex-start;}
+  #Calendario article {padding: 32px 20px;}
+  #Calendario article.periodos {padding: 1.5rem;}
+  #Calendario article.periodos .form-check {margin: 10px;}
+  #Calendario article.periodos .form-check input.form-check-input {margin-left: 10px;}
+  #Calendario article.periodos a.btn-download {padding: 20px;}
+  #Calendario article.evento h4 {text-align: left;}
+  #Calendario article.evento .fecha h2 {font-size: 4rem;}
+  #Calendario article.evento .fecha h3 {font-size: 2rem;}
+  #Calendario article.evento .fecha small {font-size: 1rem;}
+  #Calendario article.evento .items_content {justify-content: flex-start;}
 }
 @media (min-width:1200px) {
-  .card_boton {width: 70%;}
-  article.periodos .form-check {margin: 10px 20px;}
-  article.periodos .input-group {
+  #Calendario .card_boton {width: 70%;}
+  #Calendario article.periodos .form-check {margin: 10px 20px;}
+  #Calendario article.periodos .input-group {
     flex-direction: row;
     align-items: center;
   }
-  article.periodos .input-group h4 {width: 145px;}
-  article.periodos .input-group select {width: calc(100% - 161px);}
+  #Calendario article.periodos .input-group h4 {width: 145px;}
+  #Calendario article.periodos .input-group select {width: calc(100% - 161px);}
 }
 @media (min-width:1400px) {
-  .card_boton {width: 50%;}
+  #Calendario .card_boton {width: 50%;}
 }

@@ -70,14 +70,14 @@ const PeriodoAcademico = ({ filteredData, setFilteredDataByPeriodo }) => {
     return (
         <article className="periodos" id="periodos">
             <h3><i><FontAwesomeIcon icon={faFilter} /></i> Filtrar resultados por:</h3>
-            <div className='mb-4'>
+            <div className='mb-1'>
                 <h4>Actividades</h4>
                 <ul>
                     <li><a href="#" onClick={() => setTipoActividad('Abiertas')}>Actividades Abiertas</a></li>
                     <li><a href="#" onClick={() => setTipoActividad('Finalizadas')}>Actividades Finalizadas</a></li>
                 </ul>
             </div>
-            <div className='mb-4'>
+            <div className='mb-1'>
                 <h4>Nivel de Formacion</h4>
                 <ul>
                     <li><a href="#" onClick={() => setSelectedNivelFormacion('Pregrados')}>Pregrados</a></li>
