@@ -15,12 +15,12 @@
 }
 #Calendario {font-family: var(--primary-font);}
 #Calendario h2 {
+  font-family: var(--primary-font);
   font-size: 1.6rem;
-  font-weight: 500;
-  color: var(--blue);
   line-height: 3rem; 
+  font-weight: 800;
+  color: var(--blue);
 }
-#Calendario h2 strong {font-weight: bolder;}
 #Calendario h3 {
   font-size: 1.3rem;
   font-weight: 200; 
@@ -441,7 +441,8 @@
   justify-content: flex-start;
 }
 #Calendario #navbarSupportedContent li {
-  padding: 5px 20px 5px 0;
+  margin: 0;
+  padding: 5px 10px 5px 0;
   display: flex;
   border: none !important;
 }
@@ -474,10 +475,18 @@
 }
 #Calendario .perfil img {
   background: #ededf6;
-  max-width: 50px;
-  max-height: 200px;
+  width: 65px;
   padding: 0;
   border-radius: 50%;
+}
+#Calendario .perfil .blob {
+  transform: scale(1);
+  animation: 2s infinite pulse-black;
+  cursor: pointer; 
+}
+#Calendario .perfil .blob.blue {
+  box-shadow: 0 0 0 0 #34ace0;
+  animation: 2s infinite pulse-blue; 
 }
 #Calendario .perfil h4 {
   color: var(--red);
@@ -494,6 +503,12 @@
   background: var(--gray-10);
   padding-top: 10px;
   padding-bottom: 20px;
+}
+#Calendario .content_gris h2 {font-weight: 500;}
+#Calendario .content_gris h2 strong {font-weight: 700;}
+#Calendario #resultadosActividades article .container-fluid {
+  padding-right: var(--bs-gutter-x, .75rem);
+  padding-left: var(--bs-gutter-x, .75rem);
 }
 #Calendario article {
   font-family: var(--primary-font);
@@ -641,6 +656,7 @@
   margin: 2rem 0;
 }
 #Calendario article.evento .fecha hr {
+  background: transparent;
   margin: 0.5rem 0;
   border: none;
   border-top-width: 3px;
@@ -780,16 +796,6 @@
   background: var(--white); 
 }
 #Calendario .content_gris a.mas_eventos:hover i {color: var(--blue);}
-
-#Calendario .perfil .blob {
-  transform: scale(1);
-  animation: 2s infinite pulse-black;
-  cursor: pointer; 
-}
-#Calendario .perfil .blob.blue {
-  box-shadow: 0 0 0 0 #34ace0;
-  animation: 2s infinite pulse-blue; 
-}
 #Calendario .modal-backdrop.show {opacity: .8;}
 #Calendario .modal-backdrop {
   background: -webkit-linear-gradient(0deg, #1b142d 0, #2e3180 80%);
@@ -899,7 +905,6 @@
   }
   #Calendario .navbar-expand-md .d-flex.datepicker button.btn.btn-outline-secondary.border-left-0 i {font-size: 1.2rem;}
   #Calendario .perfil h4 {padding-left: 15px;}
-  #Calendario .perfil img {max-height: 50px;}
   #Calendario section.headeer_calendario h3 {font-size: 1.4rem;}
   #Calendario article.periodos {padding: 2rem 1.5rem;}
   #Calendario article.periodos .form-check {
@@ -947,7 +952,6 @@
     padding-top: 40px;
     padding-bottom: 40px;
   }
-  #Calendario .perfil img {max-width: 65px;}
   #Calendario .card_boton {padding: 30px 20px;}
   #Calendario article.periodos {
     margin-top: 0;
